@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 
 import { GetAccountFromKeystore } from "../../helpers/crypto";
-import { LOADER_BOX } from "../common/common";
 
 const ImportFromFilerBodyComponent = ({ cb, defaultPath }) => {
   let fileReader;
@@ -12,7 +11,7 @@ const ImportFromFilerBodyComponent = ({ cb, defaultPath }) => {
     if (defaultPath) {
       handleFileChosen(defaultPath);
     }
-  }, []);
+  });
 
   const handleFileRead = () => {
     const content = fileReader.result;
@@ -37,17 +36,17 @@ const ImportFromFilerBodyComponent = ({ cb, defaultPath }) => {
   );
 };
 
-const Keystore = ({ cb, defaultPath }) => {
+const Keystore = ({ cb }) => {
   const [keystore, setKeystore] = useState("");
   const [pwd, setPwd] = useState("");
   const [statusMessage, setStatusMessage] = useState("");
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
   let btnName = "Submit";
 
-  if (loading) {
-    btnName = LOADER_BOX;
-  }
+  // if (loading) {
+  //   btnName = LOADER_BOX;
+  // }
 
   return (
     <div className="keystore">
@@ -85,7 +84,6 @@ const Keystore = ({ cb, defaultPath }) => {
                 }
                 cb(account);
               }}
-              disabled={loading}
             >
               {btnName}
             </Button>

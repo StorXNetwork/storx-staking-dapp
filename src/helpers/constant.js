@@ -1,4 +1,6 @@
 import _ from "lodash";
+import axios from "axios";
+
 import StorX from "../abi/StorX.json";
 import ReputationFeed from "../abi/ReputationFeed.json";
 
@@ -42,7 +44,7 @@ export const RemoveExpo = (x) => {
 };
 
 export const CONTRACT_ADDRESS = {
-  storx: "xdc8a000e77af0dc2c1ae42b8cf47ef78f4fd429e66", //
+  storx: "xdc3db3715985a9891e7b41c2c2dc3f740d1d831d8a", //
   reputation: "xdcb1b4218ad6a2df75bf07cfddf7732915911dd1b4", //
 };
 
@@ -74,6 +76,12 @@ export const HTTP_PROVIDER = {
 
 export const DEFAULT_CHAIN_ID = 51;
 export const DEFAULT_PROVIDER = HTTP_PROVIDER[VALID_CHAINS[0]];
+
+export const REPUTATION_FEED_API = "http://localhost:3000";
+
+export const AxiosInstance = axios.create({
+  baseURL: REPUTATION_FEED_API,
+});
 
 export const WS_PROVIDER = {};
 

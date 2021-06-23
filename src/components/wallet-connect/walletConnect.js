@@ -52,7 +52,6 @@ class WalletConnect extends React.Component {
     this.state = {
       showModal: false,
       providerSelected: Provider.menu,
-      loading: false,
     };
   }
 
@@ -90,11 +89,10 @@ class WalletConnect extends React.Component {
               <Col sm={12}>
                 <Container>
                   <Row
-                    className={this.state.loading ? "disabled" : ""}
                     onClick={async () => {
-                      this.setState({ loading: true, providerSelected: type });
                       await provider();
-                      this.setState({ loading: false });
+                      if (this.state.providerSelected !== type)
+                        this.setState({ providerSelected: type });
                     }}
                   >
                     <Col className="wallet-icon--wrapper" sm={2} lg={2} md={2}>

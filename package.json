@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^12.6.0",
     "@web3-react/core": "^6.1.9",
     "abi-decoder": "^2.3.0",
+    "axios": "^0.21.1",
     "bootstrap": "^4.5.3",
     "chroma-js": "^2.1.1",
     "geopattern": "^1.2.3",
@@ -40,6 +41,8 @@
     "xdc3": "^1.3.13416"
   },
   "scripts": {
+    "generate-build-version": "node ./scripts/generate-build-version",
+    "prebuild": "npm run generate-build-version",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

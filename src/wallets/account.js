@@ -1,21 +1,16 @@
-import Xdc3, { utils } from "xdc3";
-import detectEthereumProvider from "@metamask/detect-provider";
+import Xdc3 from "xdc3";
+
 import _ from "lodash";
 
 import {
   CONTRACT_ABI,
   CONTRACT_ADDRESS,
-  HTTP_PROVIDER,
-  LOADERS,
-  IsJsonRpcError,
   DEFAULT_PROVIDER,
 } from "../helpers/constant";
 
-import * as actions from "../actions";
 import store from "../redux/store";
-import { toast } from "react-toastify";
 
-let addresses, xdc3, addressChangeIntervalRef;
+let addresses;
 
 /**
  *

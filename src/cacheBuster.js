@@ -2,6 +2,8 @@ import React from "react";
 
 /* CacheBuster component */
 import packageJson from "../package.json";
+
+console.log("packageJson", packageJson);
 global.appVersion = packageJson.version;
 
 const semverGreaterThan = (versionA, versionB) => {

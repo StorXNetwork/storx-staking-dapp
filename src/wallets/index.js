@@ -1,18 +1,11 @@
 import Xdc3 from "xdc3";
 import { toast } from "react-toastify";
 
-import * as metamask from "./metamask";
 import * as xinpay from "./xinpay";
 import * as account from "./account";
 
 import store from "../redux/store";
-import {
-  EXPLORER,
-  LOADERS,
-  VALID_CHAINS,
-  HTTP_PROVIDER,
-  DEFAULT_PROVIDER,
-} from "../helpers/constant";
+import { EXPLORER, LOADERS, DEFAULT_PROVIDER } from "../helpers/constant";
 
 function GetFuncFromLoader(loader) {
   switch (loader) {
@@ -38,7 +31,6 @@ export function GetNativeBalance() {
     const xdc3 = new Xdc3(new Xdc3.providers.HttpProvider(DEFAULT_PROVIDER));
     const wallet = store.getState();
     const address = wallet.wallet.address;
-    console.log("address", wallet);
     xdc3.eth.getBalance(address).then(resolve).catch(reject);
   });
 }

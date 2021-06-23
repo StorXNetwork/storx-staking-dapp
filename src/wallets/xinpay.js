@@ -41,7 +41,7 @@ export async function initXdc3() {
   try {
     const isLocked = await IsLocked();
     if (isLocked === true) {
-      toast("Please unlock XinPay wallet to continue");
+      toast("Please unlock XinPay wallet to continue", { autoClose: 2000 });
       return store.dispatch(actions.WalletDisconnected());
     }
     const isXdc3Supported = IsXdc3Supported();
@@ -49,7 +49,10 @@ export async function initXdc3() {
       toast(
         <div>
           XinPay not available in the browser. Please refer <a href="/">here</a>
-        </div>
+        </div>,
+        {
+          autoClose: 2000,
+        }
       );
 
       return store.dispatch(actions.WalletDisconnected());
@@ -58,7 +61,10 @@ export async function initXdc3() {
       toast(
         <div>
           XinPay not available in the browser. Please refer <a href="/">here</a>
-        </div>
+        </div>,
+        {
+          autoClose: 2000,
+        }
       );
       return store.dispatch(actions.WalletDisconnected());
     }

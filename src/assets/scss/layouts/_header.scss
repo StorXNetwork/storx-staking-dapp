@@ -7,6 +7,22 @@
   box-shadow: 0 1px 5px lightgrey;
   background-color: $color-background-primary-light !important;
 
+  .navbar-seperator {
+    @media screen and (min-width: $lg-width) {
+      margin-left: 8rem;
+    }
+  }
+
+  .navbar-link {
+    margin-left: 2rem;
+    color: $color-primary;
+
+    &:hover {
+      text-decoration: none;
+      color: $color-new-blue;
+    }
+  }
+
   .balance-link {
     padding: 8px;
     margin: 2px;
@@ -34,7 +50,7 @@
     font-weight: 600;
 
     img {
-      width: 15rem;
+      width: 12rem;
     }
 
     &:hover,
