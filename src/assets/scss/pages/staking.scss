@@ -1,0 +1,65 @@
+.loaded-address {
+  width: 100%;
+  text-align: right;
+  background-color: white;
+  padding: 1rem;
+  border: 1px solid lightgrey;
+  border-radius: 1rem;
+
+  span {
+    margin-left: 1rem;
+  }
+
+  &__label {
+    font-weight: 550;
+    color: $color-new-blue;
+  }
+  &__address {
+  }
+}
+
+.stake-details {
+  &__title {
+    font-size: large;
+    font-weight: 550;
+    color: $color-new-blue;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  background-color: white;
+  padding: 1rem;
+  margin-top: 1rem;
+  border: 1px solid lightgrey;
+  border-radius: 1rem;
+
+  .row {
+    margin: 5px;
+    .col:nth-child(1) {
+      font-weight: 550;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.staking-func {
+  &__title {
+    font-size: large;
+    font-weight: 550;
+    color: $color-new-blue;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  background-color: white;
+  padding: 1rem;
+  margin-top: 1rem;
+  border: 1px solid lightgrey;
+  border-radius: 1rem;
+
+  .row {
+    margin: 5px;
+    .col:nth-child(1) {
+      font-weight: 550;
+      text-transform: uppercase;
+    }
+  }
+}

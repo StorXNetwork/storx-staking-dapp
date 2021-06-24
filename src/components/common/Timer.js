@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { FormatSeconds } from "../../helpers/constant";
+import { FormatSecondsTwo } from "../../helpers/constant";
 
 export default function Timer(props) {
-  const { startDate, endDate } = props;
+  const { startDate = new Date().getTime(), endDate } = props;
   const startTime = new Date(startDate).getTime() / 1000,
     endTime = new Date(endDate).getTime() / 1000;
   const [state, setstate] = useState(endTime - startTime);
@@ -13,6 +13,6 @@ export default function Timer(props) {
 
     return () => clearInterval(ref);
   });
-  const x = FormatSeconds(state);
+  const x = FormatSecondsTwo(state);
   return <div>{x}</div>;
 }

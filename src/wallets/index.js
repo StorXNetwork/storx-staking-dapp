@@ -68,13 +68,9 @@ export function SubmitContractTxGeneral(...params) {
         closeButton: false,
       });
 
-    console.log("params[2]", params[2], toastId, params);
-
     GetFuncFromLoader(wallet.wallet.loader)
       .SubmitContractTxGeneral(...params)
       .then((resp) => {
-        console.log("params[2] resp", resp);
-
         if (resp.transactionHash) {
           const { transactionHash } = resp;
           toast(
@@ -106,7 +102,24 @@ export function SubmitContractTxGeneral(...params) {
       })
       .catch((e) => {
         console.log("resp", IsJsonRpcError(e));
-        console.log("resp", e);
+        console.log("resp", e, e.message);
+        const message = e.message || <>Failing Transaction</>;
+        toast(
+          <div>
+            <b>Error</b>:{message}
+          </div>,
+          {
+            position: "bottom-right",
+            type: "error",
+            autoClose: false,
+            hideProgressBar: false,
+            closeButton: true,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          }
+        );
         reject(e);
       })
       .finally(() => {
@@ -133,5 +146,3 @@ export const IsAddressEqual = (a, b) => {
   b = xinpay.fromXdcAddress(b).toLowerCase();
   return a === b;
 };
-
-// IsValidNFT().then(console.log);

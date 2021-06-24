@@ -3,6 +3,7 @@ import axios from "axios";
 
 import StorX from "../abi/StorX.json";
 import ReputationFeed from "../abi/ReputationFeed.json";
+import Staking from "../abi/Staking.json";
 
 export const PROJECT_NAME = "StorX Staking";
 
@@ -45,12 +46,14 @@ export const RemoveExpo = (x) => {
 
 export const CONTRACT_ADDRESS = {
   storx: "xdc3db3715985a9891e7b41c2c2dc3f740d1d831d8a", //
-  reputation: "xdcb1b4218ad6a2df75bf07cfddf7732915911dd1b4", //
+  reputation: "xdcb048bd39c7221a7dba1e08ec569e17bfe4903077", //
+  staking: "xdc1be5f2fe960ace329b6fc25d1d64bdda6802754f",
 };
 
 export const CONTRACT_ABI = {
   storx: StorX,
-  reputationFeed: ReputationFeed,
+  reputation: ReputationFeed,
+  staking: Staking,
 };
 
 /**
@@ -77,7 +80,8 @@ export const HTTP_PROVIDER = {
 export const DEFAULT_CHAIN_ID = 51;
 export const DEFAULT_PROVIDER = HTTP_PROVIDER[VALID_CHAINS[0]];
 
-export const REPUTATION_FEED_API = "http://localhost:3000";
+export const REPUTATION_FEED_API =
+  process.env.REACT_APP_REPUTATION_API || "http://localhost:3000";
 
 export const AxiosInstance = axios.create({
   baseURL: REPUTATION_FEED_API,
@@ -126,6 +130,24 @@ export const FormatSeconds = (seconds) => {
       <span className="seconds">{sec}</span>
     </span>
   );
+};
+
+export const FormatSecondsTwo = (seconds) => {
+  const { days, hours, minutes, seconds: sec } = GetTimerData(seconds);
+  return (
+    <span className="timer">
+      <span className="days">D:&nbsp;{days}</span>&nbsp;&nbsp;
+      <span className="hours">{ToDoubleDigit(hours)}</span>:
+      <span className="minutes">{ToDoubleDigit(minutes)}</span>:
+      <span className="seconds">{ToDoubleDigit(sec)}</span>
+    </span>
+  );
+};
+
+export const ToDoubleDigit = (x) => {
+  x = `${x}`;
+  if (x.length === 1) return `0${x}`;
+  return x;
 };
 
 export const AddMultiplier = (amount) => {

@@ -1,7 +1,7 @@
 const Xdc3 = require("xdc3");
 const Accounts = require("xdc3-eth-accounts");
 const { utils } = Xdc3;
-const { TransferType } = require("./constant");
+const { TransferType, DEFAULT_PROVIDER } = require("./constant");
 
 /**
  * 
@@ -84,4 +84,25 @@ export const GetAccountFromKeystore = (keystore, pwd) => {
 
 export const IsValidAddress = (address) => {
   return utils.isAddress(address);
+};
+
+export const GetRevertReason = (tx) => {
+  return new Promise((resolve, reject) => {
+    const xdc3 = new Xdc3(new Xdc3.providers.HttpProvider(DEFAULT_PROVIDER));
+    xdc3.eth
+      .call(tx)
+      .then((x) => {
+        console.log("x", x, utils.toAscii(x));
+        const other = x.replace("0x", "").slice(8);
+        const buf = Buffer.from(other, "hex");
+        const reason = buf
+          .toString()
+          .split("")
+          .filter((x) => /^[a-zA-Z\d\s:]+$/i.test(x))
+          .join("");
+        console.log(reason);
+        resolve(reason);
+      })
+      .catch(reject);
+  });
 };

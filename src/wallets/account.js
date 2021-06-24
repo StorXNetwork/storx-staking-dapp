@@ -9,8 +9,7 @@ import {
 } from "../helpers/constant";
 
 import store from "../redux/store";
-
-let addresses;
+import { GetRevertReason } from "../helpers/crypto";
 
 /**
  *
@@ -60,61 +59,80 @@ export async function SubmitContractTxGeneral(
 
       const data = contract.methods[method](...params).encodeABI();
 
+      const state = store.getState();
+      const { address: walletAddress, privateKey } = state.wallet;
+
       const tx = {
-        from: addresses[0],
+        from: walletAddress.toLowerCase(),
         to: address,
         data,
         value,
       };
 
-      const gasLimit = await xdc3.eth.estimateGas(tx);
+      let gasLimit;
+
+      try {
+        gasLimit = await xdc3.eth.estimateGas(tx);
+      } catch (e) {
+        const reason = await GetRevertReason(tx);
+        reject({ message: reason });
+        return;
+      }
 
       tx["gas"] = gasLimit;
 
-      xdc3.eth.sendTransaction(tx, (err, hash) => {
-        if (err) reject(err);
-        let interval = setInterval(async () => {
-          const receipt = await xdc3.eth.getTransactionReceipt(hash);
-          console.log("receipt", receipt);
+      const signed = await xdc3.eth.accounts.signTransaction(tx, privateKey);
+      xdc3.eth
+        .sendSignedTransaction(signed.rawTransaction)
+        .once("receipt", (receipt) => {
           if (receipt !== null) {
             if (receipt.status) {
-              clearInterval(interval);
               resolve(receipt);
             } else {
               reject(receipt);
             }
           }
-        }, 2000);
-      });
+        });
+
       // })
       // .catch(reject);
     } else {
-      console.log("addresses[0]", addresses[0], method, params);
 
       const data = contract.methods[method](...params).encodeABI();
 
+      const state = store.getState();
+      const { address: walletAddress, privateKey } = state.wallet;
+
       const tx = {
-        from: addresses[0],
+        from: walletAddress.toLowerCase(),
         to: address,
         data,
       };
 
-      await xdc3.eth.estimateGas(tx);
+      let gasLimit;
 
-      xdc3.eth.sendTransaction(tx, (err, hash) => {
-        if (err) reject(err);
-        let interval = setInterval(async () => {
-          const receipt = await xdc3.eth.getTransactionReceipt(hash);
+      try {
+        gasLimit = await xdc3.eth.estimateGas(tx);
+      } catch (e) {
+        const reason = await GetRevertReason(tx);
+        reject({ message: reason });
+        return;
+      }
+
+      tx["gas"] = gasLimit;
+
+      const signed = await xdc3.eth.accounts.signTransaction(tx, privateKey);
+      xdc3.eth
+        .sendSignedTransaction(signed.rawTransaction)
+        .once("receipt", (receipt) => {
           if (receipt !== null) {
             if (receipt.status) {
-              clearInterval(interval);
               resolve(receipt);
             } else {
               reject(receipt);
             }
           }
-        }, 2000);
-      });
+        });
     }
   });
 }

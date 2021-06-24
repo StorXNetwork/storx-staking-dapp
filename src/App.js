@@ -35,6 +35,7 @@ import { PROJECT_NAME } from "./helpers/constant";
 const ComposedStaking = RequireWallet()(Staking);
 
 function App() {
+
   return (
     <div className="App">
       <ToastContainer />

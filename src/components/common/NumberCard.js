@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
 import { Container, Col, Row } from "react-bootstrap";
 
-export const AnimatedNumberCard = ({ title, icon, number, color = null }) => {
+export const AnimatedNumberCard = ({ title, number, color = null }) => {
   // const [no, setNo] = useState(0);
   // let currNo = no;
   // useEffect(() => {

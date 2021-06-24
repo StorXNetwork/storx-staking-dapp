@@ -1,8 +1,10 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { AxiosInstance, RemoveMultiplier } from "../helpers/constant";
+import { AxiosInstance, RemoveExpo } from "../helpers/constant";
+import { toXdcAddress } from "../wallets/xinpay";
 import { LOADER_BOX } from "./common/common";
 import { AnimatedNumberCard } from "./common/NumberCard";
+import { fromWei } from "xdc3-utils";
 
 const intialState = {
   data: null,
@@ -27,7 +29,7 @@ class Dashboard extends React.Component {
     if (!this.state.data)
       return <Col className="u-text-center">{LOADER_BOX}</Col>;
 
-    const { stakeHolders, totalStaked, interest } = this.state.data;
+    const { stakeHolders = [], totalStaked, interest } = this.state.data;
 
     return (
       <>
@@ -43,7 +45,7 @@ class Dashboard extends React.Component {
           <AnimatedNumberCard
             title={"Total SRX Staked"}
             color={"green"}
-            number={RemoveMultiplier(totalStaked)}
+            number={fromWei(RemoveExpo(totalStaked))}
           />
         </Col>
 
@@ -61,12 +63,21 @@ class Dashboard extends React.Component {
   renderFarmerNode() {
     if (!this.state.data)
       return <Col className="u-text-center">{LOADER_BOX}</Col>;
-    const rows = Object.keys(this.state.data.stakeHolders).map((address) => (
-      <tr>
-        <td>{address}</td>
-        <td>{this.state.data.stakeHolders[address]}</td>
-      </tr>
-    ));
+    const rows = Object.keys(this.state.data.stakeHolders || []).map(
+      (address) => (
+        <tr>
+          <td>{toXdcAddress(address)}</td>
+          <td>
+            {this.state.data.stakeHolders &&
+              fromWei(this.state.data.stakeHolders[address].stake.stakedAmount)}
+          </td>
+          <td>
+            {this.state.data.stakeHolders &&
+              this.state.data.stakeHolders[address].reputation}
+          </td>
+        </tr>
+      )
+    );
 
     return (
       <Col className="farmer-node">
@@ -74,6 +85,7 @@ class Dashboard extends React.Component {
           <thead>
             <tr>
               <th>Farmer Node Address</th>
+              <th>Staked Amount</th>
               <th>Node Reputation</th>
             </tr>
           </thead>

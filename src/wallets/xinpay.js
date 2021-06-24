@@ -2,6 +2,7 @@ import Xdc3, { utils } from "xdc3";
 import detectEthereumProvider from "@metamask/detect-provider";
 import _ from "lodash";
 
+import { GetRevertReason } from "../helpers/crypto";
 import {
   CONTRACT_ABI,
   CONTRACT_ADDRESS,
@@ -218,8 +219,14 @@ export async function SubmitContractTxGeneral(
             value,
           };
 
-          await xdc3.eth.estimateGas(tx);
-
+          try {
+            await xdc3.eth.estimateGas(tx);
+          } catch (e) {
+            const reason = await GetRevertReason(tx);
+            reject({ message: reason });
+            return;
+          }
+          
           xdc3.eth.sendTransaction(tx, (err, hash) => {
             if (err) reject(err);
             let interval = setInterval(async () => {
@@ -248,7 +255,13 @@ export async function SubmitContractTxGeneral(
             data,
           };
 
-          await xdc3.eth.estimateGas(tx);
+          try {
+            await xdc3.eth.estimateGas(tx);
+          } catch (e) {
+            const reason = await GetRevertReason(tx);
+            reject({ message: reason });
+            return;
+          }
 
           xdc3.eth.sendTransaction(tx, (err, hash) => {
             if (err) reject(err);

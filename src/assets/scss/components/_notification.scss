@@ -51,6 +51,7 @@
     &--error {
       color: grey;
       background: white !important;
+      border-left: 4px solid $color-new-red;
     }
     &-body {
     }

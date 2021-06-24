@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { fromWei } from "xdc3-utils";
 
 import { Navbar, Col } from "react-bootstrap";
 
@@ -9,7 +10,6 @@ import BalanceModal from "./common/BalanceModal";
 import WalletConnect from "./wallet-connect/walletConnect";
 
 import BrandLogo from "../assets/img/brand/header-logo.png";
-import { RemoveMultiplier } from "../helpers/constant";
 
 class Header extends React.Component {
   renderCurrentAddressBox() {
@@ -60,7 +60,10 @@ class Header extends React.Component {
 
       const resp = Object.keys(this.props.balance).reduce((acc, curr) => {
         if (balances.includes(curr)) {
-          acc.push({ name: curr, balance: RemoveMultiplier(this.props.balance[curr]) });
+          acc.push({
+            name: curr,
+            balance: fromWei(this.props.balance[curr]),
+          });
         }
         return acc;
       }, []);

@@ -52,7 +52,3 @@ export const GetWalletBalance = (store) => (next) => async (action) => {
   }
 };
 
-function Multiplier(amount) {
-  const multiplier = Math.pow(10, 18);
-  return parseFloat(amount) / multiplier;
-}
