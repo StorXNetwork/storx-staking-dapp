@@ -185,7 +185,7 @@ export const IsJsonRpcError = (err) => {
   return err.message.split("\n")[0] === "Internal JSON-RPC error.";
 };
 
-export const EXPLORER = "https://explorer.xinfin.network/";
+export const EXPLORER = CHAIN_DATA[DEFAULT_CHAIN_ID];
 
 export const DateStringFormat = (date) => {
   date = new Date(date);
