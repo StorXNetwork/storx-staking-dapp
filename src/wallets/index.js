@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 
 import * as xinpay from "./xinpay";
 import * as account from "./account";
+import * as dcent from "./dcent";
 
 import store from "../redux/store";
 import { EXPLORER, LOADERS, DEFAULT_PROVIDER } from "../helpers/constant";

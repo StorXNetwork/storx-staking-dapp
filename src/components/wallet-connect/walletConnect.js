@@ -7,6 +7,7 @@ import PrivateKey from "./PrivateKey";
 
 import { PROJECT_NAME, DEFAULT_CHAIN_ID } from "../../helpers/constant";
 import { initXdc3 } from "../../wallets/xinpay";
+import { initiateListener } from "../../wallets/dcent";
 import * as actions from "../../actions";
 
 import XinPayIcon from "../../assets/img/wallets/xinpay.png";
