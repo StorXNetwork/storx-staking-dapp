@@ -329,7 +329,7 @@ class Staking extends React.Component {
                 <Button
                   variant="danger"
                   onClick={this.withdrawStake}
-                  disabled={parseFloat(stake.canWithdrawStakeIn) != 0}
+                  disabled={parseFloat(stake.canWithdrawStakeIn) !== 0}
                 >
                   CLAIM STAKE
                 </Button>
