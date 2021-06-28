@@ -7,12 +7,13 @@ import PrivateKey from "./PrivateKey";
 
 import { PROJECT_NAME, DEFAULT_CHAIN_ID } from "../../helpers/constant";
 import { initXdc3 } from "../../wallets/xinpay";
-import { initiateListener } from "../../wallets/dcent";
 import * as actions from "../../actions";
 
 import XinPayIcon from "../../assets/img/wallets/xinpay.png";
+import DCent from "../../assets/img/wallets/dcent.png"
 
 import { toast } from "react-toastify";
+import { initDcent } from "../../wallets/dcentInAppBrowser";
 
 const Provider = {
   menu: "menu",
@@ -44,6 +45,12 @@ const WalletProviders = [
     icon: XinPayIcon,
     provider: () => {},
   },
+  {
+    type:"menu",
+    name:"Dcent In-App",
+    icon: DCent,
+    provider: initDcent
+  }
 ];
 
 class WalletConnect extends React.Component {

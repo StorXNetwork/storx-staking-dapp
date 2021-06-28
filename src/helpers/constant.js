@@ -12,6 +12,8 @@ export const LOADERS = {
   Keystore: "keystore",
   Privatekey: "privatekey",
   MetaMask: "metamask",
+  DcentInApp: "dcent-inapp",
+  DcentBridge: "dcent-bridge",
 };
 
 export const GetDefaultLoader = () =>
