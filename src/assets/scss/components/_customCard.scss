@@ -239,6 +239,10 @@
     border-left: 2px solid $color-new-green;
   }
 
+  &.orange-bg {
+    border-left: 2px solid $color-new-orange;
+  }
+
   &__title {
     text-transform: uppercase;
     font-weight: 600;

@@ -29,7 +29,13 @@ class Dashboard extends React.Component {
     if (!this.state.data)
       return <Col className="u-text-center">{LOADER_BOX}</Col>;
 
-    const { stakeHolders = [], totalStaked, interest } = this.state.data;
+    const {
+      stakeHolders = [],
+      totalStaked,
+      interest,
+      interestPrecision,
+      totalRedeemed,
+    } = this.state.data;
 
     return (
       <>
@@ -53,7 +59,15 @@ class Dashboard extends React.Component {
           <AnimatedNumberCard
             title={"Rewards PA"}
             color={"blue"}
-            number={interest + " %"}
+            number={parseFloat(interest) / parseFloat(interestPrecision) + " %"}
+          />
+        </Col>
+
+        <Col>
+          <AnimatedNumberCard
+            title={"Rewards Redeemed"}
+            color={"orange"}
+            number={fromWei(RemoveExpo(totalRedeemed))}
           />
         </Col>
       </>

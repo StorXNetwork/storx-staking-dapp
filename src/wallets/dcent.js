@@ -12,13 +12,13 @@ import * as actions from "../actions";
 import store from "../redux/store";
 import { toast } from "react-toastify";
 
-DcentWebConnector.info()
-  .then((x) => {
-    console.log("DcentWebConnector", x);
-  })
-  .catch((e) => {
-    console.log("DcentWebConnector", e);
-  });
+// DcentWebConnector.info()
+//   .then((x) => {
+//     console.log("DcentWebConnector", x);
+//   })
+//   .catch((e) => {
+//     console.log("DcentWebConnector", e);
+//   });
 
 export const initListener = () => {
   DcentWebConnector.setConnectionListener(connectionListener);
