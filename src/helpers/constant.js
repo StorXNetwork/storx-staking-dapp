@@ -47,7 +47,7 @@ export const RemoveExpo = (x) => {
 export const CONTRACT_ADDRESS = {
   storx: "xdc3db3715985a9891e7b41c2c2dc3f740d1d831d8a", //
   reputation: "xdcb048bd39c7221a7dba1e08ec569e17bfe4903077", //
-  staking: "xdc1ca98ae2f0fe20aac7ac3c17d3403de06cc59553",
+  staking: "xdc1937064906f634ab14cd10549c03b1e98fb6f40d",
 };
 
 export const CONTRACT_ABI = {
@@ -194,6 +194,18 @@ export const DateStringFormat = (date) => {
       date.getMonth() + 1
     }-${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
   return date;
+};
+
+export const DECIMALS = {
+  SRX: 2,
+  XDC: 2,
+  native: 2,
+  tokens: 2,
+};
+
+export const COIN_NAME = {
+  native: "XDC",
+  tokens: "SRX",
 };
 
 Object.defineProperty(Object.prototype, "partialMatch", {

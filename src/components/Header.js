@@ -10,6 +10,7 @@ import BalanceModal from "./common/BalanceModal";
 import WalletConnect from "./wallet-connect/walletConnect";
 
 import BrandLogo from "../assets/img/brand/header-logo.png";
+import { COIN_NAME, DECIMALS } from "../helpers/constant";
 
 class Header extends React.Component {
   renderCurrentAddressBox() {
@@ -21,7 +22,10 @@ class Header extends React.Component {
 
     const resp = Object.keys(this.props.balance).reduce((acc, curr) => {
       if (balances.includes(curr)) {
-        acc.push({ name: curr, balance: this.props.balance[curr] });
+        acc.push({
+          name: curr,
+          balance: parseFloat(this.props.balance[curr]).toFixed(DECIMALS[curr]),
+        });
       }
       return acc;
     }, []);
@@ -56,13 +60,13 @@ class Header extends React.Component {
     if (this.props.wallet.connected !== false && this.props.balance) {
       const balances = ["native", "tokens"];
 
-      console.log("this.props.balance", this.props.balance);
-
       const resp = Object.keys(this.props.balance).reduce((acc, curr) => {
         if (balances.includes(curr)) {
           acc.push({
-            name: curr,
-            balance: fromWei(this.props.balance[curr]),
+            name: COIN_NAME[curr],
+            balance: parseFloat(fromWei(this.props.balance[curr])).toFixed(
+              DECIMALS[curr]
+            ),
           });
         }
         return acc;

@@ -6,7 +6,12 @@ import { fromWei } from "xdc3-utils";
 import { SubmitContractTxGeneral } from "../wallets";
 import { toXdcAddress } from "../wallets/xinpay";
 import { LOADER_BOX } from "./common/common";
-import { CONTRACT_ADDRESS, DateStringFormat } from "../helpers/constant";
+import {
+  AxiosInstance,
+  CONTRACT_ADDRESS,
+  DateStringFormat,
+  RemoveExpo,
+} from "../helpers/constant";
 import Timer from "./common/Timer";
 
 const InitialState = {
@@ -16,6 +21,7 @@ const InitialState = {
   form: {
     amount: null,
   },
+  stakingData: null,
 };
 
 class Staking extends React.Component {
@@ -68,11 +74,7 @@ class Staking extends React.Component {
         this.props.wallet.address,
         CONTRACT_ADDRESS.staking
       ),
-      SubmitContractTxGeneral(
-        "reputationThreshold",
-        { type: "staking" },
-        "view"
-      ),
+      AxiosInstance.get("/get-contract-data"),
       SubmitContractTxGeneral(
         "isStaker",
         { type: "reputation" },
@@ -91,10 +93,12 @@ class Staking extends React.Component {
         earned,
         nextDripAt,
         approvedAmount,
-        reputationThreshold,
+        stakingData,
         isStaker,
         reputation,
       ]) => {
+        console.log("stakingData", stakingData);
+
         const {
           exists,
           balance,
@@ -128,7 +132,7 @@ class Staking extends React.Component {
               ...rst,
             },
             approvedAmount,
-            reputationThreshold,
+            stakingData: stakingData.data.data,
             isStaker,
             reputation,
           },
@@ -359,22 +363,86 @@ class Staking extends React.Component {
           <Row>
             <Col>
               <div className="loaded-address">
-                <span className="loaded-address__label">
-                  Minimum Reputation
-                </span>
-                <span className="loaded-address__address">
-                  {this.state.reputationThreshold}
-                </span>
+                <Container>
+                  <Row>
+                    <Col>
+                      <span className="loaded-address__label">
+                        Minimum Reputation
+                      </span>
+                      <span className="loaded-address__address">
+                        {this.state.stakingData
+                          ? this.state.stakingData.reputationThreshold
+                          : LOADER_BOX}
+                      </span>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col>
+                      <span className="loaded-address__label">
+                        Minimum Stake Amount
+                      </span>
+                      <span className="loaded-address__address">
+                        {this.state.stakingData
+                          ? fromWei(
+                              RemoveExpo(this.state.stakingData.minStakeAmount)
+                            )
+                          : LOADER_BOX}{" "}
+                      </span>
+                    </Col>
+                  </Row>
+
+                  <Row>
+                    <Col>
+                      <span className="loaded-address__label">
+                        Maximum Stake Amount
+                      </span>
+                      <span className="loaded-address__address">
+                        {this.state.stakingData
+                          ? fromWei(
+                              RemoveExpo(this.state.stakingData.maxStakeAmount)
+                            )
+                          : LOADER_BOX}{" "}
+                      </span>
+                    </Col>
+                  </Row>
+                </Container>
               </div>
             </Col>
             <Col>
               <div className="loaded-address">
-                <span className="loaded-address__label">
-                  Current Reputation
-                </span>
-                <span className="loaded-address__address">
-                  {this.state.isStaker ? this.state.reputation : "NOT A STAKER"}
-                </span>
+                <Container>
+                  <Row>
+                    <Col>
+                      <span className="loaded-address__label">
+                        Current Reputation
+                      </span>
+                      <span className="loaded-address__address">
+                        {this.state.isStaker
+                          ? this.state.reputation
+                          : "NOT A STAKER"}
+                      </span>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col>
+                      <span className="loaded-address__label">
+                        Farmer Node Valid
+                      </span>
+                      <span className="loaded-address__address">
+                        {this.state.stakingData
+                          ? this.state.isStaker
+                            ? (
+                                this.state.reputation >
+                                this.state.stakingData.reputationThreshold
+                              )
+                                .toString()
+                                .toUpperCase()
+                            : "NOT A STAKER"
+                          : LOADER_BOX}
+                      </span>
+                    </Col>
+                  </Row>
+                </Container>
               </div>
             </Col>
           </Row>
