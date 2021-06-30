@@ -1,0 +1,36 @@
+.event-history {
+  &__title {
+    text-align: center;
+    border-bottom: 1px solid lightgrey;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+  }
+
+  &__table {
+    width: 100%;
+
+    background-color: white;
+
+    border-radius: 1rem;
+    border: 1px solid lightgrey;
+
+    table {
+      width: 100%;
+
+      th:nth-child(5) {
+        text-align: center;
+      }
+
+      tr,
+      td,
+      th {
+        padding: 1rem;
+      }
+
+      tr {
+        border-bottom: 1px solid lightgrey;
+      }
+    }
+  }
+}

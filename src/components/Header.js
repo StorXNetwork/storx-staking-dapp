@@ -117,6 +117,10 @@ class Header extends React.Component {
           Staking
         </Link>
 
+        <Link className="navbar-link" to="/tx-history">
+          TX History
+        </Link>
+
         {this.getWalletBtn()}
       </Navbar>
     );

@@ -12,6 +12,7 @@ import CacheBuster from "./cacheBuster";
 import Header from "./components/Header";
 import Dashboard from "./components/Dashboard";
 import Staking from "./components/Staking";
+import TxHistory from "./components/TxHistory";
 
 /**
  *
@@ -33,9 +34,9 @@ import packageJson from "../package.json";
 import { PROJECT_NAME } from "./helpers/constant";
 
 const ComposedStaking = RequireWallet()(Staking);
+const ComposedHistory = RequireWallet()(TxHistory);
 
 function App() {
-
   return (
     <div className="App">
       <ToastContainer />
@@ -55,6 +56,7 @@ function App() {
 
       <Header />
 
+      <Route exact path={"/tx-history"} component={ComposedHistory} />
       <Route exact path={"/staking"} component={ComposedStaking} />
       <Route exact path={"/"} component={Dashboard} />
     </div>
