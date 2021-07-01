@@ -10,7 +10,7 @@ import { initXdc3 } from "../../wallets/xinpay";
 import * as actions from "../../actions";
 
 import XinPayIcon from "../../assets/img/wallets/xinpay.png";
-import DCent from "../../assets/img/wallets/dcent.png"
+import DCent from "../../assets/img/wallets/dcent.png";
 
 import { toast } from "react-toastify";
 import { initDcent } from "../../wallets/dcentInAppBrowser";
@@ -32,25 +32,29 @@ const WalletProviders = [
     name: "xinpay",
     icon: XinPayIcon,
     provider: initXdc3,
+    rowClass: "",
   },
   {
     type: "privatekey",
     name: "privatekey",
     icon: XinPayIcon,
     provider: () => {},
+    rowClass: "",
   },
   {
     type: "keystore",
     name: "keystore",
     icon: XinPayIcon,
     provider: () => {},
+    rowClass: "",
   },
   {
-    type:"menu",
-    name:"Dcent In-App",
+    type: "menu",
+    name: "Dcent ( coming soon )",
     icon: DCent,
-    provider: initDcent
-  }
+    provider: initDcent,
+    rowClass: "disabled",
+  },
 ];
 
 class WalletConnect extends React.Component {
@@ -93,10 +97,11 @@ class WalletConnect extends React.Component {
       return (
         <Container>
           <Row>
-            {WalletProviders.map(({ name, icon, provider, type }) => (
+            {WalletProviders.map(({ name, icon, provider, type, rowClass }) => (
               <Col sm={12}>
                 <Container>
                   <Row
+                    className={rowClass}
                     onClick={async () => {
                       await provider();
                       if (this.state.providerSelected !== type)

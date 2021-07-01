@@ -47,9 +47,9 @@ export const RemoveExpo = (x) => {
 };
 
 export const CONTRACT_ADDRESS = {
-  storx: "xdc3db3715985a9891e7b41c2c2dc3f740d1d831d8a", //
-  reputation: "xdcb048bd39c7221a7dba1e08ec569e17bfe4903077", //
-  staking: "xdc1937064906f634ab14cd10549c03b1e98fb6f40d",
+  storx: "xdcf45ab647946e9f0800bc1194a73a52cf109a4313", //
+  reputation: "xdc03eb22ba299f7902a6f65966649d62c05a61cb8f", //
+  staking: "xdcca47a4a497a2547407aa250c40d71d3454a82835",
 };
 
 export const CONTRACT_ABI = {
@@ -62,7 +62,7 @@ export const CONTRACT_ABI = {
  * @constant VALID_CHAINS  correct chain id, in decimal
  */
 // export const VALID_CHAINS = [50, 51];
-export const VALID_CHAINS = [51];
+export const VALID_CHAINS = [50];
 
 export const NETWORK_NAME = {
   50: "XinFin",

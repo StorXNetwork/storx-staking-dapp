@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import { fromWei } from "xdc3-utils";
+import { fromWei, toWei } from "xdc3-utils";
 
 import { SubmitContractTxGeneral } from "../wallets";
 import { toXdcAddress } from "../wallets/xinpay";
@@ -131,7 +131,7 @@ class Staking extends React.Component {
               unstaked,
               ...rst,
             },
-            approvedAmount,
+            approvedAmount: fromWei(RemoveExpo(approvedAmount)),
             stakingData: stakingData.data.data,
             isStaker,
             reputation,
@@ -164,7 +164,7 @@ class Staking extends React.Component {
       "stake",
       { type: "staking" },
       "nonpayable",
-      this.state.form.amount
+      toWei(this.state.form.amount)
     ).then(() => this.getStakeDetail());
   }
 
@@ -174,7 +174,7 @@ class Staking extends React.Component {
       { type: "storx" },
       "nonpayable",
       CONTRACT_ADDRESS.staking,
-      this.state.form.amount
+      toWei(this.state.form.amount)
     ).then(() => this.getStakeDetail());
   }
 
