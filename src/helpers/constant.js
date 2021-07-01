@@ -79,7 +79,7 @@ export const HTTP_PROVIDER = {
   51: "https://rpc.apothem.network",
 };
 
-export const DEFAULT_CHAIN_ID = 51;
+export const DEFAULT_CHAIN_ID = 50;
 export const DEFAULT_PROVIDER = HTTP_PROVIDER[VALID_CHAINS[0]];
 
 export const REPUTATION_FEED_API =
