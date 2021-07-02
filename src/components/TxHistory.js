@@ -4,7 +4,13 @@ import { Container, Row, Col } from "react-bootstrap";
 import _ from "lodash";
 import { isAddress, fromWei } from "xdc3-utils";
 
-import { AxiosInstance, EXPLORER, RemoveExpo } from "../helpers/constant";
+import {
+  AxiosInstance,
+  BUILD_BLOCK_LINK,
+  BUILD_TX_LINK,
+  EXPLORER,
+  RemoveExpo,
+} from "../helpers/constant";
 import { toXdcAddress } from "../wallets/xinpay";
 
 function formatValue(varName, value) {
@@ -33,13 +39,13 @@ function RenderEvent(event, i) {
     <tr>
       <td>{i + 1}</td>
       <td>
-        <a target="_blank" href={EXPLORER + "/block/" + event.block}>
+        <a target="_blank" href={BUILD_BLOCK_LINK(EXPLORER, event.block)}>
           {event.block}
         </a>
       </td>
       <td>{event.name}</td>
       <td>
-        <a target="_blank" href={EXPLORER + "/tx/" + event.tx_hash}>
+        <a target="_blank" href={BUILD_TX_LINK(EXPLORER, event.tx_hash)}>
           HASH LINK
         </a>
       </td>

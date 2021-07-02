@@ -79,6 +79,22 @@ export const HTTP_PROVIDER = {
   51: "https://rpc.apothem.network",
 };
 
+export const BUILD_TX_LINK = (explorer, hash) => {
+  let retLink = `${explorer}`;
+
+  if (!retLink.endsWith("/")) retLink += "/";
+  retLink += `tx/${hash}`;
+  return retLink;
+};
+
+export const BUILD_BLOCK_LINK = (explorer, hash) => {
+  let retLink = `${explorer}`;
+
+  if (!retLink.endsWith("/")) retLink += "/";
+  retLink += `block/${hash}`;
+  return retLink;
+};
+
 export const DEFAULT_CHAIN_ID = 50;
 export const DEFAULT_PROVIDER = HTTP_PROVIDER[VALID_CHAINS[0]];
 

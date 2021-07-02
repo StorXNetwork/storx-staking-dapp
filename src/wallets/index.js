@@ -6,7 +6,7 @@ import * as account from "./account";
 import * as dcentBridge from "./dcentBridge";
 
 import store from "../redux/store";
-import { EXPLORER, LOADERS, DEFAULT_PROVIDER } from "../helpers/constant";
+import { EXPLORER, LOADERS, DEFAULT_PROVIDER, BUILD_TX_LINK } from "../helpers/constant";
 
 function GetFuncFromLoader(loader) {
   switch (loader) {
@@ -80,7 +80,8 @@ export function SubmitContractTxGeneral(...params) {
             <div>
               Sucsess&nbsp;
               <a
-                href={`${EXPLORER}tx/${transactionHash}`}
+                href={BUILD_TX_LINK(EXPLORER, transactionHash)}
+                // href={`${EXPLORER}/tx/${transactionHash}`}
                 rel="noreferrer"
                 target="_blank"
               >
