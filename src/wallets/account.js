@@ -60,7 +60,7 @@ export async function SubmitContractTxGeneral(
       const data = contract.methods[method](...params).encodeABI();
 
       const state = store.getState();
-      const { address: walletAddress, privateKey } = state.wallet;
+      const { address: walletAddress } = state.wallet;
 
       const tx = {
         from: walletAddress.toLowerCase(),
@@ -101,7 +101,7 @@ export async function SubmitContractTxGeneral(
       const data = contract.methods[method](...params).encodeABI();
 
       const state = store.getState();
-      const { address: walletAddress, privateKey } = state.wallet;
+      const { address: walletAddress } = state.wallet;
 
       const tx = {
         from: walletAddress.toLowerCase(),
