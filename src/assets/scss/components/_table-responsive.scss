@@ -1,0 +1,101 @@
+
+.table-responsive-stack {
+  font-size: 14px!important;
+  font-weight: 400;
+  color: var(--text-color);
+}
+.table-responsive-stack a {
+  color: var(--link-color);
+}
+.table-responsive-stack tr {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  border-radius: 12px!important;
+}
+.table-responsive-stack tbody tr {
+  margin-bottom: 15px;
+}
+.table-responsive-stack tr th:last-child {
+  max-width: 190px;
+}
+.table-responsive-stack tr td:first-child {
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+.table-responsive-stack tr td:last-child {
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  max-width: 190px;
+}
+.table-responsive-stack td,
+.table-responsive-stack th {
+  vertical-align: bottom!important;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+.table-responsive-stack th {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  background-color: transparent!important;
+  border-bottom: none!important;
+}
+.table-responsive-stack .table-responsive-stack-thead {
+  color: var(--text-color);
+  font-size: 14px;
+  font-weight: 500;
+  float: left;
+}
+.table-responsive-stack td,
+.table-responsive-stack th {
+  border-top: none;
+}
+.table-responsive-stack tbody tr td {
+  vertical-align: middle;
+}
+.table {
+  font-size: 14px;
+  color: var(--text-color);
+}
+tbody tr {
+  -webkit-transition: all .1s ease-in;
+  transition: all .1s ease-in;
+  background-color: var(--white);
+}
+tbody tr:hover {
+  -webkit-transform: scale(1.010);
+  transform: scale(1.010);
+  background-color: var(--white);
+  -webkit-box-shadow: var(--theme-table-hover-shadow);
+  box-shadow: var(--theme-table-hover-shadow);
+  z-index: 999;
+  border-radius: 12px;
+}
+tr:hover td {
+  background-color: var(--color-theme-table-row-hover);
+}
+tr:hover td:first-child {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+tr:hover td:last-child {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+thead tr {
+  background-color: var(--color-theme-table-row-sticky);
+  color: var(--color-theme-text-thead);
+  font-size: .875rem;
+}
+thead th {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 50px;
+  background-color: var(--color-theme-table-row-sticky);
+  z-index: 10;
+}

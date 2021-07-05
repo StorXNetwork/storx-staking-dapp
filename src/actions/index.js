@@ -1,4 +1,5 @@
 import { CHAIN_DATA } from "../helpers/constant";
+import { SetTheme as _SetTheme } from "../helpers/theme";
 import * as Types from "./types";
 
 export const WalletConnected = ({ address, chain_id, loader, ...rst }) => {
@@ -50,5 +51,13 @@ export const SetChainData = (chain_id) => {
 export const NetworkInValid = () => {
   return {
     type: Types.NETWORK_INVALID,
+  };
+};
+
+export const SetTheme = (theme) => {
+  _SetTheme(theme);
+  return {
+    type: Types.SET_THEME,
+    payload: theme,
   };
 };

@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fromWei } from "xdc3-utils";
 
 import { Navbar, Col } from "react-bootstrap";
 
@@ -9,126 +8,153 @@ import BalanceModal from "./common/BalanceModal";
 
 import WalletConnect from "./wallet-connect/walletConnect";
 
-import BrandLogo from "../assets/img/brand/header-logo.png";
-import { COIN_NAME, DECIMALS } from "../helpers/constant";
+import LogoLight from "../assets/img/storx-logo-light.png";
+
+import LogoDark from "../assets/img/storx-logo.png";
+import { IsDark, Toggle } from "../helpers/theme";
+
+import * as actions from "../actions";
+
+const ToggleLight = (
+  <span className="d-block-light">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      className="feather feather-moon"
+    >
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+    </svg>
+  </span>
+);
+
+const ToggleDark = (
+  <span className="d-block-dark">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      className="feather feather-sun"
+    >
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </span>
+);
 
 class Header extends React.Component {
-  renderCurrentAddressBox() {
-    if (this.props.wallet.connected === false) return "Not Connected";
-
-    if (!this.props.balance) return "Loading";
-
-    const balances = ["native"];
-
-    const resp = Object.keys(this.props.balance).reduce((acc, curr) => {
-      if (balances.includes(curr)) {
-        acc.push({
-          name: curr,
-          balance: parseFloat(this.props.balance[curr]).toFixed(DECIMALS[curr]),
-        });
-      }
-      return acc;
-    }, []);
-
-    return (
-      <>
-        <Col lg={12} sm={12} md={12}>
-          <BalanceModal data={[...resp]} />
-        </Col>
-      </>
-    );
-  }
-
-  getWalletBtn() {
-    let btnName = "CONNECT",
-      disabled = false,
-      balance = "",
-      variant = "primary";
-
-    if (this.props.wallet.connected && this.props.wallet.valid_network) {
-      btnName = "WALLET CONNECTED";
-      disabled = true;
-    } else if (
-      this.props.wallet.connected &&
-      !this.props.wallet.valid_network
-    ) {
-      btnName = "INCORRECT NETWORK";
-      disabled = true;
-      variant = "danger";
-    }
-
-    if (this.props.wallet.connected !== false && this.props.balance) {
-      const balances = ["native", "tokens"];
-
-      const resp = Object.keys(this.props.balance).reduce((acc, curr) => {
-        if (balances.includes(curr)) {
-          acc.push({
-            name: COIN_NAME[curr],
-            balance: parseFloat(fromWei(this.props.balance[curr])).toFixed(
-              DECIMALS[curr]
-            ),
-          });
-        }
-        return acc;
-      }, []);
-
-      balance = (
-        <div>
-          <BalanceModal data={[...resp]} />
-        </div>
-      );
-      // balance = (
-      //   <Link className="balance-link" to="/wallet-page">
-      //     <FontAwesomeIcon icon={faWallet} />
-      //   </Link>
-      // );
-    }
-
-    return (
-      <>
-        <div className="ml-auto header-btn">
-          {balance}
-          <WalletConnect
-            variant={variant}
-            disabled={disabled}
-            btnName={btnName}
-          />
-        </div>
-      </>
-    );
-  }
-
   render() {
+    const brandLogo = IsDark(this.props.theme) === true ? LogoLight : LogoDark;
+    const themeToggle =
+      IsDark(this.props.theme) === true ? ToggleLight : ToggleDark;
+
+    console.log("theme", this.props.theme);
+
     return (
-      <Navbar className="custom-header" bg="light" expand="lg">
-        <Link className="navbar-brand" to="/">
-          <img src={BrandLogo} alt={"logo"} />
-        </Link>
+      <header>
+        <nav className="navbar navbar-expand-lg fixed-top navbar-custom sticky">
+          <div className="container">
+            <Link className="logo" to="/">
+              <img src={brandLogo} alt="SRX" />
+            </Link>
 
-        <b>IN BETA STAGE</b>
+            <div
+              className="collapse navbar-collapse"
+              id="navbarSupportedContent"
+            >
+              <ul className="navbar-nav ml-auto" id="mySidenav">
+                <li className="nav-item button">
+                  <Link className="btn nav-link" to="/">
+                    Home
+                  </Link>
+                </li>
+                <li className="nav-item button">
+                  <Link className="btn nav-link" to="/staking">
+                    Staking
+                  </Link>
+                </li>
+                <li className="nav-item button">
+                  <Link className="btn nav-link" to="/tx-history">
+                    TX History
+                  </Link>
+                </li>
+              </ul>
+            </div>
 
-        <div className="navbar-seperator"></div>
-
-        <Link className="navbar-link" to="/">
-          Home
-        </Link>
-
-        <Link className="navbar-link" to="/staking">
-          Staking
-        </Link>
-
-        <Link className="navbar-link" to="/tx-history">
-          TX History
-        </Link>
-
-        {this.getWalletBtn()}
-      </Navbar>
+            <div className="mobile-footer-block">
+              <ul className="navbar-nav mobile-footer-nav">
+                <li className="nav-item button">
+                  <div className="btn nav-link">Connect Wallet</div>
+                </li>
+                <li className="nav-item button">
+                  {
+                    <BalanceModal
+                      data={{
+                        xdc: {
+                          amount: this.props.balance.native || 100,
+                          total:
+                            parseFloat(this.props.balance.native) * 0.1 || 10,
+                        },
+                        srx: {
+                          amount: this.props.balance.tokens || 10000,
+                          total:
+                            parseFloat(this.props.balance.tokens) * 0.1 || 1000,
+                        },
+                      }}
+                      btn={
+                        <div data-toggle="modal" className="btn nav-link">
+                          Balance
+                        </div>
+                      }
+                    />
+                  }
+                </li>
+              </ul>
+              <ul className="navbar-nav mobile-footer-nav">
+                <li className="nav-item button">
+                  <div className="themeSwitcher">
+                    <button
+                      id="theme-toggle"
+                      className="btn btn-link btn-sm small theme-toggle"
+                      type="button"
+                      onClick={() =>
+                        this.props.SetTheme(Toggle(this.props.theme))
+                      }
+                    >
+                      {themeToggle}
+                    </button>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
     );
   }
 }
 
-function mapStateToProps({ wallet, balance }) {
-  return { wallet, balance };
+function mapStateToProps({ wallet, balance, theme }) {
+  return { wallet, balance, theme };
 }
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, actions)(Header);

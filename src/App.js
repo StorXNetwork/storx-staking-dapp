@@ -56,9 +56,9 @@ function App() {
 
       <Header />
 
-      <Route exact path={"/tx-history"} component={ComposedHistory} />
+      {/* <Route exact path={"/tx-history"} component={ComposedHistory} />
       <Route exact path={"/staking"} component={ComposedStaking} />
-      <Route exact path={"/"} component={Dashboard} />
+      <Route exact path={"/"} component={Dashboard} /> */}
     </div>
   );
 }

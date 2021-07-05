@@ -9,8 +9,8 @@ import { PROJECT_NAME, DEFAULT_CHAIN_ID } from "../../helpers/constant";
 import { initXdc3 } from "../../wallets/xinpay";
 import * as actions from "../../actions";
 
-import XinPayIcon from "../../assets/img/wallets/xinpay.png";
-import DCent from "../../assets/img/wallets/dcent.png";
+import XinPayIcon from "../../assets/img/wallets/xinpay-logo.png";
+import DCent from "../../assets/img/wallets/dcent-logo.png";
 
 import { toast } from "react-toastify";
 import { initDcent } from "../../wallets/dcentInAppBrowser";

@@ -1,0 +1,26 @@
+/*--------------------------
+    Staking Styles  
+---------------------------*/
+.list-group .list-group-item:last-child {
+	border-bottom: none;
+}
+.list-group-item {
+	line-height: 20px;
+	padding: .75rem 0rem;
+	background-color: transparent;
+	border: none;
+	border-bottom: 1px solid var(--light-grey);
+}
+.badge-pill {
+	padding: 6px 12px;
+    border-radius: 50px;
+}
+
+
+.darkTheme .list-group-item {
+	border-bottom: 1px solid var(--border-color);
+}
+/*--------------------------
+    Staking Styles  
+---------------------------*/
+

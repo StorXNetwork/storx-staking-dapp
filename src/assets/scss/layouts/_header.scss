@@ -1,68 +1,189 @@
-.custom-header {
-  top: 0;
-  position: sticky;
-  z-index: 2;
-  font-size: 1.5rem;
-  border-bottom: 0px solid black;
-  box-shadow: 0 1px 5px lightgrey;
-  background-color: $color-background-primary-light !important;
+.navbar-custom {
+  padding: 20px 0px;
+  width: 100%;
+  border-radius: 0px;
+  z-index: 999;
+  margin-bottom: 0px;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+.navbar-custom .logo .logo-dark {
+  display: inline-block;
+}
+.navbar-custom .logo .logo-light {
+  display: none;
+}
+.navbar-custom .navbar-nav .nav-item .nav-link {
+  line-height: 26px;
+  color: rgba(255, 255, 255, 0.6);
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  background-color: transparent;
+  padding: 6px 10px;
+  margin: 0 3px;
+  font-weight: 300;
+}
+.navbar-custom .navbar-nav .nav-item .nav-link:hover,
+.navbar-custom .navbar-nav .nav-item .nav-link:active {
+  color: var(--white);
+}
+.navbar-custom .navbar-nav .nav-item.active .nav-link {
+  color: var(--white);
+}
+.navbar-toggler {
+  font-size: 24px;
+  margin-top: 5px;
+  margin-bottom: 0px;
+  color: var(--white);
+}
+.navbar-custom .navbar-nav>.button:last-child {
+  margin-right: 0px;
+}
+.navbar-custom .navbar-nav>.button>.btn.nav-link {
+  text-align: center;
+  clear: both;
+  background: var(--frontbg);
+  color: var(--text-color);
+  border: 1px solid transparent;
+  font-weight: 400;
+  font-size: 14px;
+  padding: 3px 12px;
+  max-width: 200px;
+  line-height: inherit;
+  height: inherit;
+  border-radius: 8px;
+  box-shadow: none;
+}
+.navbar-custom .navbar-nav>.button>.btn.nav-link:hover {
+  background-color: var(--light);
+  border-color: var(--light-grey);
+}
+.navbar-custom .navbar-nav>.button>.btn.nav-link.active {  
+  background-color: var(--light);
+  border-color: var(--light-grey);
+  color: var(--text-color)
+}
+.navbar-custom .navbar-nav>.button>.btn.nav-link.warning {  
+  background-color: var(--light-pink);
+  border-color: var(--pink);
+  color: var(--pink)
+}
+.navbar-custom .nav-sticky .navbar-nav>.button>.btn.nav-link {
+  // background-color: ;
+  border-color: var(--cyan);
+  color: var(--cyan);
+}
+.navbar-expand-lg .navbar-collapse {
+    display: -webkit-box!important;
+    display: -ms-flexbox!important;
+    display: flex!important;
+    -ms-flex-preferred-size: auto;
+    flex-basis: auto;
+}
+.navbar-expand-lg .navbar-nav {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+}
 
-  .navbar-seperator {
-    @media screen and (min-width: $lg-width) {
-      margin-left: 8rem;
-    }
-  }
 
-  .navbar-link {
-    margin-left: 2rem;
-    color: $color-primary;
+.darkTheme .navbar-custom .logo .logo-light {
+  display: inline-block;
+}
+.darkTheme .navbar-custom .logo .logo-dark {
+  display: none;
+}
+.darkTheme .navbar-custom .navbar-nav>.button>.btn.nav-link {
+  background: var(--frontbg);
+  border: 1px solid transparent;  
+}
+.darkTheme .navbar-custom .navbar-nav>.button>.btn.nav-link:hover {
+  background-color: var(--frontbg-hover);
+  border-color: var(--frontbg-hover);
+  color: var(--white);
+}
 
-    &:hover {
-      text-decoration: none;
-      color: $color-new-blue;
-    }
-  }
+/*--- navbar sticky ---*/
+.nav-sticky.navbar-custom {
+  margin-top: 0px;
+  padding: 10px 0px;
+  background-color: var(--white);
+  -webkit-box-shadow: 0 10px 33px -14px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 33px -14px rgba(0, 0, 0, 0.2);
+}
+.nav-sticky.navbar-custom .logo .logo-dark {
+  display: inline-block;
+}
+.nav-sticky.navbar-custom .logo .logo-light {
+  display: none;
+}
+.nav-sticky.navbar-custom .navbar-nav .nav-item .nav-link {
+  color: rgba(40, 40, 46, 0.8);
+}
+.nav-sticky.navbar-custom .navbar-nav .nav-item .nav-link:hover,
+.nav-sticky.navbar-custom .navbar-nav .nav-item .nav-link:active {
+  color: var(--cyan);
+}
+.nav-sticky.navbar-custom .navbar-nav .nav-item.active .nav-link {
+  color: var(--cyan);
+}
+.nav-sticky.navbar-custom .navbar-nav>.button>.btn.nav-link {
+  background-color: var(--light);
+  color: var(--text-color);
+}
+.nav-sticky.navbar-custom .navbar-nav>.button>.btn.nav-link:hover {
+  background-color: var(--cyan);
+  border-color: var(--cyan);
+  color: var(--white);
+}
+.nav-sticky.navbar-custom .navbar-nav>.button>.btn.nav-link.active {
+  background-color: var(--cyan);
+  border-color: var(--cyan);
+  color: var(--white);
+}
+.nav-sticky .has-search .form-control {
+  color: var(--text-color);
+  background-color: var(--light);
+  box-shadow: none;
+}
+.nav-sticky .has-search .icon-search {
+  color: var(--text-color);
+}
+.nav-sticky .has-search .form-control:focus,
+.nav-sticky .has-search .form-control:hover {
+  background-color: var(--white);
+  border-color: var(--light-grey)!important;
+}
 
-  .balance-link {
-    padding: 8px;
-    margin: 2px;
-    border: 1px solid lightgrey;
-    border-radius: 50%;
 
-    color: $color-primary;
-
-    &:hover {
-      color: lighten($color-primary, 20%);
-    }
-  }
-
-  .header-btn {
-    div {
-      display: inline-block;
-      margin-left: 1rem;
-    }
-  }
-
-  .navbar-brand {
-    color: $font-color-primary;
-    text-transform: uppercase;
-    font-size: 2.5rem;
-    font-weight: 600;
-
-    img {
-      width: 12rem;
-    }
-
-    &:hover,
-    &:active,
-    &::after,
-    &:focus {
-      color: $font-color-primary;
-    }
-
-    img {
-      margin-right: 1rem;
-    }
-    font-weight: 500;
-  }
+.darkTheme .nav-sticky.navbar-custom .logo .logo-dark {
+  display: none;
+}
+.darkTheme .nav-sticky.navbar-custom {
+  background-color: var(--headerbg);
+  -webkit-box-shadow: 0 10px 33px -14px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 10px 33px -14px rgba(0, 0, 0, 0.8);
+}
+.darkTheme .nav-sticky.navbar-custom .logo .logo-light {
+  display: inline-block;
+}
+.darkTheme .nav-sticky.navbar-custom .navbar-nav>.button>.btn.nav-link {
+  background-color: var(--background-color);
+  border: 1px solid transparent;
+}
+.darkTheme .nav-sticky.navbar-custom .navbar-nav>.button>.btn.nav-link:hover {
+  background-color: var(--frontbg-hover);
+  border-color: var(--frontbg-hover);
+  color: var(--white);
+}
+.darkTheme .navbar-custom .navbar-nav>.button>.btn.nav-link.active {
+  background-color: var(--frontbg-hover);
+  border-color: var(--frontbg-hover);
+  color: var(--white);
+}
+.darkTheme .nav-sticky.navbar-custom .navbar-nav>.button>.btn.nav-link.active {
+  background-color: var(--frontbg-hover);
+  border-color: var(--frontbg-hover);
+  color: var(--white);
 }

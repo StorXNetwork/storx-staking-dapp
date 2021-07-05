@@ -1,0 +1,16 @@
+#tx-history .table-responsive-stack tr th:last-child {
+  max-width: inherit;
+}
+#tx-history .table-responsive-stack tr td:last-child {
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  max-width: inherit;
+}
+#tx-history .table-responsive-stack tr th:nth-child(4n) {
+  width: 225px;
+  min-width: 225px;
+}
+#tx-history .table-responsive-stack tr td:nth-child(4n) {
+  width: 225px;
+  min-width: 225px;
+}
