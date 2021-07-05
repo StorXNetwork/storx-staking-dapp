@@ -47,9 +47,9 @@ export const RemoveExpo = (x) => {
 };
 
 export const CONTRACT_ADDRESS = {
-  storx: "xdcf45ab647946e9f0800bc1194a73a52cf109a4313", //
-  reputation: "xdc03eb22ba299f7902a6f65966649d62c05a61cb8f", //
-  staking: "xdcca47a4a497a2547407aa250c40d71d3454a82835",
+  storx: "xdc5d5f074837f5d4618b3916ba74de1bf9662a3fed", 
+  reputation: "xdc5db64839828174d2d29b419e5581c16c67d62046", 
+  staking: "xdc02fe7b136f5dbff8d00546cb5af45afd1e1d350c",
 };
 
 export const CONTRACT_ABI = {
