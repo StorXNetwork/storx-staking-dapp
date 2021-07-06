@@ -2,11 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { Navbar, Col } from "react-bootstrap";
-
 import BalanceModal from "./common/BalanceModal";
-
-import WalletConnect from "./wallet-connect/walletConnect";
 
 import LogoLight from "../assets/img/storx-logo-light.png";
 
@@ -24,9 +20,9 @@ const ToggleLight = (
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       className="feather feather-moon"
     >
       <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
@@ -43,9 +39,9 @@ const ToggleDark = (
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       className="feather feather-sun"
     >
       <circle cx="12" cy="12" r="5"></circle>
@@ -66,8 +62,6 @@ class Header extends React.Component {
     const brandLogo = IsDark(this.props.theme) === true ? LogoLight : LogoDark;
     const themeToggle =
       IsDark(this.props.theme) === true ? ToggleLight : ToggleDark;
-
-    console.log("theme", this.props.theme);
 
     return (
       <header>

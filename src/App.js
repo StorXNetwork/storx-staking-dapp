@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
@@ -10,7 +10,8 @@ import { ToastContainer } from "react-toastify";
 
 import CacheBuster from "./cacheBuster";
 import Header from "./components/Header";
-import Dashboard from "./components/Dashboard";
+import Dashboard from "./components/Dashboard/Dashboard";
+import Footer from "./components/Footer";
 import Staking from "./components/Staking";
 import TxHistory from "./components/TxHistory";
 
@@ -33,10 +34,21 @@ import "react-toastify/dist/ReactToastify.css";
 import packageJson from "../package.json";
 import { PROJECT_NAME } from "./helpers/constant";
 
+import { OnScroll, InitScrollToTop } from "./helpers/responsive";
+
 const ComposedStaking = RequireWallet()(Staking);
 const ComposedHistory = RequireWallet()(TxHistory);
 
 function App() {
+  useEffect(() => {
+    window.addEventListener("scroll", OnScroll);
+    InitScrollToTop();
+
+    return () => {
+      window.removeEventListener("scroll", OnScroll);
+    };
+  });
+
   return (
     <div className="App">
       <ToastContainer />
@@ -56,9 +68,11 @@ function App() {
 
       <Header />
 
-      {/* <Route exact path={"/tx-history"} component={ComposedHistory} />
-      <Route exact path={"/staking"} component={ComposedStaking} />
-      <Route exact path={"/"} component={Dashboard} /> */}
+      {/* <Route exact path={"/tx-history"} component={ComposedHistory} /> */}
+      {/* <Route exact path={"/staking"} component={ComposedStaking} /> */}
+      <Route exact path={"/"} component={Dashboard} />
+
+      <Footer />
     </div>
   );
 }

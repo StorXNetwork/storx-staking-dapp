@@ -20,7 +20,6 @@ export const SetTheme = (theme) => {
   const mainBody = window.document.getElementsByTagName("body")[0];
   mainBody.setAttribute("class", theme);
   localStorage.setItem("theme", theme);
-  console.log("mainBody", theme);
 };
 
 export const IsDark = (theme) => THEMES.darkTheme === theme;

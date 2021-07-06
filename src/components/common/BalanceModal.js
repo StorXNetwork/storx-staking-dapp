@@ -1,5 +1,3 @@
-import { faLongArrowAltLeft } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
 
@@ -20,7 +18,7 @@ const BalanceModal = ({ data }) => {
         </h5>
         <button
           type="button"
-          className="close"
+          className="close no-outline"
           onClick={handleClose}
           aria-label="Close"
         >
@@ -34,7 +32,7 @@ const BalanceModal = ({ data }) => {
               <div className="wallet-icon" style={{ float: "left" }}>
                 <img src={XdcLogo} alt="XDC" />
               </div>
-              <div style={{ "margin-left": "45px" }}>
+              <div style={{ "marginLeft": "45px" }}>
                 <h5>XDC</h5>
                 <p>XinFin Network</p>
               </div>
@@ -49,7 +47,7 @@ const BalanceModal = ({ data }) => {
               <div className="wallet-icon" style={{ float: "left" }}>
                 <img src={SrxLogo} alt="SRX" />
               </div>
-              <div style={{ "margin-left": "45px" }}>
+              <div style={{ "marginLeft": "45px" }}>
                 <h5>SRX</h5>
                 <p>StorX&nbsp;Network</p>
               </div>
@@ -63,7 +61,7 @@ const BalanceModal = ({ data }) => {
       </div>
       <div className="modal-footer border-top-0 d-flex justify-content-center">
         <button type="button" className="back" onClick={handleClose}>
-          <FontAwesomeIcon icon={faLongArrowAltLeft} /> Back
+          Close
         </button>
       </div>
     </div>

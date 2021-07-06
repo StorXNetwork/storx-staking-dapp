@@ -47,8 +47,8 @@ export const RemoveExpo = (x) => {
 };
 
 export const CONTRACT_ADDRESS = {
-  storx: "xdc5d5f074837f5d4618b3916ba74de1bf9662a3fed", 
-  reputation: "xdc5db64839828174d2d29b419e5581c16c67d62046", 
+  storx: "xdc5d5f074837f5d4618b3916ba74de1bf9662a3fed",
+  reputation: "xdc5db64839828174d2d29b419e5581c16c67d62046",
   staking: "xdc02fe7b136f5dbff8d00546cb5af45afd1e1d350c",
 };
 
@@ -84,6 +84,14 @@ export const BUILD_TX_LINK = (explorer, hash) => {
 
   if (!retLink.endsWith("/")) retLink += "/";
   retLink += `tx/${hash}`;
+  return retLink;
+};
+
+export const ADDR_LINK = (explorer, addr) => {
+  let retLink = `${explorer}`;
+
+  if (!retLink.endsWith("/")) retLink += "/";
+  retLink += `addr/${addr}`;
   return retLink;
 };
 
