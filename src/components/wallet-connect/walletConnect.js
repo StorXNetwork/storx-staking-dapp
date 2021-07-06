@@ -9,8 +9,10 @@ import { PROJECT_NAME, DEFAULT_CHAIN_ID } from "../../helpers/constant";
 import { initXdc3 } from "../../wallets/xinpay";
 import * as actions from "../../actions";
 
-import XinPayIcon from "../../assets/img/wallets/xinpay-logo.png";
-import DCent from "../../assets/img/wallets/dcent-logo.png";
+import XinpayLogo from "../../assets/img/wallets/xinpay-logo.png";
+import PrivateKeyLogo from "../../assets/img/wallets/privatekey-logo.png";
+import KeystoreLogo from "../../assets/img/wallets/keystore-logo.png";
+import DcentLogo from "../../assets/img/wallets/dcent-logo.png";
 
 import { toast } from "react-toastify";
 import { initDcent } from "../../wallets/dcentInAppBrowser";
@@ -30,28 +32,28 @@ const WalletProviders = [
   {
     type: "menu",
     name: "xinpay",
-    icon: XinPayIcon,
+    icon: XinpayLogo,
     provider: initXdc3,
     rowClass: "",
   },
   {
     type: "privatekey",
     name: "privatekey",
-    icon: XinPayIcon,
+    icon: PrivateKeyLogo,
     provider: () => {},
     rowClass: "",
   },
   {
     type: "keystore",
     name: "keystore",
-    icon: XinPayIcon,
+    icon: KeystoreLogo,
     provider: () => {},
     rowClass: "",
   },
   {
     type: "menu",
     name: "Dcent ( coming soon )",
-    icon: DCent,
+    icon: DcentLogo,
     provider: initDcent,
     rowClass: "disabled",
   },
@@ -95,74 +97,84 @@ class WalletConnect extends React.Component {
   RenderWalletProvider() {
     if (this.state.providerSelected === Provider.menu)
       return (
-        <Container>
-          <Row>
-            {WalletProviders.map(({ name, icon, provider, type, rowClass }) => (
-              <Col sm={12}>
-                <Container>
-                  <Row
-                    className={rowClass}
-                    onClick={async () => {
-                      await provider();
-                      if (this.state.providerSelected !== type)
-                        this.setState({ providerSelected: type });
-                    }}
-                  >
-                    <Col className="wallet-icon--wrapper" sm={2} lg={2} md={2}>
-                      <div className="wallet-icon">
-                        <img src={icon} alt={"logo"} />
-                      </div>
-                    </Col>
-                    <Col
-                      className="wallet-name-wrapper"
-                      sm={10}
-                      lg={10}
-                      md={10}
-                    >
-                      <div className="wallet-name">{name}</div>
-                    </Col>
-                  </Row>
-                </Container>
-              </Col>
-            ))}
-          </Row>
-        </Container>
+        <div className="modal-content">
+          <div className="modal-header border-bottom-0">
+            <h5 className="modal-title" id="exampleModalLabel">
+              Connect to a wallet
+            </h5>
+            <button
+              type="button"
+              className="close"
+              onClick={() => this.setState({ showModal: false })}
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div className="modal-body">
+            <div className="wallet-connect-block">
+              <button onClick={initXdc3} className="wallect-connect-btn">
+                <div className="wallet-name">
+                  <h4>XinPay</h4>
+                </div>
+                <div className="wallet-icon">
+                  <img src={XinpayLogo} alt="Icon" />
+                </div>
+              </button>
+              <button
+                className="wallect-connect-btn"
+                onClick={() =>
+                  this.setState({ providerSelected: Provider.privateKey })
+                }
+              >
+                <div className="wallet-name">
+                  <h4>Private Key</h4>
+                </div>
+                <div className="wallet-icon">
+                  <img src={PrivateKeyLogo} alt="Icon" />
+                </div>
+              </button>
+              <button
+                className="wallect-connect-btn"
+                onClick={() =>
+                  this.setState({ providerSelected: Provider.keystore })
+                }
+              >
+                <div className="wallet-name">
+                  <h4>Key Store</h4>
+                </div>
+                <div className="wallet-icon">
+                  <img src={KeystoreLogo} alt="Icon" />
+                </div>
+              </button>
+              <button className="wallect-connect-btn">
+                <div className="wallet-name disabled">
+                  <h4>
+                    D'CENT <span>(Coming soon!)</span>
+                  </h4>
+                </div>
+                <div className="wallet-icon">
+                  <img src={DcentLogo} alt="Icon" />
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
       );
 
     if (this.state.providerSelected === Provider.keystore)
       return (
-        <Container>
-          <Row>
-            <Keystore cb={this.accountCallback(Provider.keystore)} />
-          </Row>
-          <Row>
-            <Button
-              onClick={() => {
-                this.setState({ providerSelected: Provider.menu });
-              }}
-            >
-              Back
-            </Button>
-          </Row>
-        </Container>
+        <Keystore
+          back={() => this.setState({ providerSelected: Provider.menu })}
+          cb={this.accountCallback(Provider.keystore)}
+        />
       );
 
     if (this.state.providerSelected === Provider.privateKey)
       return (
-        <Container>
-          <Row>
-            <PrivateKey cb={this.accountCallback(Provider.privateKey)} />
-          </Row>
-          <Row>
-            <Button
-              onClick={() => {
-                this.setState({ providerSelected: Provider.menu });
-              }}
-            >
-              Back
-            </Button>
-          </Row>
-        </Container>
+        <PrivateKey
+          back={() => this.setState({ providerSelected: Provider.menu })}
+          cb={this.accountCallback(Provider.privateKey)}
+        />
       );
   }
 
@@ -171,33 +183,23 @@ class WalletConnect extends React.Component {
     const disabled = this.props.disabled || false;
 
     return (
-      <div className="wallet-connect">
-        <Button
-          variant={this.props.variant || "primary"}
+      <>
+        <div
+          data-toggle="modal"
+          className="btn nav-link"
           onClick={() => this.setState({ showModal: true })}
           disabled={disabled}
         >
           {BTN_MSG}
-        </Button>
+        </div>
         <Modal
-          className="wallet-connect"
+          centered={true}
           show={this.state.showModal}
           onHide={() => this.setState({ showModal: false })}
         >
-          <Modal.Header closeButton>
-            <Modal.Title>{PROJECT_NAME}</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>{this.RenderWalletProvider()}</Modal.Body>
-          <Modal.Footer>
-            <Button
-              variant="secondary"
-              onClick={() => this.setState({ showModal: false })}
-            >
-              Close
-            </Button>
-          </Modal.Footer>
+          {this.RenderWalletProvider()}
         </Modal>
-      </div>
+      </>
     );
   }
 }

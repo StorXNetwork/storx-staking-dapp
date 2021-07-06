@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import BalanceModal from "./common/BalanceModal";
+import WalletConnectModal from "./wallet-connect/walletConnect";
 
 import LogoLight from "../assets/img/storx-logo-light.png";
 
@@ -96,9 +97,7 @@ class Header extends React.Component {
 
             <div className="mobile-footer-block">
               <ul className="navbar-nav mobile-footer-nav">
-                <li className="nav-item button">
-                  <div className="btn nav-link">Connect Wallet</div>
-                </li>
+                <li className="nav-item button">{<WalletConnectModal />}</li>
                 <li className="nav-item button">
                   {
                     <BalanceModal

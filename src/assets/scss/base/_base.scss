@@ -5,6 +5,10 @@
   padding: 0px;
 }
 
+button {
+  @extend .no-outline;
+}
+
 @import url("https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&display=swap");
 :root {
   --background-color: #f7f7f7;
