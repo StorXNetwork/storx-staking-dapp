@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
+import { fromWei } from "xdc3-utils";
 
 import XdcLogo from "../../assets/img/wallets/xdc-logo.png";
 import SrxLogo from "../../assets/img/wallets/storx-logo.png";
+import { DECIMALS, RemoveExpo } from "../../helpers/constant";
+import { FormatNumber, FormatToken } from "../../helpers/decimal";
 
 const BalanceModal = ({ data }) => {
   const [showModal, setShowModal] = useState(false);
@@ -32,14 +35,14 @@ const BalanceModal = ({ data }) => {
               <div className="wallet-icon" style={{ float: "left" }}>
                 <img src={XdcLogo} alt="XDC" />
               </div>
-              <div style={{ "marginLeft": "45px" }}>
+              <div style={{ marginLeft: "45px" }}>
                 <h5>XDC</h5>
                 <p>XinFin Network</p>
               </div>
             </div>
             <div className="wallet-icon-block text-right">
-              <h5>{data.xdc.amount}</h5>
-              <p>{data.xdc.total} $</p>
+              <h5>{FormatToken(data.xdc.amount)}</h5>
+              <p>{FormatToken(data.xdc.total)} $</p>
             </div>
           </li>
           <li className="list-group-item d-flex justify-content-between align-items-center">
@@ -47,14 +50,14 @@ const BalanceModal = ({ data }) => {
               <div className="wallet-icon" style={{ float: "left" }}>
                 <img src={SrxLogo} alt="SRX" />
               </div>
-              <div style={{ "marginLeft": "45px" }}>
+              <div style={{ marginLeft: "45px" }}>
                 <h5>SRX</h5>
                 <p>StorX&nbsp;Network</p>
               </div>
             </div>
             <div className="wallet-icon-block text-right">
-              <h5>{data.srx.amount}</h5>
-              <p>{data.srx.total} $</p>
+              <h5>{FormatToken(data.srx.amount)}</h5>
+              <p>{FormatToken(data.srx.total)} $</p>
             </div>
           </li>
         </ul>

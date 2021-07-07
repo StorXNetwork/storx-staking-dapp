@@ -226,19 +226,25 @@ export async function SubmitContractTxGeneral(
             reject({ message: reason });
             return;
           }
-          
+
           xdc3.eth.sendTransaction(tx, (err, hash) => {
             if (err) reject(err);
             let interval = setInterval(async () => {
-              const receipt = await xdc3.eth.getTransactionReceipt(hash);
-              console.log("receipt", receipt);
-              if (receipt !== null) {
-                if (receipt.status) {
-                  clearInterval(interval);
-                  resolve(receipt);
-                } else {
-                  reject(receipt);
+              try {
+                const receipt = await xdc3.eth.getTransactionReceipt(hash);
+                console.log("receipt", receipt);
+                if (receipt !== null) {
+                  if (receipt.status) {
+                    clearInterval(interval);
+                    resolve(receipt);
+                  } else {
+                    clearInterval(interval);
+                    reject(receipt);
+                  }
                 }
+              } catch (e) {
+                clearInterval(interval);
+                reject(e);
               }
             }, 2000);
           });
@@ -266,14 +272,20 @@ export async function SubmitContractTxGeneral(
           xdc3.eth.sendTransaction(tx, (err, hash) => {
             if (err) reject(err);
             let interval = setInterval(async () => {
-              const receipt = await xdc3.eth.getTransactionReceipt(hash);
-              if (receipt !== null) {
-                if (receipt.status) {
-                  clearInterval(interval);
-                  resolve(receipt);
-                } else {
-                  reject(receipt);
+              try {
+                const receipt = await xdc3.eth.getTransactionReceipt(hash);
+                if (receipt !== null) {
+                  if (receipt.status) {
+                    clearInterval(interval);
+                    resolve(receipt);
+                  } else {
+                    clearInterval(interval);
+                    reject(receipt);
+                  }
                 }
+              } catch (e) {
+                clearInterval(interval);
+                reject(e);
               }
             }, 2000);
           });

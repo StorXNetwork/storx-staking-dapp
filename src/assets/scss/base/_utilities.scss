@@ -165,8 +165,8 @@
 .disabled {
   pointer-events: none;
   opacity: 0.3;
-
 }
+
 
 .loader-box {
   background: currentcolor;
@@ -255,4 +255,12 @@
 .truncate-lg a {
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.u-uppercase {
+  text-transform: uppercase;
+}
+
+.u-capitalize {
+  text-transform: capitalize;
 }

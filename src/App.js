@@ -12,7 +12,7 @@ import CacheBuster from "./cacheBuster";
 import Header from "./components/Header";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Footer from "./components/Footer";
-import Staking from "./components/Staking";
+import Staking from "./components/Staking/Staking";
 import TxHistory from "./components/TxHistory";
 
 /**
@@ -37,7 +37,7 @@ import { PROJECT_NAME } from "./helpers/constant";
 import { OnScroll, InitScrollToTop } from "./helpers/responsive";
 
 const ComposedStaking = RequireWallet()(Staking);
-const ComposedHistory = RequireWallet()(TxHistory);
+// const ComposedHistory = RequireWallet()(TxHistory);
 
 function App() {
   useEffect(() => {
@@ -50,7 +50,7 @@ function App() {
   });
 
   return (
-    <div className="App">
+    <div className="app">
       <ToastContainer />
       <CacheBuster>
         {({ loading, isLatestVersion, refreshCacheAndReload }) => {
@@ -69,7 +69,7 @@ function App() {
       <Header />
 
       {/* <Route exact path={"/tx-history"} component={ComposedHistory} /> */}
-      {/* <Route exact path={"/staking"} component={ComposedStaking} /> */}
+      <Route exact path={"/staking"} component={ComposedStaking} />
       <Route exact path={"/"} component={Dashboard} />
 
       <Footer />

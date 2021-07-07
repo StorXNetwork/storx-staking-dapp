@@ -6,8 +6,9 @@ import FarmNode from "../../assets/img/icons/farmnodes.png";
 import Staking from "../../assets/img/icons/staking.png";
 import Rewards from "../../assets/img/icons/rewards.png";
 import { toXdcAddress } from "../../wallets/xinpay";
-import { FormatNumber } from "../../helpers/decimal";
+import { FormatNumber, FormatToken } from "../../helpers/decimal";
 import { ADDR_LINK, EXPLORER, RemoveExpo } from "../../helpers/constant";
+import { LOADER_BOX } from "../common/common";
 
 function RenderRows(holders, reputationThreshold) {
   if (!holders)
@@ -40,7 +41,7 @@ function RenderRows(holders, reputationThreshold) {
             {toXdcAddress(data.stake.stakerHolder)}
           </a>
         </td>
-        <td>NODE</td>
+        <td>{data.data.address}</td>
         <td>{FormatNumber(fromWei(data.stake.stakedAmount))} SRX</td>
         <td>
           <div className="notify masternode">
@@ -58,22 +59,20 @@ function RenderRows(holders, reputationThreshold) {
 }
 
 function DashboardPresentation({ data }) {
-  const nodeCount = data ? Object.keys(data.stakeHolders).length : "loading";
+  const nodeCount = data ? Object.keys(data.stakeHolders).length : LOADER_BOX;
   const stakeholder = data
     ? Object.keys(data.stakeHolders).map((x) => data.stakeHolders[x])
     : null;
   const reputationThreshold = data ? data.reputationThreshold : null;
 
-  const totalStaked = data
-    ? FormatNumber(fromWei(RemoveExpo(data.totalStaked + "")))
-    : "loading";
+  const totalStaked = data ? FormatNumber(FormatToken(data.totalStaked + "")) : LOADER_BOX;
   const hostingRewards = data
     ? FormatNumber(fromWei(RemoveExpo(data.hostingCompensation) + ""))
-    : "loading";
+    : LOADER_BOX;
 
   const stakingRewwards = data
     ? data.interest / data.interestPrecision
-    : "loading";
+    : LOADER_BOX;
 
   return (
     <>
@@ -189,7 +188,7 @@ function DashboardPresentation({ data }) {
                     className="nav nav-tabs ticker-nav form-tabs hidden-xs"
                     role="tablist"
                   >
-                    <li className="nav-item">
+                    <li className="nav-item mb-3">
                       <a
                         className="nav-link active show"
                         href="#tab1"

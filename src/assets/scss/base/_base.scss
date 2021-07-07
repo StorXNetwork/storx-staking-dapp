@@ -330,3 +330,7 @@ iframe {
   outline: none;
   box-shadow: none;
 }
+
+.app {
+  @extend body
+}

@@ -23,42 +23,6 @@ const Provider = {
   privateKey: "privatekey",
 };
 
-const WalletProviders = [
-  // {
-  //   name: "metamask",
-  //   icon: MetamaskIcon,
-  //   provider: initWeb3,
-  // },
-  {
-    type: "menu",
-    name: "xinpay",
-    icon: XinpayLogo,
-    provider: initXdc3,
-    rowClass: "",
-  },
-  {
-    type: "privatekey",
-    name: "privatekey",
-    icon: PrivateKeyLogo,
-    provider: () => {},
-    rowClass: "",
-  },
-  {
-    type: "keystore",
-    name: "keystore",
-    icon: KeystoreLogo,
-    provider: () => {},
-    rowClass: "",
-  },
-  {
-    type: "menu",
-    name: "Dcent ( coming soon )",
-    icon: DcentLogo,
-    provider: initDcent,
-    rowClass: "disabled",
-  },
-];
-
 class WalletConnect extends React.Component {
   constructor(props) {
     super(props);
@@ -74,9 +38,7 @@ class WalletConnect extends React.Component {
       prevProps.wallet.connected !== this.props.wallet.connected &&
       this.props.wallet.connected
     ) {
-      this.setState({ showModal: false }, () => {
-        toast("Wallet Connected", { autoClose: 2000 });
-      });
+      this.setState({ showModal: false });
     }
   }
 
@@ -180,13 +142,13 @@ class WalletConnect extends React.Component {
 
   render() {
     const BTN_MSG = this.props.btnName || "CONNECT";
+    const BTN_CLASS = this.props.btnClass || "btn nav-link";
     const disabled = this.props.disabled || false;
 
     return (
       <>
         <div
-          data-toggle="modal"
-          className="btn nav-link"
+          className={BTN_CLASS}
           onClick={() => this.setState({ showModal: true })}
           disabled={disabled}
         >

@@ -41,7 +41,7 @@ export const InitStackableTable = () => {
         window
           .$(".table-responsive-stack td:nth-child(" + (i + 1) + ")")
           .prepend(
-            '<span class="table-responsive-stack-thead">' +
+            '<span className="table-responsive-stack-thead">' +
               window.$(this).text() +
               ":</span> "
           );

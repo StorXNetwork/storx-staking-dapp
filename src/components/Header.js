@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import _ from "lodash";
 
 import BalanceModal from "./common/BalanceModal";
 import WalletConnectModal from "./wallet-connect/walletConnect";
@@ -11,6 +12,7 @@ import LogoDark from "../assets/img/storx-logo.png";
 import { IsDark, Toggle } from "../helpers/theme";
 
 import * as actions from "../actions";
+import { toast } from "react-toastify";
 
 const ToggleLight = (
   <span className="d-block-light">
@@ -59,10 +61,62 @@ const ToggleDark = (
 );
 
 class Header extends React.Component {
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.wallet.connected !== this.props.wallet.connected &&
+      this.props.wallet.connected
+    ) {
+      this.setState({ showModal: false }, () => {
+        toast("Wallet Connected", { autoClose: 2000 });
+      });
+    }
+  }
+
+  getConnectButton() {
+    let btn_msg = "connect",
+      btn_class = "btn nav-link u-capitalize";
+    if (this.props.wallet.connected) {
+      if (!this.props.wallet.valid_network) {
+        btn_msg = "incorrect network";
+        btn_class += " warning";
+      } else {
+        btn_msg = "connected";
+        btn_class += " active";
+      }
+    }
+    return { btn_msg, btn_class };
+  }
+
   render() {
     const brandLogo = IsDark(this.props.theme) === true ? LogoLight : LogoDark;
     const themeToggle =
       IsDark(this.props.theme) === true ? ToggleLight : ToggleDark;
+
+    const balance =
+      this.props.wallet.connected &&
+      !_.isUndefined(this.props.balance.native) ? (
+        <BalanceModal
+          data={{
+            xdc: {
+              amount: this.props.balance.native,
+              total: parseFloat(this.props.balance.nativeTotal),
+            },
+            srx: {
+              amount: this.props.balance.tokens,
+              total: parseFloat(this.props.balance.tokensTotal),
+            },
+          }}
+          btn={
+            <div data-toggle="modal" className="btn nav-link">
+              Balance
+            </div>
+          }
+        />
+      ) : (
+        ""
+      );
+
+    const btn = this.getConnectButton();
 
     return (
       <header>
@@ -87,40 +141,25 @@ class Header extends React.Component {
                     Staking
                   </Link>
                 </li>
-                <li className="nav-item button">
+                {/* <li className="nav-item button">
                   <Link className="btn nav-link" to="/tx-history">
                     TX History
                   </Link>
-                </li>
+                </li> */}
               </ul>
             </div>
 
             <div className="mobile-footer-block">
               <ul className="navbar-nav mobile-footer-nav">
-                <li className="nav-item button">{<WalletConnectModal />}</li>
                 <li className="nav-item button">
                   {
-                    <BalanceModal
-                      data={{
-                        xdc: {
-                          amount: this.props.balance.native || 100,
-                          total:
-                            parseFloat(this.props.balance.native) * 0.1 || 10,
-                        },
-                        srx: {
-                          amount: this.props.balance.tokens || 10000,
-                          total:
-                            parseFloat(this.props.balance.tokens) * 0.1 || 1000,
-                        },
-                      }}
-                      btn={
-                        <div data-toggle="modal" className="btn nav-link">
-                          Balance
-                        </div>
-                      }
+                    <WalletConnectModal
+                      btnName={btn.btn_msg}
+                      btnClass={btn.btn_class}
                     />
                   }
                 </li>
+                <li className="nav-item button">{balance}</li>
               </ul>
               <ul className="navbar-nav mobile-footer-nav">
                 <li className="nav-item button">
