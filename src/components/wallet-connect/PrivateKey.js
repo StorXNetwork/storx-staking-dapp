@@ -34,7 +34,7 @@ const PrivateKey = ({ cb, loading, back }) => {
           <div className="form-group">
             <label>Enter Private Key</label>
             <input
-              type="text"
+              type="password"
               className="form-control"
               placeholder="Enter Private Key"
               value={privateKey}
