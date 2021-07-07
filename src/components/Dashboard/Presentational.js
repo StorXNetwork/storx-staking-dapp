@@ -14,7 +14,7 @@ function RenderRows(holders, reputationThreshold) {
   if (!holders)
     return (
       <tr>
-        <td className="u-text-center" style={{ maxWidth: "100%" }} colSpan={5}>
+        <td className="u-text-center" style={{ maxWidth: "100%" }} colSpan={4}>
           LOADING
         </td>
       </tr>
@@ -41,7 +41,7 @@ function RenderRows(holders, reputationThreshold) {
             {toXdcAddress(data.stake.stakerHolder)}
           </a>
         </td>
-        <td>{data.data.address}</td>
+        {/* <td>{data.data.address}</td> */}
         <td>{FormatNumber(fromWei(data.stake.stakedAmount))} SRX</td>
         <td>
           <div className="notify masternode">
@@ -221,7 +221,7 @@ function DashboardPresentation({ data }) {
                       <thead>
                         <tr>
                           <th>FARM NODE ADDRESS</th>
-                          <th>NODE IP</th>
+                          {/* <th>NODE IP</th> */}
                           <th>STAKED AMOUNT</th>
                           <th>REPUTATION</th>
                           <th>STATUS</th>
