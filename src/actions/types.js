@@ -11,3 +11,5 @@ export const NETWORK_INVALID = "NETWORK_INVALID";
 export const SET_CHAIN_DATA = "SET_CHAIN_DATA";
 
 export const GET_ASSETS = "GET_ASSETS";
+
+export const SET_THEME = "SET_THEME";

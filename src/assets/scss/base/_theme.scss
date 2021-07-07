@@ -1,0 +1,119 @@
+/*--------------------------
+    Theme Switcher Styles  
+---------------------------*/
+.themeSwitcher {
+  left: 30px;
+  z-index: 99;
+  bottom: 30px;
+  padding-left: 4px;
+}
+.lightTheme {
+  --background-color: #f2f3f6;
+  --text-color: #6c7083;
+  --headerbg: #212130;
+  --frontbg: #fefefe;
+  --modalbg: #ffffff;
+  --link-color: #543fd7;
+  --border-color: #ececec;
+}
+.lightTheme .d-block-light {
+  display: none !important;
+}
+#theme-toggle {
+  &:focus,
+  &:active {
+    box-shadow: none;
+  }
+
+  padding: 5px;
+  width: 34px;
+  height: 34px;
+  line-height: 1;
+  border-radius: 8px;
+  border: none;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out,
+    -webkit-box-shadow 0.15s ease-in-out;
+}
+.lightTheme
+  .navbar-custom
+  .navbar-nav
+  > .button
+  > .themeSwitcher
+  > #theme-toggle {
+  background-color: var(--frontbg);
+  color: var(--text-color);
+}
+.lightTheme
+  .nav-sticky.navbar-custom
+  .navbar-nav
+  > .button
+  > .themeSwitcher
+  > #theme-toggle {
+  background-color: var(--light);
+  color: var(--text-color);
+}
+.lightTheme
+  .navbar-custom
+  .navbar-nav
+  > .button
+  > .themeSwitcher
+  > #theme-toggle:hover {
+  color: #e6aa1e;
+}
+
+/*---------- Dark Theme ----------*/
+.darkTheme {
+  --background-color: #171622;
+  --text-color: #9196ac;
+  --headerbg: #212130;
+  --frontbg: #212130;
+  --frontbg-hover: #383854;
+  --modalbg: #212130;
+  --link-color: #828fff;
+  --border-color: #2e2e42;
+}
+.darkTheme h1,
+.darkTheme h2,
+.darkTheme h3,
+.darkTheme h4,
+.darkTheme h5,
+.darkTheme h6 {
+  color: var(--white);
+}
+.darkTheme .form-control {
+  background-color: var(--frontbg);
+  border-color: var(--border-color);
+  color: var(--text-color) !important;
+}
+.darkTheme .d-block-dark {
+  display: none !important;
+}
+.darkTheme
+  .navbar-custom
+  .navbar-nav
+  > .button
+  > .themeSwitcher
+  > #theme-toggle {
+  background: var(--frontbg);
+  color: var(--text-color);
+}
+.darkTheme
+  .nav-sticky.navbar-custom
+  .navbar-nav
+  > .button
+  > .themeSwitcher
+  > #theme-toggle {
+  background-color: var(--background-color);
+}
+.darkTheme
+  .navbar-custom
+  .navbar-nav
+  > .button
+  > .themeSwitcher
+  > #theme-toggle:hover {
+  color: #e6aa1e;
+}
+/*--------------------------
+    Theme Switcher Styles  
+---------------------------*/

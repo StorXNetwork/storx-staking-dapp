@@ -167,6 +167,7 @@
   opacity: 0.3;
 }
 
+
 .loader-box {
   background: currentcolor;
   position: relative;
@@ -231,4 +232,35 @@
   50% {
     box-shadow: 0 -0.25em 0 currentcolor, 0 0.25em 0 currentcolor;
   }
+}
+
+.truncate {
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--green) !important;
+  cursor: pointer;
+}
+.truncate a {
+  color: var(--green) !important;
+  max-width: 175px !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.truncate-lg {
+  color: var(--cyan) !important;
+  cursor: pointer;
+}
+.truncate-lg a {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.u-uppercase {
+  text-transform: uppercase;
+}
+
+.u-capitalize {
+  text-transform: capitalize;
 }

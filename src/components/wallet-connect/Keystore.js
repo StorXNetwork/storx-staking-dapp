@@ -25,18 +25,19 @@ const ImportFromFilerBodyComponent = ({ cb, defaultPath }) => {
   };
 
   return (
-    <div>
+    <>
       <input
+        className="form-file-input form-control"
         type="file"
         id="input-file"
         accept=".json"
         onChange={(e) => handleFileChosen(e.target.files[0])}
       />
-    </div>
+    </>
   );
 };
 
-const Keystore = ({ cb }) => {
+const Keystore = ({ cb, back }) => {
   const [keystore, setKeystore] = useState("");
   const [pwd, setPwd] = useState("");
   const [statusMessage, setStatusMessage] = useState("");
@@ -49,47 +50,56 @@ const Keystore = ({ cb }) => {
   // }
 
   return (
-    <div className="keystore">
-      <Container>
-        <Row>
-          <ImportFromFilerBodyComponent
-            className="keystore-path__input"
-            cb={setKeystore}
-          />
-        </Row>
-
-        <Row>
-          <input
-            className="keystore-pwd__input"
-            value={pwd}
-            type="password"
-            onChange={(x) => setPwd(x.target.value)}
-          />
-        </Row>
-
-        <Row>
-          <div className="private-key__message">{statusMessage}</div>
-        </Row>
-
-        <Row>
-          <Col>
-            <Button
-              className="u-float-r"
-              onClick={(e) => {
-                const account = GetAccountFromKeystore(keystore, pwd);
-                if (account === null) {
-                  setStatusMessage("Invalid Password / Keystore");
-                } else {
-                  setStatusMessage("Successfully got the account");
-                }
-                cb(account);
-              }}
-            >
-              {btnName}
-            </Button>
-          </Col>
-        </Row>
-      </Container>
+    <div className="modal-content">
+      <div className="modal-header border-bottom-0">
+        <h5 className="modal-title" id="exampleModalLabel">
+          Connect with Key Store
+        </h5>
+      </div>
+      <div className="modal-body">
+        <form className="" role="form">
+          <div className="form-group">
+            <ImportFromFilerBodyComponent cb={setKeystore} />
+          </div>
+          <div className="">{statusMessage}</div>
+          <div className="form-group">
+            <label>Password</label>
+            <input
+              type="password"
+              className="form-control"
+              placeholder="Enter Password"
+              value={pwd}
+              onClick={setPwd}
+            />
+          </div>
+          <button
+            className="btn btn-rounded btn-info mb-2"
+            onClick={(e) => {
+              e.preventDefault();
+              const account = GetAccountFromKeystore(keystore, pwd);
+              if (account === null) {
+                setStatusMessage("Invalid Password / Keystore");
+              } else {
+                setStatusMessage("Successfully got the account");
+              }
+              cb(account);
+            }}
+          >
+            Submit
+          </button>
+          <div></div>
+        </form>
+      </div>
+      <div className="modal-footer border-top-0 d-flex justify-content-center">
+        <button
+          onClick={back}
+          type="button"
+          className="back"
+          data-dismiss="modal"
+        >
+          Back
+        </button>
+      </div>
     </div>
   );
 };
