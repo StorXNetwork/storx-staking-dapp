@@ -102,7 +102,7 @@ export function InfoHeader({ stakingData, wallet, reputation, stakeValid, stakeV
                 <div className="media align-items-center">
                   <div className="media-body text-center">
                     <h2 className="font-size-1 text-uppercase text-secondary mb-1">
-                      Mininimum
+                      Minimum
                       <br />
                       Reputation
                     </h2>
