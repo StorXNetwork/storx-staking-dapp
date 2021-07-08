@@ -106,7 +106,7 @@ function DashboardPresentation({ data }) {
                   </figure>
                   <div className="media-body">
                     <h2 className="font-size-1 text-uppercase text-secondary mb-0">
-                      Farm Nodes
+                      Farm/Storage Nodes
                     </h2>
                     <p>
                       <span className="counter">{nodeCount}</span>
@@ -149,7 +149,7 @@ function DashboardPresentation({ data }) {
                     </h2>
                     <p>
                       <span className="counter">{hostingRewards}</span>{" "}
-                      <span className="small">SRX P.A.</span>
+                      <span className="small">SRX/PA</span>
                     </p>
                   </div>
                 </div>
@@ -167,7 +167,7 @@ function DashboardPresentation({ data }) {
                   </figure>
                   <div className="media-body">
                     <h2 className="font-size-1 text-uppercase text-secondary mb-0">
-                      Rewards
+                      Staking Rewards
                     </h2>
                     <p>
                       <span className="counter">{stakingRewwards}</span>%{" "}
@@ -199,7 +199,7 @@ function DashboardPresentation({ data }) {
                         data-toggle="tab"
                         aria-selected="true"
                       >
-                        Farm Nodes ( {`${nodeCount}`} )
+                        Farm / Storage Nodes ( {`${nodeCount}`} )
                       </a>
                     </li>
                   </ul>
