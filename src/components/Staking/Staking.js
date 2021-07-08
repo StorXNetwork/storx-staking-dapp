@@ -157,6 +157,12 @@ class Staking extends React.Component {
       ? this.state.reputation
       : "NOT A STAKER";
 
+    let stakeValidClass =
+      this.state.isStaker &&
+      this.state.reputation > this.state.stakingData.reputationThreshold
+        ? "text-success"
+        : "text-danger";
+
     const stakeValid = this.state.stakingData
       ? this.state.isStaker
         ? (this.state.reputation > this.state.stakingData.reputationThreshold)
@@ -174,6 +180,7 @@ class Staking extends React.Component {
               stakingData={this.state.stakingData}
               reputation={reputation}
               stakeValid={stakeValid}
+              stakeValidClass={stakeValidClass}
               wallet={this.props.wallet.address}
             />
             <div className="row mb-3">

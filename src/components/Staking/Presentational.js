@@ -74,7 +74,7 @@ export function InfoCard({ data }) {
   );
 }
 
-export function InfoHeader({ stakingData, wallet, reputation, stakeValid }) {
+export function InfoHeader({ stakingData, wallet, reputation, stakeValid, stakeValidClass }) {
   return (
     <>
       <div className="row mb-3">
@@ -205,7 +205,7 @@ export function InfoHeader({ stakingData, wallet, reputation, stakeValid }) {
                       <br />
                       Status
                     </h2>
-                    <p className="text-success">
+                    <p className={stakeValidClass}>
                       {stakeValid ? stakeValid : LOADER_BOX}
                     </p>
                   </div>
