@@ -1,5 +1,7 @@
 window.$ = window.jQuery = require("jquery");
 
+let initialized = false;
+
 export const OnScroll = (event) => {
   const scrollTop = event.target.scrollingElement.scrollTop;
   const e = window.document.getElementsByClassName("sticky")[0];
@@ -33,6 +35,8 @@ export const InitScrollToTop = () => {
 };
 
 export const InitStackableTable = () => {
+  if (initialized) return;
+  initialized = true;
   window.$(document).ready(function () {
     window
       .$(".table-responsive-stack")

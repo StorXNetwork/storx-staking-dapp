@@ -19,15 +19,9 @@ class Dashboard extends React.Component {
   componentDidMount() {
     AxiosInstance.get("/get-contract-data")
       .then((resp) => {
-        this.setState({ data: resp.data.data });
+        this.setState({ data: resp.data.data }, InitStackableTable);
       })
       .catch(console.error);
-
-    InitStackableTable();
-  }
-
-  componentDidUpdate() {
-    InitStackableTable();
   }
 
   render() {
