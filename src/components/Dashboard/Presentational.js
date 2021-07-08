@@ -199,7 +199,7 @@ function DashboardPresentation({ data }) {
                         data-toggle="tab"
                         aria-selected="true"
                       >
-                        Farm / Storage Nodes ( {`${nodeCount}`} )
+                        Farm/Storage Nodes ( {`${nodeCount}`} )
                       </a>
                     </li>
                   </ul>
