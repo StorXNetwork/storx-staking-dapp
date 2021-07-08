@@ -5,6 +5,7 @@ import { fromWei } from "xdc3-utils";
 import FarmNode from "../../assets/img/icons/farmnodes.png";
 import Staking from "../../assets/img/icons/staking.png";
 import Rewards from "../../assets/img/icons/rewards.png";
+import HostingRewards from "../../assets/img/icons/hosting-rewards.png";
 import { toXdcAddress } from "../../wallets/xinpay";
 import { FormatNumber, FormatToken } from "../../helpers/decimal";
 import { ADDR_LINK, EXPLORER, RemoveExpo } from "../../helpers/constant";
@@ -65,7 +66,9 @@ function DashboardPresentation({ data }) {
     : null;
   const reputationThreshold = data ? data.reputationThreshold : null;
 
-  const totalStaked = data ? FormatNumber(FormatToken(data.totalStaked + "")) : LOADER_BOX;
+  const totalStaked = data
+    ? FormatNumber(FormatToken(data.totalStaked + ""))
+    : LOADER_BOX;
   const hostingRewards = data
     ? FormatNumber(fromWei(RemoveExpo(data.hostingCompensation) + ""))
     : LOADER_BOX;
@@ -134,7 +137,7 @@ function DashboardPresentation({ data }) {
                   <figure className="sm-avatar mr-2">
                     <div className="xs-avatar mx-auto">
                       <img
-                        src={Rewards}
+                        src={HostingRewards}
                         className="img-fluid"
                         alt="Next Checkpoint"
                       />

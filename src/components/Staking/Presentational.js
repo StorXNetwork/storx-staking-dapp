@@ -1,5 +1,5 @@
 import React from "react";
-import { fromWei } from "xdc3-utils";
+import { fromWei, toXdcAddress } from "xdc3-utils";
 
 import { DateStringFormat, DECIMALS, RemoveExpo } from "../../helpers/constant";
 import { FormatNumber, FormatToken } from "../../helpers/decimal";
@@ -79,7 +79,8 @@ export function InfoHeader({ stakingData, wallet, reputation, stakeValid }) {
             <h5>
               {wallet ? (
                 <>
-                  Wallet: <span className="walletAddress">{wallet}</span>
+                  Wallet:{" "}
+                  <span className="walletAddress">{toXdcAddress(wallet)}</span>
                 </>
               ) : (
                 LOADER_BOX
