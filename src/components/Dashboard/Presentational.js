@@ -149,7 +149,7 @@ function DashboardPresentation({ data }) {
                     </h2>
                     <p>
                       <span className="counter">{hostingRewards}</span>{" "}
-                      <span className="small">SRX</span>
+                      <span className="small">SRX P.A.</span>
                     </p>
                   </div>
                 </div>
