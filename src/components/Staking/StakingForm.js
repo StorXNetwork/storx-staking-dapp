@@ -94,7 +94,8 @@ class StakingForm extends React.Component {
             }
           />
           <div className="mt-2">
-            {this.props.approvedAmount >= this.state.form.amount ? (
+            {parseFloat(this.props.approvedAmount) >=
+            parseFloat(this.state.form.amount) ? (
               <button onClick={this.stake} className="btn btn-rounded btn-info">
                 Stake
               </button>
