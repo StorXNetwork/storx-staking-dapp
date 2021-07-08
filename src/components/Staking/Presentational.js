@@ -28,6 +28,7 @@ export function InfoCard({ data }) {
     ? FormatToken(data.stake.stakedAmount)
     : LOADER_BOX;
   const earned = data.stake ? FormatToken(data.stake.earned) : LOADER_BOX;
+  const totalRedeemed = data.stake ? FormatToken(data.stake.totalRedeemed) : LOADER_BOX;
   const lastRedeemedAt = data.stake
     ? DateStringFormat(data.stake.lastRedeemedAt * 1000)
     : LOADER_BOX;
@@ -52,7 +53,10 @@ export function InfoCard({ data }) {
                 Staked Amount <span className="">{stakedAmount}</span>
               </li>
               <li className="list-group-item d-flex justify-content-between align-items-center">
-                Earnings <span className="">{earned}</span>
+                Current Earnings <span className="">{earned}</span>
+              </li>
+              <li className="list-group-item d-flex justify-content-between align-items-center">
+                Rewards Redeemed<span className="">{totalRedeemed}</span>
               </li>
               <li className="list-group-item d-flex justify-content-between align-items-center">
                 Last Rewards <span className="">{lastRedeemedAt}</span>

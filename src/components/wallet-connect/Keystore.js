@@ -69,7 +69,7 @@ const Keystore = ({ cb, back }) => {
               className="form-control"
               placeholder="Enter Password"
               value={pwd}
-              onClick={setPwd}
+              onChange={x => setPwd(x.target.value)}
             />
           </div>
           <button
