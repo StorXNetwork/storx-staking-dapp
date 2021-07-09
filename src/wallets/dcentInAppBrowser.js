@@ -73,7 +73,7 @@ export function _initListerner() {
       actions.WalletConnected({
         address: accounts[0],
         chain_id,
-        loader: LOADERS.MetaMask,
+        loader: LOADERS.DcentInApp,
       })
     );
   });
@@ -97,9 +97,6 @@ export async function SubmitContractTxGeneral(
   try {
     const xdc3 = new Xdc3(await GetProvider());
 
-    const state = store.getState();
-    const wallet = state.wallet.address;
-
     const { address, abi } = getContractAddress(type);
 
     const contract = new xdc3.eth.Contract(abi, address);
@@ -111,37 +108,22 @@ export async function SubmitContractTxGeneral(
     } else if (stateMutability === "payable") {
       const [value] = params.splice(params.length - 1, 1);
       const gasLimit = await contract.methods[method](...params).estimateGas({
-        from: wallet,
+        from: addresses[0],
       });
-      const data = contract.methods[method](...params).encodeABI();
-      const tx = {
-        data,
+      const resp = await contract.methods[method](...params).send({
+        from: addresses[0],
         gas: gasLimit,
         value: value,
-        from: wallet,
-        to: address,
-      };
-
-      const resp = await window.ethereum.request({
-        method: "eth_sendTransaction",
-        params: [tx],
       });
 
       return resp;
     } else {
       const gasLimit = await contract.methods[method](...params).estimateGas({
-        from: wallet,
+        from: addresses[0],
       });
-      const data = contract.methods[method](...params).encodeABI();
-      const tx = {
-        data,
+      const resp = await contract.methods[method](...params).send({
+        from: addresses[0],
         gas: gasLimit,
-        from: wallet,
-        to: address,
-      };
-      const resp = await window.ethereum.request({
-        method: "eth_sendTransaction",
-        params: [tx],
       });
 
       return resp;
