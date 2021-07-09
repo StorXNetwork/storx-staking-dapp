@@ -108,11 +108,9 @@ class WalletConnect extends React.Component {
                   <img src={KeystoreLogo} alt="Icon" />
                 </div>
               </button>
-              <button className="wallect-connect-btn">
+              <button className="wallect-connect-btn" onClick={initDcent}>
                 <div className="wallet-name">
-                  <h4>
-                    D'CENT
-                  </h4>
+                  <h4>D'CENT</h4>
                 </div>
                 <div className="wallet-icon">
                   <img src={DcentLogo} alt="Icon" />
