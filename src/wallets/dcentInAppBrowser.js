@@ -7,6 +7,7 @@ import { CONTRACT_ABI, CONTRACT_ADDRESS, LOADERS } from "../helpers/constant";
 import * as actions from "../actions";
 import store from "../redux/store";
 import { toast } from "react-toastify";
+import { toXdcAddress } from "./xinpay";
 
 let addresses, xdc3;
 
@@ -122,8 +123,9 @@ export async function SubmitContractTxGeneral(
       const gasLimit = await contract.methods[method](...params).estimateGas({
         from: accounts[0],
       });
+      console.log("accounts", accounts, toXdcAddress(accounts[0]));
       const resp = await contract.methods[method](...params).send({
-        from: accounts[0],
+        from: toXdcAddress(accounts[0]),
         gas: gasLimit,
       });
 
