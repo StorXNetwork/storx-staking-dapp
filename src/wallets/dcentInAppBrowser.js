@@ -113,10 +113,18 @@ export async function SubmitContractTxGeneral(
       const gasLimit = await contract.methods[method](...params).estimateGas({
         from: wallet,
       });
-      const resp = await contract.methods[method](...params).send({
-        from: wallet,
+      const data = contract.methods[method](...params).encodeABI();
+      const tx = {
+        data,
         gas: gasLimit,
         value: value,
+        from: wallet,
+        to: address,
+      };
+
+      const resp = await ethereum.request({
+        method: "eth_sendTransaction",
+        params: [tx],
       });
 
       return resp;
@@ -124,9 +132,16 @@ export async function SubmitContractTxGeneral(
       const gasLimit = await contract.methods[method](...params).estimateGas({
         from: wallet,
       });
-      const resp = await contract.methods[method](...params).send({
-        from: wallet,
+      const data = contract.methods[method](...params).encodeABI();
+      const tx = {
+        data,
         gas: gasLimit,
+        from: wallet,
+        to: address,
+      };
+      const resp = await ethereum.request({
+        method: "eth_sendTransaction",
+        params: [tx],
       });
 
       return resp;
