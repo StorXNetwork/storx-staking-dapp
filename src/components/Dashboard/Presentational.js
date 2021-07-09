@@ -4,7 +4,7 @@ import { fromWei } from "xdc3-utils";
 
 import FarmNode from "../../assets/img/icons/farmnodes.png";
 import Staking from "../../assets/img/icons/staking.png";
-import Rewards from "../../assets/img/icons/rewards.png";
+import Rewards from "../../assets/img/icons/staking-rewards.png";
 import HostingRewards from "../../assets/img/icons/hosting-rewards.png";
 import { toXdcAddress } from "../../wallets/xinpay";
 import { FormatNumber, FormatToken } from "../../helpers/decimal";
@@ -86,93 +86,104 @@ function DashboardPresentation({ data }) {
       <section className="block-overlap">
         <div className="container">
           <div className="row">
-            <div className="col-lg-12">
-              <h3 className="header-stats">Network Stats</h3>
+            <div className="col-lg-6 mb-3">
+              <h3 className="header-stats">Statistics</h3>
+              <div className="stats-box h-0 p-3 pt-4 pb-4">
+                <div className="row stats-counter">
+                  <div className="col-sm-6 col-md-6 col-lg-6 ver-divider ver-divider_none-md safari-float-left">
+                    <div className="media align-items-center">
+                      <figure className="sm-avatar mr-2">
+                        <div className="xs-avatar mx-auto">
+                          <img
+                            src={FarmNode}
+                            className="img-fluid"
+                            alt="Current Block"
+                          />
+                        </div>
+                      </figure>
+                      <div className="media-body">
+                        <h2 className="font-size-1 text-uppercase text-secondary mb-0">
+                          Farm/Storage Nodes
+                        </h2>
+                        <p>
+                          <span className="counter">{nodeCount}</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-sm-6 col-md-6 col-lg-6 ver-divider ver-divider_none-md safari-float-left">
+                    <div className="media align-items-center">
+                      <figure className="sm-avatar mr-2">
+                        <div className="xs-avatar mx-auto">
+                          <img
+                            src={Staking}
+                            className="img-fluid"
+                            alt="Epoch"
+                          />
+                        </div>
+                      </figure>
+                      <div className="media-body">
+                        <h2 className="font-size-1 text-uppercase text-secondary mb-0">
+                          SRX Staked
+                        </h2>
+                        <p>
+                          <span className="counter">{totalStaked}</span>{" "}
+                          <span className="small">SRX</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
 
-          <div className="stats-box p-4">
-            <div className="row stats-counter">
-              <div className="col-sm-6 col-md-6 col-lg-3 ver-divider ver-divider_none-md safari-float-left">
-                <div className="media align-items-center">
-                  <figure className="sm-avatar mr-2">
-                    <div className="xs-avatar mx-auto">
-                      <img
-                        src={FarmNode}
-                        className="img-fluid"
-                        alt="Current Block"
-                      />
+            <div className="col-lg-6 mb-3">
+              <h3 className="header-stats">Rewards</h3>
+              <div className="stats-box h-0 p-3 pt-4 pb-4">
+                <div className="row stats-counter">
+                  <div className="col-sm-6 col-md-6 col-lg-6 ver-divider plus ver-divider_none-md safari-float-left">
+                    <div className="media align-items-center">
+                      <figure className="sm-avatar mr-2">
+                        <div className="xs-avatar mx-auto">
+                          <img
+                            src={HostingRewards}
+                            className="img-fluid"
+                            alt="Next Checkpoint"
+                          />
+                        </div>
+                      </figure>
+                      <div className="media-body">
+                        <h2 className="font-size-1 text-uppercase text-secondary mb-0">
+                          Hosting Rewards
+                        </h2>
+                        <p>
+                          <span className="counter">{hostingRewards}</span>{" "}
+                          <span className="small">SRX/PA</span>
+                        </p>
+                      </div>
                     </div>
-                  </figure>
-                  <div className="media-body">
-                    <h2 className="font-size-1 text-uppercase text-secondary mb-0">
-                      Farm/Storage Nodes
-                    </h2>
-                    <p>
-                      <span className="counter">{nodeCount}</span>
-                    </p>
                   </div>
-                </div>
-              </div>
-              <div className="col-sm-6 col-md-6 col-lg-3 ver-divider ver-divider_none-md safari-float-left">
-                <div className="media align-items-center">
-                  <figure className="sm-avatar mr-2">
-                    <div className="xs-avatar mx-auto">
-                      <img src={Staking} className="img-fluid" alt="Epoch" />
+                  <div className="col-sm-6 col-md-6 col-lg-6 ver-divider plus ver-divider_none-md safari-float-left">
+                    <div className="media align-items-center">
+                      <figure className="sm-avatar mr-2">
+                        <div className="xs-avatar mx-auto">
+                          <img
+                            src={Rewards}
+                            className="img-fluid"
+                            alt="Next Checkpoint"
+                          />
+                        </div>
+                      </figure>
+                      <div className="media-body">
+                        <h2 className="font-size-1 text-uppercase text-secondary mb-0">
+                          Staking Rewards
+                        </h2>
+                        <p>
+                          <span className="counter">{stakingRewwards}</span>%{" "}
+                          <span className="small">P.A (approx)</span>
+                        </p>
+                      </div>
                     </div>
-                  </figure>
-                  <div className="media-body">
-                    <h2 className="font-size-1 text-uppercase text-secondary mb-0">
-                      SRX Staked
-                    </h2>
-                    <p>
-                      <span className="counter">{totalStaked}</span>{" "}
-                      <span className="small">SRX</span>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="col-sm-6 col-md-6 col-lg-3 ver-divider ver-divider_none-md safari-float-left">
-                <div className="media align-items-center">
-                  <figure className="sm-avatar mr-2">
-                    <div className="xs-avatar mx-auto">
-                      <img
-                        src={HostingRewards}
-                        className="img-fluid"
-                        alt="Next Checkpoint"
-                      />
-                    </div>
-                  </figure>
-                  <div className="media-body">
-                    <h2 className="font-size-1 text-uppercase text-secondary mb-0">
-                      Hosting Rewards
-                    </h2>
-                    <p>
-                      <span className="counter">{hostingRewards}</span>{" "}
-                      <span className="small">SRX/PA</span>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="col-sm-6 col-md-6 col-lg-3 ver-divider ver-divider_none-md safari-float-left">
-                <div className="media align-items-center">
-                  <figure className="sm-avatar mr-2">
-                    <div className="xs-avatar mx-auto">
-                      <img
-                        src={Rewards}
-                        className="img-fluid"
-                        alt="Next Checkpoint"
-                      />
-                    </div>
-                  </figure>
-                  <div className="media-body">
-                    <h2 className="font-size-1 text-uppercase text-secondary mb-0">
-                      Staking Rewards
-                    </h2>
-                    <p>
-                      <span className="counter">{stakingRewwards}</span>%{" "}
-                      <span className="small">P.A (approx)</span>
-                    </p>
                   </div>
                 </div>
               </div>
@@ -188,7 +199,7 @@ function DashboardPresentation({ data }) {
               <div className="col-lg-12">
                 <div className="ticker-head mb-2">
                   <ul
-                    className="nav nav-tabs ticker-nav form-tabs hidden-xs"
+                    className="nav nav-tabs ticker-nav form-tabs"
                     role="tablist"
                   >
                     <li className="nav-item mb-3">

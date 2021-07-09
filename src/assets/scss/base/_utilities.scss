@@ -167,7 +167,6 @@
   opacity: 0.3;
 }
 
-
 .loader-box {
   background: currentcolor;
   position: relative;
@@ -263,4 +262,20 @@
 
 .u-capitalize {
   text-transform: capitalize;
+}
+
+.h-0 {
+  height: inherit !important;
+}
+.mh-175 {
+  min-height: 175px;
+}
+
+.vh-align-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%);
+  transform: translateX(-50%);
+  display: inline-block;
 }

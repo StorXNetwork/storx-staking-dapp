@@ -113,11 +113,11 @@ class StakingForm extends React.Component {
 
     if (stake.staked)
       return (
-        <div className="stats-box p-4">
+        <div className="stats-box mh-175 p-4">
           <h5 className="mb-2">Unstake</h5>
           <Container>
             <Row>
-              <Col className="u-text-center">
+              <Col className="u-text-center vh-align-center">
                 <Button onClick={this.unstake} variant="danger">
                   UNSTAKE
                 </Button>
