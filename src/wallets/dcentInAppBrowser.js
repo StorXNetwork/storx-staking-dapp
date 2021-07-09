@@ -100,6 +100,7 @@ export async function SubmitContractTxGeneral(
     const { address, abi } = getContractAddress(type);
 
     const contract = new xdc3.eth.Contract(abi, address);
+    const accounts = await xdc3.eth.getAccounts();
 
     if (stateMutability === "view") {
       const resp = await contract.methods[method](...params).call();
@@ -108,10 +109,10 @@ export async function SubmitContractTxGeneral(
     } else if (stateMutability === "payable") {
       const [value] = params.splice(params.length - 1, 1);
       const gasLimit = await contract.methods[method](...params).estimateGas({
-        from: addresses[0],
+        from: accounts[0],
       });
       const resp = await contract.methods[method](...params).send({
-        from: addresses[0],
+        from: accounts[0],
         gas: gasLimit,
         value: value,
       });
@@ -119,10 +120,10 @@ export async function SubmitContractTxGeneral(
       return resp;
     } else {
       const gasLimit = await contract.methods[method](...params).estimateGas({
-        from: addresses[0],
+        from: accounts[0],
       });
       const resp = await contract.methods[method](...params).send({
-        from: addresses[0],
+        from: accounts[0],
         gas: gasLimit,
       });
 
