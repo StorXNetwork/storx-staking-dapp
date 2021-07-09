@@ -122,7 +122,7 @@ export async function SubmitContractTxGeneral(
         to: address,
       };
 
-      const resp = await ethereum.request({
+      const resp = await window.ethereum.request({
         method: "eth_sendTransaction",
         params: [tx],
       });
@@ -139,7 +139,7 @@ export async function SubmitContractTxGeneral(
         from: wallet,
         to: address,
       };
-      const resp = await ethereum.request({
+      const resp = await window.ethereum.request({
         method: "eth_sendTransaction",
         params: [tx],
       });
