@@ -109,9 +109,9 @@ class WalletConnect extends React.Component {
                 </div>
               </button>
               <button className="wallect-connect-btn">
-                <div className="wallet-name disabled">
+                <div className="wallet-name">
                   <h4>
-                    D'CENT <span>(Coming soon!)</span>
+                    D'CENT
                   </h4>
                 </div>
                 <div className="wallet-icon">
