@@ -42,7 +42,7 @@ export const initDcent = async () => {
       actions.WalletConnected({
         address: accounts[0],
         chain_id,
-        loader: LOADERS.MetaMask,
+        loader: LOADERS.DcentInApp,
       })
     );
   } catch (e) {

@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import * as xinpay from "./xinpay";
 import * as account from "./account";
 import * as dcentBridge from "./dcentBridge";
+import * as dcentInApp from "./dcentInAppBrowser";
 
 import store from "../redux/store";
 import { EXPLORER, LOADERS, DEFAULT_PROVIDER, BUILD_TX_LINK } from "../helpers/constant";
@@ -17,7 +18,7 @@ function GetFuncFromLoader(loader) {
     case LOADERS.Privatekey:
       return account;
     case LOADERS.DcentInApp:
-      return dcentBridge;
+      return dcentInApp;
     default:
       return xinpay;
   }
