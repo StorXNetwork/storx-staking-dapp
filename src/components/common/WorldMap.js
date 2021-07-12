@@ -46,8 +46,6 @@ const MapChart = ({ setTooltipContent, node_data }) => {
       );
     }
 
-  console.log("country_count", country_count);
-
   return (
     <>
       <ComposableMap data-tip="" projectionConfig={{ scale: 200 }}>
