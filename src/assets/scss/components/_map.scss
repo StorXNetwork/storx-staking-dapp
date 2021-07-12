@@ -1,0 +1,98 @@
+.map-modal {
+  .modal-content {
+    width: max-content;
+  }
+}
+
+.map-button {
+  display: inline;
+  cursor: pointer;
+}
+
+.world-map-common {
+  margin: 1rem;
+  width: fit-content;
+  background-color: transparent;
+  svg {
+    outline: none;
+    width: 100%;
+
+    path {
+      outline: none;
+      stroke: grey;
+    }
+
+    path:hover {
+      stroke: white;
+      stroke-width: 2;
+    }
+
+    @media screen and (min-width: $lg-width) {
+      width: 700px;
+    }
+
+    @media screen and (min-width: $md-width) {
+      width: 700px;
+    }
+
+    @media screen and (max-width: #{$md-width}-1) {
+      height: 300px;
+    }
+
+    circle {
+      $markerColor: orange;
+      fill: $markerColor;
+
+      &:hover {
+        fill: darken($markerColor, 20%);
+      }
+
+      @media screen and (min-width: $lg-width) {
+        r: 5px;
+      }
+
+      @media screen and (min-width: $md-width) {
+        r: 5px;
+      }
+
+      @media screen and (min-width: $sm-width) {
+        r: 3px;
+      }
+    }
+  }
+}
+
+.darkTheme {
+  .map-button {
+    color: white;
+  }
+
+  .world-map {
+    @extend .world-map-common;
+    svg {
+      $currentColor: grey;
+      fill: $currentColor;
+
+      path:hover {
+        fill: darken($currentColor, 20%);
+      }
+    }
+  }
+}
+
+.lightTheme {
+  .map-button {
+    color: $color-new-blue;
+  }
+  .world-map {
+    @extend .world-map-common;
+    svg {
+      $currentColor: #4d8dc3;
+      fill: $currentColor;
+
+      path:hover {
+        fill: darken($currentColor, 20%);
+      }
+    }
+  }
+}

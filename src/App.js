@@ -35,6 +35,7 @@ import packageJson from "../package.json";
 import { PROJECT_NAME } from "./helpers/constant";
 
 import { OnScroll, InitScrollToTop } from "./helpers/responsive";
+import { Button } from "react-bootstrap";
 
 const ComposedStaking = RequireWallet()(Staking);
 // const ComposedHistory = RequireWallet()(TxHistory);

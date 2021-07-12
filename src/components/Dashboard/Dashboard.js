@@ -7,6 +7,7 @@ import DashboardPresentation from "./Presentational";
 
 const intialState = {
   data: null,
+  node_data: null,
 };
 
 class Dashboard extends React.Component {
@@ -22,10 +23,21 @@ class Dashboard extends React.Component {
         this.setState({ data: resp.data.data }, InitStackableTable);
       })
       .catch(console.error);
+
+    AxiosInstance.get("/get-node-coordinates")
+      .then((resp) => {
+        this.setState({ node_data: resp.data.data });
+      })
+      .catch(console.error);
   }
 
   render() {
-    return <DashboardPresentation data={this.state.data} />;
+    return (
+      <DashboardPresentation
+        data={this.state.data}
+        node_data={this.state.node_data}
+      />
+    );
   }
 }
 

@@ -3,10 +3,12 @@ import { Modal, Button } from "react-bootstrap";
 
 function ToggleModal({
   children,
+  btnElement = Button,
   btnName = "View",
-  btnVariant = "info",
-  disableSubmit = false,
-  btnClass = "",
+  btnProps = {},
+  disableSubmit = true,
+  disableClose = true,
+  modalClass = "custom-modal",
   ...rest
 }) {
   const [showModal, setShowModal] = useState(false);
@@ -27,13 +29,32 @@ function ToggleModal({
     </Button>
   );
 
+  let footer = rest.footer ? (
+    rest.footer
+  ) : disableClose === true ? (
+    ""
+  ) : (
+    <Button
+      variant="secondary"
+      onClick={() => {
+        handleClose();
+        if (rest.onClose && typeof rest.onClose === "function") {
+          rest.onClose();
+        }
+      }}
+    ></Button>
+  );
+
   return (
     <>
-      <Button className={btnClass} variant={btnVariant} onClick={handleShow}>
-        {btnName}
-      </Button>
+      {React.createElement(
+        btnElement,
+        { ...btnProps, onClick: handleShow },
+        btnName
+      )}
+
       <Modal
-        className="custom-modal"
+        dialogClassName={modalClass}
         {...rest}
         show={showModal}
         onHide={handleClose}
@@ -42,20 +63,7 @@ function ToggleModal({
           <Modal.Title>{rest.modalname}</Modal.Title>
         </Modal.Header>
         <Modal.Body>{children}</Modal.Body>
-        <Modal.Footer>
-          <Button
-            variant="secondary"
-            onClick={() => {
-              handleClose();
-              if (rest.onClose && typeof rest.onClose === "function") {
-                rest.onClose();
-              }
-            }}
-          >
-            {rest.btnNameClose || "Close"}
-          </Button>
-          {disableSubmit === true ? "" : submitBtn}
-        </Modal.Footer>
+        <Modal.Footer>{footer}</Modal.Footer>
       </Modal>
     </>
   );

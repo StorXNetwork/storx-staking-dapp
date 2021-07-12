@@ -11,6 +11,9 @@ import { FormatNumber, FormatToken } from "../../helpers/decimal";
 import { ADDR_LINK, EXPLORER, RemoveExpo } from "../../helpers/constant";
 import { LOADER_BOX } from "../common/common";
 
+import GeneralModal from "../common/GeneralModal";
+import WorldMap from "../common/WorldMap";
+
 function RenderRows(holders, reputationThreshold) {
   if (!holders)
     return (
@@ -59,7 +62,7 @@ function RenderRows(holders, reputationThreshold) {
   return nodes;
 }
 
-function DashboardPresentation({ data }) {
+function DashboardPresentation({ data, node_data }) {
   const nodeCount = data ? Object.keys(data.stakeHolders).length : LOADER_BOX;
   const stakeholder = data
     ? Object.keys(data.stakeHolders).map((x) => data.stakeHolders[x])
@@ -106,7 +109,22 @@ function DashboardPresentation({ data }) {
                           Farm/Storage Nodes
                         </h2>
                         <p>
-                          <span className="counter">{nodeCount}</span>
+                          <span className="counter">{nodeCount}</span> ({" "}
+                          <span>
+                            <GeneralModal
+                              centered={true}
+                              modalClass="map-modal"
+                              btnElement={"div"}
+                              btnName="View All"
+                              btnProps={{ className: "map-button" }}
+                              footer={
+                                <div>Total Store Providers: {nodeCount}</div>
+                              }
+                            >
+                              <WorldMap data={node_data} />
+                            </GeneralModal>
+                          </span>{" "}
+                          )
                         </p>
                       </div>
                     </div>
