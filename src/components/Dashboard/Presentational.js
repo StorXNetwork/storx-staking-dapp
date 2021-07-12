@@ -118,7 +118,7 @@ function DashboardPresentation({ data, node_data }) {
                               btnName="View All"
                               btnProps={{ className: "map-button" }}
                               footer={
-                                <div>Total Store Providers: {nodeCount}</div>
+                                <div>Total Storage Providers: {nodeCount}</div>
                               }
                             >
                               <WorldMap data={node_data} />
