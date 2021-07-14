@@ -109,22 +109,21 @@ function DashboardPresentation({ data, node_data }) {
                           Farm/Storage Nodes
                         </h2>
                         <p>
-                          <span className="counter">{nodeCount}</span> ({" "}
+                          <span className="counter">{nodeCount}</span>
                           <span>
                             <GeneralModal
                               centered={true}
-                              modalClass="map-modal"
+                              modalClass="map-modal modal-lg"
                               btnElement={"div"}
-                              btnName="View All"
-                              btnProps={{ className: "map-button" }}
+                              btnName="( View All )"
+                              btnProps={{ className: "map-button small pl-5" }}
                               footer={
                                 <div>Total Storage Providers: {nodeCount}</div>
                               }
                             >
                               <WorldMap data={node_data} />
                             </GeneralModal>
-                          </span>{" "}
-                          )
+                          </span>
                         </p>
                       </div>
                     </div>

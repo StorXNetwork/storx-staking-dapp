@@ -9,6 +9,7 @@ function ToggleModal({
   disableSubmit = true,
   disableClose = true,
   modalClass = "custom-modal",
+  footer = "",
   ...rest
 }) {
   const [showModal, setShowModal] = useState(false);
@@ -29,8 +30,8 @@ function ToggleModal({
     </Button>
   );
 
-  let footer = rest.footer ? (
-    rest.footer
+  let _footer = footer ? (
+    footer
   ) : disableClose === true ? (
     ""
   ) : (
@@ -63,7 +64,7 @@ function ToggleModal({
           <Modal.Title>{rest.modalname}</Modal.Title>
         </Modal.Header>
         <Modal.Body>{children}</Modal.Body>
-        <Modal.Footer>{footer}</Modal.Footer>
+        <Modal.Footer>{_footer}</Modal.Footer>
       </Modal>
     </>
   );

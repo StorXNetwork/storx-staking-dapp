@@ -1,6 +1,6 @@
 .map-modal {
-  .modal-content {
-    width: max-content;
+  .modal-header {
+    border-bottom: 0 !important;
   }
 }
 
@@ -10,8 +10,6 @@
 }
 
 .world-map-common {
-  margin: 1rem;
-  width: fit-content;
   background-color: transparent;
   svg {
     outline: none;
@@ -27,17 +25,6 @@
       stroke-width: 2;
     }
 
-    @media screen and (min-width: $lg-width) {
-      width: 700px;
-    }
-
-    @media screen and (min-width: $md-width) {
-      width: 700px;
-    }
-
-    @media screen and (max-width: #{$md-width}-1) {
-      height: 300px;
-    }
 
     circle {
       $markerColor: orange;
