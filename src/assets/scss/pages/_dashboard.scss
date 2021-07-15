@@ -200,7 +200,12 @@ figure {
   border: none;
   div {
     padding: 0 ;
+    color: var(--dark-blue);
   }
+}
+
+.darkTheme .ticker-nav .nav-item div {
+  color: var(--white);
 }
 .ticker-nav .nav-item a:focus,
 .ticker-nav .nav-item a:active,

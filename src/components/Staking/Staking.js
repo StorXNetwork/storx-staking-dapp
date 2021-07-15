@@ -197,7 +197,6 @@ class Staking extends React.Component {
             </div>
           </div>
         </section>
-        <div className="staking-fillpage"></div>
       </>
     );
   }

@@ -273,7 +273,7 @@ function DashboardPresentation({ data, node_data }) {
                     role="tablist"
                   >
                     <li className="nav-item mb-3">
-                      <div className="nav-link text-white">
+                      <div className="nav-link">
                         Farm/Storage Nodes ( {`${nodeCount}`} )
                       </div>
                     </li>

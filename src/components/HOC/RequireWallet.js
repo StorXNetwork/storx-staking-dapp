@@ -24,7 +24,6 @@ const DefaultFallback = () => (
         </div>
       </div>
     </section>
-    <div className="wallet-connect-fillpage"></div>
   </>
 );
 
