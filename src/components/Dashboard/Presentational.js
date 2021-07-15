@@ -166,7 +166,7 @@ function DashboardPresentation({ data, node_data }) {
                           <span>
                             <GeneralModal
                               centered={true}
-                              modalClass="map-modal modal-xl"
+                              modalClass="map-modal modal-lg"
                               btnElement={"div"}
                               btnName="( View All )"
                               btnProps={{ className: "map-button small pl-5" }}
