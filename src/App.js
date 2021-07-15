@@ -13,7 +13,7 @@ import Header from "./components/Header";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Footer from "./components/Footer";
 import Staking from "./components/Staking/Staking";
-import TxHistory from "./components/TxHistory";
+import TxHistory from "./components/TxHistory/TxHistory";
 
 /**
  *
@@ -38,7 +38,7 @@ import { OnScroll, InitScrollToTop } from "./helpers/responsive";
 import { Button } from "react-bootstrap";
 
 const ComposedStaking = RequireWallet()(Staking);
-// const ComposedHistory = RequireWallet()(TxHistory);
+const ComposedHistory = RequireWallet()(TxHistory);
 
 function App() {
   useEffect(() => {
@@ -69,7 +69,7 @@ function App() {
 
       <Header />
 
-      {/* <Route exact path={"/tx-history"} component={ComposedHistory} /> */}
+      <Route exact path={"/tx-history"} component={ComposedHistory} />
       <Route exact path={"/staking"} component={ComposedStaking} />
       <Route exact path={"/"} component={Dashboard} />
 

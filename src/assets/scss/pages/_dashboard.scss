@@ -189,6 +189,19 @@ figure {
   padding: 0px 15px;
   border: none;
 }
+
+.ticker-nav .nav-item {
+  // text-transform: uppercase;
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--dark-blue);
+  line-height: 17px;
+  margin: 0;
+  border: none;
+  div {
+    padding: 0 ;
+  }
+}
 .ticker-nav .nav-item a:focus,
 .ticker-nav .nav-item a:active,
 .ticker-nav .nav-item a:hover {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { fromWei } from "xdc3-utils";
 
@@ -8,13 +8,19 @@ import Rewards from "../../assets/img/icons/staking-rewards.png";
 import HostingRewards from "../../assets/img/icons/hosting-rewards.png";
 import { toXdcAddress } from "../../wallets/xinpay";
 import { FormatNumber, FormatToken } from "../../helpers/decimal";
-import { ADDR_LINK, EXPLORER, RemoveExpo } from "../../helpers/constant";
+import {
+  ADDR_LINK,
+  EXPLORER,
+  Paginate,
+  PaginateNav,
+  RemoveExpo,
+} from "../../helpers/constant";
 import { LOADER_BOX } from "../common/common";
 
 import GeneralModal from "../common/GeneralModal";
 import WorldMap from "../common/WorldMap";
 
-function RenderRows(holders, reputationThreshold) {
+function RenderRows(holders, reputationThreshold, from) {
   if (!holders)
     return (
       <tr>
@@ -25,6 +31,8 @@ function RenderRows(holders, reputationThreshold) {
     );
 
   const nodes = [];
+
+  holders = Paginate({ data: holders, from: from * 10, limit: 10 });
 
   for (let i = 0; i < holders.length; i++) {
     const data = holders[i];
@@ -62,7 +70,52 @@ function RenderRows(holders, reputationThreshold) {
   return nodes;
 }
 
+function RenderPagination({ active, setPage, total }) {
+  const prevClass = active === 0 ? "page-link disabled" : "page-link";
+  const nextClass =
+    Math.ceil(total / 10) === active + 1 ? "page-link disabled" : "page-link";
+  const last = Math.ceil(total / 10);
+
+  const nos = PaginateNav(active, last);
+  const liClass = (x) => (x === active ? "page-link active" : "page-link");
+  const liItemClass = (x) => (x === active ? "page-item active" : "page-item");
+
+  return (
+    <>
+      <li className="page-item">
+        <div
+          className={prevClass}
+          onClick={() => setPage(active - 1)}
+          aria-label="Previous"
+        >
+          <span aria-hidden="true">&laquo;</span>
+          <span className="sr-only">Previous</span>
+        </div>
+      </li>
+      {nos.map((x) => (
+        <li key={`pagonate-li-${x}`} className={liItemClass(x)}>
+          <div className={liClass(x)} onClick={() => setPage(x)}>
+            {String(x + 1)}
+          </div>
+        </li>
+      ))}
+      <li className="page-item">
+        <div
+          onClick={() => setPage(active + 1)}
+          className={nextClass}
+          aria-label="Next"
+        >
+          <span aria-hidden="true">&raquo;</span>
+          <span className="sr-only">Next</span>
+        </div>
+      </li>
+    </>
+  );
+}
+
 function DashboardPresentation({ data, node_data }) {
+  const [active, setActive] = useState(0);
+
   const nodeCount = data ? Object.keys(data.stakeHolders).length : LOADER_BOX;
   const stakeholder = data
     ? Object.keys(data.stakeHolders).map((x) => data.stakeHolders[x])
@@ -89,7 +142,7 @@ function DashboardPresentation({ data, node_data }) {
       <section className="block-overlap">
         <div className="container">
           <div className="row">
-            <div className="col-lg-6 mb-3">
+            <div className="col-xl-6 col-lg-12 mb-3">
               <h3 className="header-stats">Statistics</h3>
               <div className="stats-box h-0 p-3 pt-4 pb-4">
                 <div className="row stats-counter">
@@ -113,7 +166,7 @@ function DashboardPresentation({ data, node_data }) {
                           <span>
                             <GeneralModal
                               centered={true}
-                              modalClass="map-modal modal-lg"
+                              modalClass="map-modal modal-xl"
                               btnElement={"div"}
                               btnName="( View All )"
                               btnProps={{ className: "map-button small pl-5" }}
@@ -154,7 +207,7 @@ function DashboardPresentation({ data, node_data }) {
               </div>
             </div>
 
-            <div className="col-lg-6 mb-3">
+            <div className="col-xl-6 col-lg-12 mb-3">
               <h3 className="header-stats">Rewards</h3>
               <div className="stats-box h-0 p-3 pt-4 pb-4">
                 <div className="row stats-counter">
@@ -220,15 +273,9 @@ function DashboardPresentation({ data, node_data }) {
                     role="tablist"
                   >
                     <li className="nav-item mb-3">
-                      <a
-                        className="nav-link active show"
-                        href="#tab1"
-                        role="tab"
-                        data-toggle="tab"
-                        aria-selected="true"
-                      >
+                      <div className="nav-link ">
                         Farm/Storage Nodes ( {`${nodeCount}`} )
-                      </a>
+                      </div>
                     </li>
                   </ul>
                   {/* <div className="d-sm-none">
@@ -259,9 +306,21 @@ function DashboardPresentation({ data, node_data }) {
                         </tr>
                       </thead>
                       <tbody>
-                        {RenderRows(stakeholder, reputationThreshold)}
+                        {RenderRows(stakeholder, reputationThreshold, active)}
                       </tbody>
                     </table>
+
+                    <div className="pagination-container">
+                      <nav aria-label="Page navigation example">
+                        <ul className="pagination">
+                          <RenderPagination
+                            active={active}
+                            total={stakeholder?.length}
+                            setPage={setActive}
+                          />
+                        </ul>
+                      </nav>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -273,4 +332,4 @@ function DashboardPresentation({ data, node_data }) {
   );
 }
 
-export default React.memo(DashboardPresentation);
+export default DashboardPresentation;

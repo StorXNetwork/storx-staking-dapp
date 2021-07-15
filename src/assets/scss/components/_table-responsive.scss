@@ -1,21 +1,20 @@
-
 .table-responsive-stack {
-  font-size: 14px!important;
+  font-size: 14px !important;
   font-weight: 400;
   color: var(--text-color);
 }
 .table-responsive-stack a {
-  color: var(--link-color);
+  color: var(--green);
 }
 .table-responsive-stack tr {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  // display: -webkit-box;
+  // display: -ms-flexbox;
+  // display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   -ms-flex-direction: row;
   flex-direction: row;
-  border-radius: 12px!important;
+  border-radius: 12px !important;
 }
 .table-responsive-stack tbody tr {
   margin-bottom: 10px;
@@ -34,7 +33,7 @@
 }
 .table-responsive-stack td,
 .table-responsive-stack th {
-  vertical-align: bottom!important;
+  vertical-align: middle !important;
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
 }
@@ -42,8 +41,8 @@
   font-size: 14px;
   font-weight: 500;
   line-height: 18px;
-  background-color: transparent!important;
-  border-bottom: none!important;
+  background-color: transparent !important;
+  border-bottom: none !important;
 }
 .table-responsive-stack .table-responsive-stack-thead {
   color: var(--text-color);
@@ -61,15 +60,18 @@
 .table {
   font-size: 14px;
   color: var(--text-color);
+  margin-bottom: 0.75rem !important;
+  border-collapse: separate;
+  border-spacing: 0 5px;
 }
 tbody tr {
-  -webkit-transition: all .1s ease-in;
-  transition: all .1s ease-in;
+  -webkit-transition: all 0.1s ease-in;
+  transition: all 0.1s ease-in;
   background-color: var(--white);
 }
 tbody tr:hover {
-  -webkit-transform: scale(1.010);
-  transform: scale(1.010);
+  -webkit-transform: scale(1.01);
+  transform: scale(1.01);
   background-color: var(--white);
   -webkit-box-shadow: var(--theme-table-hover-shadow);
   box-shadow: var(--theme-table-hover-shadow);
@@ -90,7 +92,7 @@ tr:hover td:last-child {
 thead tr {
   background-color: var(--color-theme-table-row-sticky);
   color: var(--color-theme-text-thead);
-  font-size: .875rem;
+  font-size: 0.875rem;
 }
 thead th {
   position: sticky;
@@ -98,4 +100,56 @@ thead th {
   top: 50px;
   background-color: var(--color-theme-table-row-sticky);
   z-index: 10;
+}
+
+.page-link {
+  user-select: none;
+}
+
+/*--------------------------
+    Pagination Styles  
+---------------------------*/
+.pagination {
+  float: right;
+  margin-bottom: 0px;
+}
+.darkTheme .page-link {
+  position: relative;
+  display: block;
+  padding: 0.5rem 0.75rem;
+  margin-left: -1px;
+  line-height: 1.25;
+  color: var(--text-color);
+  background-color: var(--frontbg);
+  border: 1px solid var(--border-color);
+}
+.darkTheme .page-link:hover {
+  z-index: 2;
+  color: var(--white);
+  text-decoration: none;
+  background-color: var(--frontbg-hover);
+  border-color: var(--frontbg-hover);
+}
+.darkTheme .page-item.active .page-link {
+  z-index: 1;
+  color: var(--white);
+  background-color: var(--dark-green);
+  border-color: var(--dark-green);
+}
+.darkTheme .page-item .page-link:hover,
+.darkTheme .page-item .page-link:focus,
+.darkTheme .page-item .page-link.active {
+  box-shadow: none;
+}
+
+.page-item.active .page-link {
+  z-index: 1;
+  color: var(--white);
+  background-color: var(--cyan);
+  border-color: var(--cyan);
+}
+.page-item .page-link:hover,
+.page-item .page-link:focus,
+.page-item .page-link.active {
+  box-shadow: none;
 }

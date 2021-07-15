@@ -1,6 +1,6 @@
 import React from "react";
 
-import { InitStackableTable, OnScroll } from "../../helpers/responsive";
+import { InitStackableTable } from "../../helpers/responsive";
 import { AxiosInstance } from "../../helpers/constant";
 
 import DashboardPresentation from "./Presentational";

@@ -2,6 +2,11 @@
   .modal-header {
     border-bottom: 0 !important;
   }
+
+  .modal-body {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
 }
 
 .map-button {
@@ -24,7 +29,6 @@
       stroke: white;
       stroke-width: 2;
     }
-
 
     circle {
       $markerColor: orange;

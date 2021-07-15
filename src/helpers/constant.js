@@ -234,6 +234,44 @@ export const COIN_NAME = {
   tokens: "SRX",
 };
 
+export const MinOf = (x, y) => {
+  return parseFloat(x) < parseFloat(y) ? parseFloat(x) : parseFloat(y);
+};
+
+export const MaxOf = (x, y) => {
+  return parseFloat(x) < parseFloat(y) ? parseFloat(y) : parseFloat(x);
+};
+
+export const Paginate = ({ data, from, limit }) => {
+  return data.slice(from, from + MinOf(data.length, limit));
+};
+
+export const PaginateNav = (active, total) => {
+  const min = 0;
+  const max = total;
+
+  let start = MaxOf(active - 1, 0);
+  let end = MinOf(total - 1, active + 1);
+
+  if (start === end && end === active) return [active];
+
+  if (start === active)
+    if (end + 1 < total) {
+      return [active, end, end + 1];
+    } else {
+      return [active, end];
+    }
+
+  if (end === active)
+    if (start > min) {
+      return [start - 1, start, active];
+    } else {
+      return [start, active];
+    }
+
+  return [start, active, end];
+};
+
 Object.defineProperty(Object.prototype, "partialMatch", {
   value: function (fields) {
     for (let key of Object.keys(fields)) {

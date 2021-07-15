@@ -13,6 +13,8 @@ import { IsDark, Toggle } from "../helpers/theme";
 
 import * as actions from "../actions";
 import { toast } from "react-toastify";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 
 const ToggleLight = (
   <span className="d-block-light">
@@ -106,15 +108,22 @@ class Header extends React.Component {
               total: parseFloat(this.props.balance.tokensTotal),
             },
           }}
-          btn={
-            <div data-toggle="modal" className="btn nav-link">
-              Balance
-            </div>
-          }
+          btn={<div className="btn nav-link">Balance</div>}
         />
       ) : (
         ""
       );
+
+    const logout = this.props.wallet.connected ? (
+      <div
+        className="btn nav-link"
+        onClick={() => this.props.WalletDisconnected()}
+      >
+        <FontAwesomeIcon icon={faSignOutAlt} />
+      </div>
+    ) : (
+      ""
+    );
 
     const btn = this.getConnectButton();
 
@@ -141,11 +150,11 @@ class Header extends React.Component {
                     Staking
                   </Link>
                 </li>
-                {/* <li className="nav-item button">
+                <li className="nav-item button">
                   <Link className="btn nav-link" to="/tx-history">
                     TX History
                   </Link>
-                </li> */}
+                </li>
               </ul>
             </div>
 
@@ -160,6 +169,7 @@ class Header extends React.Component {
                   }
                 </li>
                 <li className="nav-item button">{balance}</li>
+                <li className="nav-item button">{logout}</li>
               </ul>
               <ul className="navbar-nav mobile-footer-nav">
                 <li className="nav-item button">
