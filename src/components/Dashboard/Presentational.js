@@ -44,7 +44,7 @@ function RenderRows(holders, reputationThreshold, from) {
       );
 
     nodes.push(
-      <tr className="hover-grow" key={i + "stake-holder"}>
+      <tr className="hover-grow" key={from + i + "stake-holder"}>
         <td className="truncate">
           <a
             target="_blank"
