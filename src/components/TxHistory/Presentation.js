@@ -19,7 +19,7 @@ function formatValue(varName, value) {
   if (isAddress(value))
     return (
       <span class="truncate">
-        <a target="_blank" href={ADDR_LINK(toXdcAddress(value))}>
+        <a target="_blank" href={ADDR_LINK(EXPLORER, toXdcAddress(value))}>
           {toXdcAddress(value)}
         </a>
       </span>
