@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { fromWei } from "xdc3-utils";
 
@@ -19,6 +19,7 @@ import { LOADER_BOX } from "../common/common";
 
 import GeneralModal from "../common/GeneralModal";
 import WorldMap from "../common/WorldMap";
+import { FlexTable } from "../../helpers/responsive";
 
 function RenderRows(holders, reputationThreshold, from) {
   if (!holders)
@@ -46,6 +47,7 @@ function RenderRows(holders, reputationThreshold, from) {
     nodes.push(
       <tr className="hover-grow">
         <td className="truncate">
+          <span class="table-responsive-stack-thead">FARM NODE ADDRESS</span>
           <a
             target="_blank"
             href={ADDR_LINK(EXPLORER, toXdcAddress(data.stake.stakerHolder))}
@@ -53,16 +55,24 @@ function RenderRows(holders, reputationThreshold, from) {
             {toXdcAddress(data.stake.stakerHolder)}
           </a>
         </td>
-        {/* <td>{data.data.address}</td> */}
-        <td>{FormatNumber(fromWei(data.stake.stakedAmount))} SRX</td>
         <td>
+          <span class="table-responsive-stack-thead">STAKED AMOUNT</span>
+          {FormatNumber(fromWei(data.stake.stakedAmount))} SRX
+        </td>
+        <td>
+          <span class="table-responsive-stack-thead">REPUTATION</span>
+
           <div className="notify masternode">
             <span className="heartbit"></span>
             <span className="point"></span>
           </div>
           {FormatNumber(data.reputation)}
         </td>
-        <td>{status}</td>
+        <td>
+          <span class="table-responsive-stack-thead">STATUS</span>
+
+          {status}
+        </td>
       </tr>
     );
   }
@@ -132,6 +142,10 @@ function DashboardPresentation({ data, node_data }) {
   const stakingRewwards = data
     ? data.interest / data.interestPrecision
     : LOADER_BOX;
+
+  useEffect(() => {
+    FlexTable();
+  }, [active]);
 
   return (
     <>

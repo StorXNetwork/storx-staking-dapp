@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { fromWei, isAddress } from "xdc3-utils";
 
@@ -13,6 +13,7 @@ import {
   BUILD_BLOCK_LINK,
   BUILD_TX_LINK,
 } from "../../helpers/constant";
+import { FlexTable } from "../../helpers/responsive";
 import { LOADER_BOX } from "../common/common";
 
 function formatValue(varName, value) {
@@ -73,12 +74,18 @@ function RenderRows(events, from) {
     nodes.push(
       <tr className="hover-grow">
         <td>
+          <span class="table-responsive-stack-thead">BLOCK NUMBER</span>
+
           <a target="_blank" href={BUILD_BLOCK_LINK(EXPLORER, event.block)}>
             {event.block}
           </a>
         </td>
-        <td>{event.name}</td>
         <td>
+          <span class="table-responsive-stack-thead">NAME</span>
+          {event.name}
+        </td>
+        <td>
+          <span class="table-responsive-stack-thead">LINK</span>
           <a target="_blank" href={BUILD_TX_LINK(EXPLORER, event.tx_hash)}>
             HASH LINK
           </a>
@@ -138,6 +145,10 @@ function TxHistoryPresentation({ events }) {
   const [active, setActive] = useState(0);
 
   const data = events ? events : null;
+
+  useEffect(() => {
+    FlexTable();
+  }, [active]);
 
   return (
     <>
