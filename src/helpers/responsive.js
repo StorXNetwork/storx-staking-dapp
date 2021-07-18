@@ -34,41 +34,23 @@ export const InitScrollToTop = () => {
 
 export const InitStackableTable = () => {
   window.$(document).ready(function () {
-    window
-      .$(".table-responsive-stack")
-      .find("th")
-      .each(function (i) {
-        window
-          .$(".table-responsive-stack td:nth-child(" + (i + 1) + ")")
-          .prepend(
-            '<span class="table-responsive-stack-thead">' +
-              window.$(this).text() +
-              ":</span> "
-          );
-        window.$(".table-responsive-stack-thead").hide();
-      });
-    window.$(".table-responsive-stack").each(function () {
-      var thCount = window.$(this).find("th").length;
-      var rowGrow = 100 / thCount + "%";
-
-      window.$(this).find("th, td").css("flex-basis", rowGrow);
-    });
-    function flexTable() {
-      if (window.$(window).width() < 768) {
-        window.$(".table-responsive-stack").each(function (i) {
-          window.$(this).find(".table-responsive-stack-thead").show();
-          window.$(this).find("thead").hide();
-        });
-      } else {
-        window.$(".table-responsive-stack").each(function (i) {
-          window.$(this).find(".table-responsive-stack-thead").hide();
-          window.$(this).find("thead").show();
-        });
-      }
-    }
-    flexTable();
+    FlexTable();
     window.onresize = function (event) {
-      flexTable();
+      FlexTable();
     };
   });
+};
+
+export const FlexTable = () => {
+  if (window.$(window).width() < 768) {
+    window.$(".table-responsive-stack").each(function (i) {
+      window.$(this).find(".table-responsive-stack-thead").show();
+      window.$(this).find("thead").hide();
+    });
+  } else {
+    window.$(".table-responsive-stack").each(function (i) {
+      window.$(this).find(".table-responsive-stack-thead").hide();
+      window.$(this).find("thead").show();
+    });
+  }
 };
