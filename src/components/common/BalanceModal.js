@@ -42,7 +42,7 @@ const BalanceModal = ({ data }) => {
             </div>
             <div className="wallet-icon-block text-right">
               <h5>{FormatToken(data.xdc.amount)}</h5>
-              <p>{FormatToken(data.xdc.total)} $</p>
+              {/* <p>{FormatToken(data.xdc.total)} $</p> */}
             </div>
           </li>
           <li className="list-group-item d-flex justify-content-between align-items-center">
@@ -57,7 +57,7 @@ const BalanceModal = ({ data }) => {
             </div>
             <div className="wallet-icon-block text-right">
               <h5>{FormatToken(data.srx.amount)}</h5>
-              <p>{FormatToken(data.srx.total)} $</p>
+              {/* <p>{FormatToken(data.srx.total)} $</p> */}
             </div>
           </li>
         </ul>
