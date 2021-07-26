@@ -19,7 +19,7 @@ const MapChart = ({ setTooltipContent, node_data }) => {
   if (node_data)
     for (let i = 0; i < node_data.length; i++) {
       let node = node_data[i];
-      if (!node || node.geo_data) continue;
+      if (!node || !node.geo_data) continue;
       if (!country_count[node.geo_data.country])
         country_count[node.geo_data.country] = 0;
       country_count[node.geo_data.country] += 1;
