@@ -280,3 +280,11 @@
   transform: translateX(-50%);
   display: inline-block;
 }
+
+.visibility-xs {
+  visibility: visible;
+
+  @media screen and (min-width: $sm-width) {
+    visibility: hidden;
+  }
+}

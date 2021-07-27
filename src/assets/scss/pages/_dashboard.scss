@@ -152,6 +152,7 @@ figure {
 .ticker-head {
   float: left;
   margin-bottom: 20px;
+  width: 100%;
 }
 .nav-tabs {
   border-bottom: none;
@@ -179,7 +180,8 @@ figure {
 .ticker-nav .nav-item:first-child a {
   padding-left: 0px;
 }
-.ticker-nav .nav-item a {
+.ticker-nav .nav-item .nav-link {
+  cursor: pointer;
   // text-transform: uppercase;
   font-size: 18px;
   font-weight: 400;
@@ -188,6 +190,7 @@ figure {
   margin: 0;
   padding: 0px 15px;
   border: none;
+  z-index: 999;
 }
 
 .ticker-nav .nav-item {
@@ -197,9 +200,9 @@ figure {
   color: var(--dark-blue);
   line-height: 17px;
   margin: 0;
-  border: none;
+  // border: none;
   div {
-    padding: 0 ;
+    padding: 0;
     color: var(--dark-blue);
   }
 }
@@ -207,16 +210,16 @@ figure {
 .darkTheme .ticker-nav .nav-item div {
   color: var(--white);
 }
-.ticker-nav .nav-item a:focus,
-.ticker-nav .nav-item a:active,
-.ticker-nav .nav-item a:hover {
+.ticker-nav .nav-item .nav-link:focus,
+.ticker-nav .nav-item .nav-link:active,
+.ticker-nav .nav-item .nav-link:hover {
   color: var(--cyan);
 }
-.ticker-nav .nav-item a.active {
+.ticker-nav .nav-item .nav-link.active {
   color: var(--cyan);
   background-color: transparent;
 }
-.ticker-nav .nav-item a.active h5 {
+.ticker-nav .nav-item .nav-link.active h5 {
   color: var(--cyan);
 }
 .ticker-nav .nav-item-last {
@@ -246,17 +249,17 @@ figure {
 }
 
 .darkTheme .ticker-nav .nav-item {
-  // border-right: 1px solid var(--text-color);
+  border-right: 1px solid var(--text-color);
 }
-.darkTheme .ticker-nav .nav-item a {
+.darkTheme .ticker-nav .nav-item .nav-link {
   color: var(--text-color);
 }
-.darkTheme .ticker-nav .nav-item a:focus,
-.darkTheme .ticker-nav .nav-item a:active,
-.darkTheme .ticker-nav .nav-item a:hover {
+.darkTheme .ticker-nav .nav-item .nav-link:focus,
+.darkTheme .ticker-nav .nav-item .nav-link:active,
+.darkTheme .ticker-nav .nav-item .nav-link:hover {
   color: var(--white);
 }
-.darkTheme .ticker-nav .nav-item a.active {
+.darkTheme .ticker-nav .nav-item .nav-link.active {
   color: var(--white);
   background-color: transparent;
 }
@@ -374,4 +377,33 @@ figure {
 .darkTheme .btn-farmnode:hover {
   background-color: var(--green);
   color: var(--white);
+}
+
+.pin-light {
+  &.active {
+    color: var(--orange);
+  }
+
+  &:hover {
+    color: var(--orange);
+  }
+}
+
+.pin {
+  cursor: pointer;
+  width: 0;
+
+  @extend .pin-light;
+}
+
+.darkTheme {
+  .pin {
+    &.active {
+      color: var(--blue);
+    }
+
+    &:hover {
+      color: var(--blue);
+    }
+  }
 }

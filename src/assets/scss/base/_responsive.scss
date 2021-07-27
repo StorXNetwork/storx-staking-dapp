@@ -135,7 +135,7 @@
     min-width: inherit;
   }
 
-  .ticker-nav .nav-item a {
+  .ticker-nav .nav-item .nav-link {
     font-size: 16px;
     line-height: 16px;
     padding: 0 8px;
@@ -441,7 +441,7 @@
 }
 
 @media screen and (max-width: 499px) {
-  .ticker-nav .nav-item a {
+  .ticker-nav .nav-item .nav-link {
     font-size: 14px;
     line-height: 14px;
     padding: 0 6px;

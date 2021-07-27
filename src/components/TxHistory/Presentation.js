@@ -19,7 +19,7 @@ import { LOADER_BOX } from "../common/common";
 function formatValue(varName, value) {
   if (isAddress(value))
     return (
-      <span class="truncate">
+      <span className="truncate">
         <a target="_blank" href={ADDR_LINK(EXPLORER, toXdcAddress(value))}>
           {toXdcAddress(value)}
         </a>
@@ -74,18 +74,18 @@ function RenderRows(events, from) {
     nodes.push(
       <tr className="hover-grow">
         <td>
-          <span class="table-responsive-stack-thead">BLOCK NUMBER</span>
+          <span className="table-responsive-stack-thead">BLOCK NUMBER</span>
 
           <a target="_blank" href={BUILD_BLOCK_LINK(EXPLORER, event.block)}>
             {event.block}
           </a>
         </td>
         <td>
-          <span class="table-responsive-stack-thead">NAME</span>
+          <span className="table-responsive-stack-thead">NAME</span>
           {event.name}
         </td>
         <td>
-          <span class="table-responsive-stack-thead">LINK</span>
+          <span className="table-responsive-stack-thead">LINK</span>
           <a target="_blank" href={BUILD_TX_LINK(EXPLORER, event.tx_hash)}>
             HASH LINK
           </a>

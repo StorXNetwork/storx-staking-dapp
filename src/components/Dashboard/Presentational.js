@@ -6,7 +6,7 @@ import FarmNode from "../../assets/img/icons/farmnodes.png";
 import Staking from "../../assets/img/icons/staking.png";
 import Rewards from "../../assets/img/icons/staking-rewards.png";
 import HostingRewards from "../../assets/img/icons/hosting-rewards.png";
-import { toXdcAddress } from "../../wallets/xinpay";
+import { fromXdcAddress, toXdcAddress } from "../../wallets/xinpay";
 import { FormatNumber, FormatToken } from "../../helpers/decimal";
 import {
   ADDR_LINK,
@@ -20,8 +20,22 @@ import { LOADER_BOX } from "../common/common";
 import GeneralModal from "../common/GeneralModal";
 import WorldMap from "../common/WorldMap";
 import { FlexTable } from "../../helpers/responsive";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 
-function RenderRows(holders, reputationThreshold, from) {
+const Options = {
+  0: "",
+  1: "",
+  2: "",
+};
+
+function RenderRows(
+  holders,
+  reputationThreshold,
+  from,
+  toggleFavorite,
+  favorite
+) {
   if (!holders)
     return (
       <tr>
@@ -43,11 +57,36 @@ function RenderRows(holders, reputationThreshold, from) {
       ) : (
         <span className="btn btn-slashed">Inactive</span>
       );
+    const pinClass = favorite.includes(
+      fromXdcAddress(data.stake.stakerHolder).toLowerCase()
+    )
+      ? "pin active"
+      : "pin";
 
     nodes.push(
       <tr className="hover-grow">
+        <td
+          onClick={() => toggleFavorite(data.stake.stakerHolder)}
+          className={pinClass}
+        >
+          <span className="table-responsive-stack-thead">FAVORITE</span>
+
+          <FontAwesomeIcon
+            className={
+              favorite.includes(
+                fromXdcAddress(data.stake.stakerHolder).toLowerCase()
+              )
+                ? "active"
+                : ""
+            }
+            icon={faStar}
+          />
+        </td>
+
         <td className="truncate">
-          <span class="table-responsive-stack-thead">FARM NODE ADDRESS</span>
+          <span className="table-responsive-stack-thead">
+            FARM NODE ADDRESS
+          </span>
           <a
             target="_blank"
             href={ADDR_LINK(EXPLORER, toXdcAddress(data.stake.stakerHolder))}
@@ -56,11 +95,11 @@ function RenderRows(holders, reputationThreshold, from) {
           </a>
         </td>
         <td>
-          <span class="table-responsive-stack-thead">STAKED AMOUNT</span>
+          <span className="table-responsive-stack-thead">STAKED AMOUNT</span>
           {FormatNumber(fromWei(data.stake.stakedAmount))} SRX
         </td>
         <td>
-          <span class="table-responsive-stack-thead">REPUTATION</span>
+          <span className="table-responsive-stack-thead">REPUTATION</span>
 
           <div className="notify masternode">
             <span className="heartbit"></span>
@@ -69,7 +108,7 @@ function RenderRows(holders, reputationThreshold, from) {
           {FormatNumber(data.reputation)}
         </td>
         <td>
-          <span class="table-responsive-stack-thead">STATUS</span>
+          <span className="table-responsive-stack-thead">STATUS</span>
 
           {status}
         </td>
@@ -83,7 +122,7 @@ function RenderRows(holders, reputationThreshold, from) {
 function RenderPagination({ active, setPage, total }) {
   const prevClass = active === 0 ? "page-link disabled" : "page-link";
   const nextClass =
-    Math.ceil(total / 10) === active + 1 ? "page-link disabled" : "page-link";
+    Math.ceil(total / 10) <= active + 1 ? "page-link disabled" : "page-link";
   const last = Math.ceil(total / 10);
 
   const nos = PaginateNav(active, last);
@@ -123,13 +162,31 @@ function RenderPagination({ active, setPage, total }) {
   );
 }
 
-function DashboardPresentation({ data, node_data }) {
+function DashboardPresentation({
+  data,
+  node_data,
+  toggleFavorite = (addr) => console.log(addr),
+  favorite,
+  tab,
+  setTab,
+}) {
   const [active, setActive] = useState(0);
 
   const nodeCount = data ? Object.keys(data.stakeHolders).length : LOADER_BOX;
-  const stakeholder = data
-    ? Object.keys(data.stakeHolders).map((x) => data.stakeHolders[x])
-    : null;
+  const nodeCountTab = data ? Object.keys(data.stakeHolders).length : "-";
+  const inactiveNode = data
+    ? Object.keys(data.stakeHolders).filter(
+        (x) => data.stakeHolders[x].reputation < data.reputationThreshold
+      )
+    : LOADER_BOX;
+  const favoriteNode = data
+    ? Object.keys(data.stakeHolders).filter((x) =>
+        favorite.includes(fromXdcAddress(x).toLowerCase())
+      )
+    : LOADER_BOX;
+  const favoriteNodeCount = data ? favoriteNode.length : "-";
+  const inactiveNodeCount = data ? inactiveNode.length : "-";
+
   const reputationThreshold = data ? data.reputationThreshold : null;
 
   const totalStaked = data
@@ -142,6 +199,16 @@ function DashboardPresentation({ data, node_data }) {
   const stakingRewwards = data
     ? data.interest / data.interestPrecision
     : LOADER_BOX;
+
+  const displayNodeTab = {
+    0: data
+      ? Object.keys(data.stakeHolders).map((x) => data.stakeHolders[x])
+      : null,
+    1: data ? favoriteNode.map((x) => data.stakeHolders[x]) : null,
+    2: data ? inactiveNode.map((x) => data.stakeHolders[x]) : null,
+  };
+
+  const displayNode = displayNodeTab[`${tab}`];
 
   useEffect(() => {
     FlexTable();
@@ -283,58 +350,108 @@ function DashboardPresentation({ data, node_data }) {
               <div className="col-lg-12">
                 <div className="ticker-head mb-2">
                   <ul
-                    className="nav nav-tabs ticker-nav form-tabs"
+                    className="nav nav-tabs ticker-nav form-tabs hidden-xs"
                     role="tablist"
                   >
                     <li className="nav-item mb-3">
-                      <div className="nav-link">
-                        Farm/Storage Nodes ( {`${nodeCount}`} )
+                      <div
+                        className={tab === 0 ? "nav-link active" : "nav-link"}
+                        onClick={() => {
+                          setActive(0);
+                          setTab(0);
+                        }}
+                      >
+                        Farm/Storage Nodes ( {nodeCountTab} )
+                      </div>
+                    </li>
+                    <li className="nav-item mb-3">
+                      <div
+                        className={tab === 1 ? "nav-link active" : "nav-link"}
+                        onClick={() => {
+                          setActive(0);
+                          setTab(1);
+                        }}
+                      >
+                        Favorite ( {favoriteNodeCount} )
+                      </div>
+                    </li>
+                    <li className="nav-item mb-3">
+                      <div
+                        className={tab === 2 ? "nav-link active" : "nav-link"}
+                        onClick={() => {
+                          setActive(0);
+                          setTab(2);
+                        }}
+                      >
+                        Inactive ( {inactiveNodeCount} ){" "}
                       </div>
                     </li>
                   </ul>
-                  {/* <div className="d-sm-none">
-                <select className="mb10 form-control" id="tab_selector">
-                  <option value="0">Farm Nodes (6)</option>
-                  <option value="1">Slashed Nodes (4)</option>
-                  <option value="2">Resigned Nodes (3)</option>
-                </select>
-              </div> */}
+                  <div className="d-sm-none">
+                    <select
+                      className="mb10 form-control"
+                      id="tab_selector"
+                      value={`${tab}`}
+                      onChange={(v) => {
+                        setActive(0);
+                        setTab(v.target.value);
+                      }}
+                    >
+                      <option value="0">
+                        Farm/Storage Nodes ( {nodeCountTab} )
+                      </option>
+                      <option value="1">
+                        Favorite ( {favoriteNodeCount} )
+                      </option>
+                      <option value="2">
+                        Inactive ( {inactiveNodeCount} ){" "}
+                      </option>
+                    </select>
+                  </div>
                 </div>
               </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-lg-12">
+              <div className="tab-content">
+                <div
+                  role="tabpanel"
+                  className="tab-pane fade in active show"
+                  id="tab1"
+                >
+                  <table className="table table-responsive-stack">
+                    <thead>
+                      <tr>
+                        <th className="visibility-xs fav"></th>
+                        <th>FARM NODE ADDRESS</th>
+                        {/* <th>NODE IP</th> */}
+                        <th>STAKED AMOUNT</th>
+                        <th>REPUTATION</th>
+                        <th>STATUS</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {RenderRows(
+                        displayNode,
+                        reputationThreshold,
+                        active,
+                        toggleFavorite,
+                        favorite
+                      )}
+                    </tbody>
+                  </table>
 
-              <div className="col-lg-12">
-                <div className="tab-content">
-                  <div
-                    role="tabpanel"
-                    className="tab-pane fade in active show"
-                    id="tab1"
-                  >
-                    <table className="table table-responsive-stack">
-                      <thead>
-                        <tr>
-                          <th>FARM NODE ADDRESS</th>
-                          {/* <th>NODE IP</th> */}
-                          <th>STAKED AMOUNT</th>
-                          <th>REPUTATION</th>
-                          <th>STATUS</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {RenderRows(stakeholder, reputationThreshold, active)}
-                      </tbody>
-                    </table>
-
-                    <div className="pagination-container">
-                      <nav aria-label="Page navigation example">
-                        <ul className="pagination">
-                          <RenderPagination
-                            active={active}
-                            total={stakeholder?.length}
-                            setPage={setActive}
-                          />
-                        </ul>
-                      </nav>
-                    </div>
+                  <div className="pagination-container">
+                    <nav aria-label="Page navigation example">
+                      <ul className="pagination">
+                        <RenderPagination
+                          active={active}
+                          total={displayNode?.length}
+                          setPage={setActive}
+                        />
+                      </ul>
+                    </nav>
                   </div>
                 </div>
               </div>

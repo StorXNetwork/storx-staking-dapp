@@ -251,16 +251,18 @@ export const PaginateNav = (active, total) => {
   const max = total;
 
   let start = MaxOf(active - 1, 0);
-  let end = MinOf(total - 1, active + 1);
+  let end = MaxOf(MinOf(total - 1, active + 1), 0);
 
   if (start === end && end === active) return [active];
 
-  if (start === active)
+  if (start === active) {
+    if (start === active && active === end) return [active];
     if (end + 1 < total) {
       return [active, end, end + 1];
     } else {
       return [active, end];
     }
+  }
 
   if (end === active)
     if (start > min) {
