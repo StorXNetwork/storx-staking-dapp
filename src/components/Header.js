@@ -15,6 +15,10 @@ import * as actions from "../actions";
 import { toast } from "react-toastify";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { SubmitContractTxGeneral } from "../wallets/account";
+import { AxiosInstance } from "../helpers/constant";
+import { LOADER_BOX } from "./common/common";
+import { FormatTVL } from "../helpers/decimal";
 
 const ToggleLight = (
   <span className="d-block-light">
@@ -63,6 +67,12 @@ const ToggleDark = (
 );
 
 class Header extends React.Component {
+  state = { tvl: LOADER_BOX };
+
+  componentDidMount() {
+    this.getTVL();
+  }
+
   componentDidUpdate(prevProps) {
     if (
       prevProps.wallet.connected !== this.props.wallet.connected &&
@@ -72,6 +82,20 @@ class Header extends React.Component {
         toast("Wallet Connected", { autoClose: 2000 });
       });
     }
+  }
+
+  getTVL() {
+    Promise.all([
+      AxiosInstance.get("/get-contract-data"),
+      AxiosInstance.get("/get-asset-price"),
+    ])
+      .then(([data, rates]) => {
+        const rate = rates?.data?.data?.SRXUSDT;
+        const totalStaked = data?.data?.data?.totalStaked;
+        const tvl = (parseFloat(rate) * parseFloat(totalStaked)) / 10 ** 18;
+        this.setState({ tvl: FormatTVL(tvl) });
+      })
+      .catch(console.error);
   }
 
   getConnectButton() {
@@ -134,6 +158,11 @@ class Header extends React.Component {
             <Link className="logo" to="/">
               <img src={brandLogo} alt="SRX" />
             </Link>
+
+            <div class="hBadge badge ml-2">
+              <span>TVL</span>
+              <span class="ml-1">{this.state.tvl}</span>
+            </div>
 
             <div
               className="collapse navbar-collapse"

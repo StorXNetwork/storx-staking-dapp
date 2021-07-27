@@ -19,7 +19,7 @@ import { LOADER_BOX } from "../common/common";
 
 import GeneralModal from "../common/GeneralModal";
 import WorldMap from "../common/WorldMap";
-import { FlexTable } from "../../helpers/responsive";
+import { FlexTable, InitStackableTable } from "../../helpers/responsive";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
@@ -34,7 +34,8 @@ function RenderRows(
   reputationThreshold,
   from,
   toggleFavorite,
-  favorite
+  favorite,
+  pageLength = 10
 ) {
   if (!holders)
     return (
@@ -47,7 +48,11 @@ function RenderRows(
 
   const nodes = [];
 
-  holders = Paginate({ data: holders, from: from * 10, limit: 10 });
+  holders = Paginate({
+    data: holders,
+    from: from * pageLength,
+    limit: pageLength,
+  });
 
   for (let i = 0; i < holders.length; i++) {
     const data = holders[i];
@@ -119,15 +124,19 @@ function RenderRows(
   return nodes;
 }
 
-function RenderPagination({ active, setPage, total }) {
+function RenderPagination({ active, setPage, total, pageLength = 10 }) {
   const prevClass = active === 0 ? "page-link disabled" : "page-link";
   const nextClass =
-    Math.ceil(total / 10) <= active + 1 ? "page-link disabled" : "page-link";
-  const last = Math.ceil(total / 10);
+    Math.ceil(total / pageLength) <= active + 1
+      ? "page-link disabled"
+      : "page-link";
+  const last = Math.ceil(total / pageLength);
 
   const nos = PaginateNav(active, last);
   const liClass = (x) => (x === active ? "page-link active" : "page-link");
   const liItemClass = (x) => (x === active ? "page-item active" : "page-item");
+
+  useEffect(InitStackableTable, [pageLength]);
 
   return (
     <>
@@ -171,6 +180,7 @@ function DashboardPresentation({
   setTab,
 }) {
   const [active, setActive] = useState(0);
+  const [pageLength, setPageLength] = useState(10);
 
   const nodeCount = data ? Object.keys(data.stakeHolders).length : LOADER_BOX;
   const nodeCountTab = data ? Object.keys(data.stakeHolders).length : "-";
@@ -437,18 +447,35 @@ function DashboardPresentation({
                         reputationThreshold,
                         active,
                         toggleFavorite,
-                        favorite
+                        favorite,
+                        pageLength
                       )}
                     </tbody>
                   </table>
 
-                  <div className="pagination-container">
+                  <div className="pagination-container d-flex align-items-center justify-content-between">
+                    <div class="entries-amount">
+                      <span>Show</span>
+                      <select
+                        id="change-record-count"
+                        class="select"
+                        value={pageLength}
+                        onChange={(e) => setPageLength(e.target.value)}
+                      >
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                      </select>
+                      <span class="hide-mobile">Entries</span>
+                    </div>
+
                     <nav aria-label="Page navigation example">
                       <ul className="pagination">
                         <RenderPagination
                           active={active}
                           total={displayNode?.length}
                           setPage={setActive}
+                          pageLength={pageLength}
                         />
                       </ul>
                     </nav>

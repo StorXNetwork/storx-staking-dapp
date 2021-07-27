@@ -380,6 +380,14 @@ figure {
 }
 
 .pin-light {
+  color: #bec6cd;
+
+}
+
+.pin {
+  cursor: pointer;
+  width: 0;
+
   &.active {
     color: var(--orange);
   }
@@ -387,23 +395,44 @@ figure {
   &:hover {
     color: var(--orange);
   }
-}
-
-.pin {
-  cursor: pointer;
-  width: 0;
 
   @extend .pin-light;
 }
 
 .darkTheme {
   .pin {
+
+    color: #353c45;
+
     &.active {
-      color: var(--blue);
+      color: var(--orange);
     }
 
     &:hover {
-      color: var(--blue);
+      color: var(--orange);
     }
+  }
+}
+.darkTheme .ticker-nav .nav-item:last-child {
+  border-right: none;
+}
+
+#change-record-count {
+  padding: 0.45rem 0.75rem !important;
+  border-radius: 0.25rem !important;
+  color: var(--text-color) !important;
+  background-color: var(--frontbg) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.entries-amount span:first-child {
+  margin-right: 0.5rem;
+}
+.entries-amount span:last-child {
+  margin-left: 0.5rem;
+}
+@media screen and (max-width: 575px) {
+  .hide-mobile {
+    display: none;
   }
 }
