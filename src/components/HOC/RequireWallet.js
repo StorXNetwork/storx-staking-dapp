@@ -5,8 +5,7 @@ import WalletConnect from "../wallet-connect/walletConnect";
 
 const DefaultFallback = () => (
   <>
-    <section className="bg-home bg-gradient red" id="home"></section>
-    <section className="block-overlap pb-5">
+    <section className="block-overlap mt-5 pb-5">
       <div className="container">
         <div className="row text-center">
           <div className="col-sm-12 col-md-12 col-lg-10 offset-lg-1">

@@ -152,7 +152,7 @@ function TxHistoryPresentation({ events }) {
 
   return (
     <>
-      <section className="section-sm mt-5" id="tx-history-block">
+      <section className="section-sm" >
         <div className="container">
           <div className="row">
             <div className="farmnodes-tabbed-section">

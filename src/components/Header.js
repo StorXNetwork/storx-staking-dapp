@@ -152,7 +152,7 @@ class Header extends React.Component {
     const btn = this.getConnectButton();
 
     return (
-      <header>
+      <header className="custom-header">
         <nav className="navbar navbar-expand-lg fixed-top navbar-custom sticky">
           <div className="container">
             <Link className="logo" to="/">

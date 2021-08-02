@@ -1,3 +1,7 @@
+.custom-header {
+  margin-bottom: 140px;
+}
+
 .navbar-custom {
   padding: 20px 0px !important;
   width: 100%;
@@ -223,7 +227,7 @@
 }
 
 .d-xs-none {
-  @media screen and (max-width:$xs-width) {
+  @media screen and (max-width: $xs-width) {
     display: none !important;
   }
 }

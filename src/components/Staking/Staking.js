@@ -175,7 +175,6 @@ class Staking extends React.Component {
       <>
         <section className="block-overlap pb-3">
           <div className="container">
-            <section className="bg-home bg-gradient red" id="home"></section>
             <InfoHeader
               stakingData={this.state.stakingData}
               reputation={reputation}

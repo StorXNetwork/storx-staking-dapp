@@ -21,7 +21,7 @@ import GeneralModal from "../common/GeneralModal";
 import WorldMap from "../common/WorldMap";
 import { FlexTable, InitStackableTable } from "../../helpers/responsive";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faStar } from "@fortawesome/free-solid-svg-icons";
 
 const Options = {
   0: "",
@@ -184,7 +184,9 @@ function DashboardPresentation({
   const [pageLength, setPageLength] = useState(10);
   const [addrFilter, setaddrFilter] = useState("");
 
-  const allNodeCount = data ? Object.keys(data.allStakeholders).length : LOADER_BOX;
+  const allNodeCount = data
+    ? Object.keys(data.allStakeholders).length
+    : LOADER_BOX;
 
   const nodeCount = data ? Object.keys(data.stakeHolders).length : LOADER_BOX;
   const nodeCountTab = data ? Object.keys(data.stakeHolders).length : "-";
@@ -234,8 +236,24 @@ function DashboardPresentation({
 
   return (
     <>
-      <section className="bg-home bg-gradient red" id="home">
-        <div id="particles-js" className="particles-js"></div>
+      <section className="mb-5">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-12">
+              <div className="announcement">
+                <b>Note</b>: The minimum staking amount will be updated as per the
+                new incremental model from 03/08/2021 onwards.{" "}
+                <a
+                  href="https://storxnetwork.medium.com/storx-farm-node-minimum-staking-increment-model-to-avoid-srx-token-inflation-7a343cf89401"
+                  target="_blank"
+                  className="blue"
+                >
+                  Refer
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section className="block-overlap">
@@ -270,7 +288,9 @@ function DashboardPresentation({
                               btnName="( View All )"
                               btnProps={{ className: "map-button small pl-5" }}
                               footer={
-                                <div>Total Storage Providers: {allNodeCount}</div>
+                                <div>
+                                  Total Storage Providers: {allNodeCount}
+                                </div>
                               }
                             >
                               <WorldMap data={node_data} />
@@ -361,33 +381,17 @@ function DashboardPresentation({
         </div>
       </section>
 
-      <section>
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-12">
-              <input
-                className="form-control"
-                placeholder="Filter node address..."
-                value={addrFilter}
-                onChange={(e) => setaddrFilter(e.target.value)}
-                type="text"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section className="section-sm" id="farmnode">
         <div className="container">
           <div className="row">
             <div className="farmnodes-tabbed-section">
               <div className="col-lg-12">
-                <div className="ticker-head mb-2">
+                <div className="ticker-head align-items-center justify-content-between mb-2">
                   <ul
                     className="nav nav-tabs ticker-nav form-tabs hidden-xs"
                     role="tablist"
                   >
-                    <li className="nav-item mb-3">
+                    <li className="nav-item ">
                       <div
                         className={tab === 0 ? "nav-link active" : "nav-link"}
                         onClick={() => {
@@ -398,7 +402,7 @@ function DashboardPresentation({
                         Farm/Storage Nodes ( {nodeCountTab} )
                       </div>
                     </li>
-                    <li className="nav-item mb-3">
+                    <li className="nav-item ">
                       <div
                         className={tab === 1 ? "nav-link active" : "nav-link"}
                         onClick={() => {
@@ -409,7 +413,7 @@ function DashboardPresentation({
                         Favorite ( {favoriteNodeCount} )
                       </div>
                     </li>
-                    <li className="nav-item mb-3">
+                    <li className="nav-item ">
                       <div
                         className={tab === 2 ? "nav-link active" : "nav-link"}
                         onClick={() => {
@@ -441,6 +445,16 @@ function DashboardPresentation({
                         Inactive ( {inactiveNodeCount} ){" "}
                       </option>
                     </select>
+                  </div>
+                  <div class="input-group with-icon">
+                    <input
+                      class="form-control"
+                      type="search"
+                      placeholder="Filter node address..."
+                      value={addrFilter}
+                      onChange={(e) => setaddrFilter(e.target.value)}
+                    />
+                    <FontAwesomeIcon icon={faSearch} />
                   </div>
                 </div>
               </div>

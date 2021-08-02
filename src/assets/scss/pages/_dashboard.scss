@@ -434,3 +434,53 @@ figure {
     display: none;
   }
 }
+
+
+
+.ticker-head {
+  display: -webkit-box!important;
+  display: -ms-flexbox!important;
+  display: flex!important;
+}
+@media screen and (max-width:991px) {
+.ticker-head {
+  display: block!important;
+}
+.input-group.with-icon {
+  margin-top: 25px;
+  width: 100%!important;
+}
+}
+.input-group.with-icon>input::-ms-clear{display:none}
+.input-group.with-icon>svg {
+-webkit-transform: translateY(-50%);
+-ms-transform: translateY(-50%);
+transform: translateY(-50%);
+pointer-events: none;
+position: absolute;
+z-index: 3;
+top: 50%;
+}
+.input-group.with-icon>svg,
+.input-group.with-icon.icon-right>svg{
+right: .7rem;
+}
+.input-group.with-icon>input,
+.input-group.with-icon.icon-right>input {
+padding-right: 1.7rem;
+}
+.input-group.with-icon {
+width:350px;
+}
+.input-group.with-icon>input {
+border-radius: 12px!important;height: 3rem!important;
+}
+
+.announcement {
+  position: relative;
+  margin-bottom: 10px;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 12px;
+  background-color: var(--frontbg);
+}
