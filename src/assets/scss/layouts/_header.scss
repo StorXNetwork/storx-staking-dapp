@@ -221,3 +221,9 @@
   background-color: var(--background-color);
   border: 1px solid transparent;
 }
+
+.d-xs-none {
+  @media screen and (max-width:$xs-width) {
+    display: none !important;
+  }
+}
