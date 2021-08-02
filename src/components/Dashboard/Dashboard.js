@@ -1,10 +1,12 @@
 import React from "react";
+import _ from "lodash";
 
 import { InitStackableTable } from "../../helpers/responsive";
 import { AxiosInstance } from "../../helpers/constant";
 
 import DashboardPresentation from "./Presentational";
 import { GetFavorites, ToggleFavorite } from "../../helpers/miscellaneous";
+import { fromXdcAddress, toXdcAddress } from "../../wallets/xinpay";
 
 const intialState = {
   data: null,
@@ -21,12 +23,17 @@ class Dashboard extends React.Component {
 
     this.toggleFavorite = this.toggleFavorite.bind(this);
     this.setTab = this.setTab.bind(this);
+    this.filterData = this.filterData.bind(this);
   }
 
   componentDidMount() {
     AxiosInstance.get("/get-contract-data")
       .then((resp) => {
-        this.setState({ data: resp.data.data }, InitStackableTable);
+        const allStakeholders = resp.data.data.stakeHolders;
+        this.setState(
+          { data: { ...resp.data.data, allStakeholders } },
+          InitStackableTable
+        );
       })
       .catch(console.error);
 
@@ -50,6 +57,25 @@ class Dashboard extends React.Component {
     this.setState({ tab });
   }
 
+  filterData(filter) {
+    if (!this.state.data) return;
+    const data =
+      this.state.data.allStakeholders || this.state.data.stakeHolders;
+    const filtered = Object.keys(data).reduce((acc, curr) => {
+      if (toXdcAddress(curr).toLowerCase().includes(toXdcAddress(filter).toLowerCase())) {
+        acc[curr] = data[curr];
+      }
+      return acc;
+    }, {});
+
+    this.setState({
+      data: {
+        ...this.state.data,
+        stakeHolders: filtered,
+      },
+    });
+  }
+
   render() {
     return (
       <DashboardPresentation
@@ -57,6 +83,7 @@ class Dashboard extends React.Component {
         node_data={this.state.node_data}
         favorite={this.state.favorite}
         toggleFavorite={this.toggleFavorite}
+        filterData={this.filterData}
         setTab={this.setTab}
         tab={this.state.tab}
       />

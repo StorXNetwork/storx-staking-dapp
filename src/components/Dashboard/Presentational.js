@@ -178,9 +178,13 @@ function DashboardPresentation({
   favorite,
   tab,
   setTab,
+  filterData,
 }) {
   const [active, setActive] = useState(0);
   const [pageLength, setPageLength] = useState(10);
+  const [addrFilter, setaddrFilter] = useState("");
+
+  const allNodeCount = data ? Object.keys(data.allStakeholders).length : LOADER_BOX;
 
   const nodeCount = data ? Object.keys(data.stakeHolders).length : LOADER_BOX;
   const nodeCountTab = data ? Object.keys(data.stakeHolders).length : "-";
@@ -224,6 +228,10 @@ function DashboardPresentation({
     FlexTable();
   }, [active]);
 
+  useEffect(() => {
+    filterData(addrFilter);
+  }, [addrFilter]);
+
   return (
     <>
       <section className="bg-home bg-gradient red" id="home">
@@ -253,7 +261,7 @@ function DashboardPresentation({
                           Farm/Storage Nodes
                         </h2>
                         <p>
-                          <span className="counter">{nodeCount}</span>
+                          <span className="counter">{allNodeCount}</span>
                           <span>
                             <GeneralModal
                               centered={true}
@@ -262,7 +270,7 @@ function DashboardPresentation({
                               btnName="( View All )"
                               btnProps={{ className: "map-button small pl-5" }}
                               footer={
-                                <div>Total Storage Providers: {nodeCount}</div>
+                                <div>Total Storage Providers: {allNodeCount}</div>
                               }
                             >
                               <WorldMap data={node_data} />
@@ -348,6 +356,22 @@ function DashboardPresentation({
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-12">
+              <input
+                className="form-control"
+                placeholder="Filter node address..."
+                value={addrFilter}
+                onChange={(e) => setaddrFilter(e.target.value)}
+                type="text"
+              />
             </div>
           </div>
         </div>

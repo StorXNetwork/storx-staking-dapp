@@ -159,9 +159,9 @@ class Header extends React.Component {
               <img src={brandLogo} alt="SRX" />
             </Link>
 
-            <div class="hBadge badge ml-2">
+            <div className="hBadge badge ml-2">
               <span>TVL</span>
-              <span class="ml-1">{this.state.tvl}</span>
+              <span className="ml-1">{this.state.tvl}</span>
             </div>
 
             <div
