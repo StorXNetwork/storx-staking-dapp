@@ -100,7 +100,7 @@ class Header extends React.Component {
 
   getConnectButton() {
     let btn_msg = "connect",
-      btn_class = "btn nav-link u-capitalize";
+      btn_class = "btn nav-link u-capitalize u-pointer";
     if (this.props.wallet.connected) {
       if (!this.props.wallet.valid_network) {
         btn_msg = "incorrect network";

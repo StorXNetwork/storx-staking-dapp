@@ -193,12 +193,13 @@
   background: currentcolor;
   color: currentcolor;
   animation: dotFlashing 1s infinite linear alternate;
-  animation-delay: .5s;
+  animation-delay: 0.5s;
   margin-left: 10px;
 }
 
-.loader-box::before, .loader-box::after {
-  content: '';
+.loader-box::before,
+.loader-box::after {
+  content: "";
   display: inline-block;
   position: absolute;
   top: 0;
@@ -290,4 +291,8 @@
   @media screen and (min-width: $sm-width) {
     visibility: hidden;
   }
+}
+
+.u-pointer {
+  cursor: pointer;
 }
