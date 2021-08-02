@@ -51,7 +51,7 @@
     "generate-build-version": "node ./scripts/generate-build-version",
     "prebuild": "npm run generate-build-version",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
