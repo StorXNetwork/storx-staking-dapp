@@ -170,7 +170,7 @@ class Header extends React.Component {
             >
               <ul className="navbar-nav ml-auto" id="mySidenav">
                 <li className="nav-item button">
-                  <Link className="btn nav-link" to="/">
+                  <Link className="btn nav-link d-sm-none" to="/">
                     Home
                   </Link>
                 </li>
