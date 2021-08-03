@@ -1,7 +1,7 @@
 import React from "react";
 import { fromWei, toWei } from "xdc3-utils";
 
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col, Button, Modal } from "react-bootstrap";
 import { CONTRACT_ADDRESS } from "../../helpers/constant";
 import { FormatNumber } from "../../helpers/decimal";
 import { SubmitContractTxGeneral } from "../../wallets";
@@ -12,6 +12,7 @@ const InitialState = {
   form: {
     amount: 0,
   },
+  showModal: false,
 };
 class StakingForm extends React.Component {
   constructor(props) {
@@ -118,7 +119,10 @@ class StakingForm extends React.Component {
           <Container>
             <Row>
               <Col className="u-text-center vh-align-center">
-                <Button onClick={this.unstake} variant="danger">
+                <Button
+                  onClick={() => this.setState({ showModal: true })}
+                  variant="danger"
+                >
                   UNSTAKE
                 </Button>
               </Col>
@@ -168,7 +172,42 @@ class StakingForm extends React.Component {
   }
 
   render() {
-    return <>{this.renderStakingFunc()}</>;
+    return (
+      <>
+        {this.renderStakingFunc()}
+        <Modal
+          centered={true}
+          show={this.state.showModal}
+          onHide={() => this.setState({ showModal: false })}
+        >
+          <Modal.Header>
+            <h4>Confirm</h4>
+          </Modal.Header>
+          <Modal.Body>
+            On unstaking you will no longer receive rewards.
+            <br /> The current rewards & the staked amount will become
+            redeemable after a cool-off period of 7 days.
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              onClick={() => this.setState({ showModal: false })}
+              variant="secondary"
+            >
+              Close
+            </Button>
+            <Button
+              onClick={() => {
+                this.setState({ showModal: false });
+                this.unstake();
+              }}
+              variant="primary"
+            >
+              Unstake
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </>
+    );
   }
 }
 
