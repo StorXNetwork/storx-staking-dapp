@@ -105,9 +105,9 @@ figure {
   border-right: 1px solid var(--border-color);
   content: "";
 }
-.ver-divider:nth-child(2n):after {
-  display: none;
-}
+// .ver-divider:nth-child(2n):after {
+//   display: none;
+// }
 .stats-counter .ver-divider:nth-child(4n):after {
   border-right: none;
 }
