@@ -290,7 +290,7 @@ export const DynamicForm = (props) => {
               setLoading(false);
             })
             .catch((e) => {
-              console.log("err", e);
+              // console.log("err", e);
               if (IsJsonRpcError(e)) {
                 const err = GetJsonRpcError(e);
                 props.setModalContent(`Error: ${err.message}`);

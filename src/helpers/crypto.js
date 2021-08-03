@@ -92,7 +92,7 @@ export const GetRevertReason = (tx) => {
     xdc3.eth
       .call(tx)
       .then((x) => {
-        console.log("x", x, utils.toAscii(x));
+        // console.log("x", x, utils.toAscii(x));
         const other = x.replace("0x", "").slice(8);
         const buf = Buffer.from(other, "hex");
         const reason = buf
@@ -100,7 +100,7 @@ export const GetRevertReason = (tx) => {
           .split("")
           .filter((x) => /^[a-zA-Z\d\s:]+$/i.test(x))
           .join("");
-        console.log(reason);
+        // console.log(reason);
         resolve(reason);
       })
       .catch(reject);

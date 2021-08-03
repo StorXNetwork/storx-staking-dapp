@@ -11,7 +11,7 @@ export const FormatNumber = (x) => parseFloat(x).toLocaleString();
 export const FormatToken = (x) => {
   try {
     x = parseFloat(x).toFixed(0);
-    console.log(x, parseFloat(fromWei(RemoveExpo(x))).toFixed(2));
+    // console.log(x, parseFloat(fromWei(RemoveExpo(x))).toFixed(2));
     return _.isNumber(parseFloat(x))
       ? parseFloat(fromWei(RemoveExpo(x))).toFixed(2)
       : 0;

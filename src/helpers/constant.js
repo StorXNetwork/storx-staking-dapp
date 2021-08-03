@@ -292,7 +292,7 @@ Object.defineProperty(Array.prototype, "includesPartial", {
   value: function (fields) {
     for (let i = 0; i < this.length; i++) {
       const obj = this[i];
-      console.log("objobj", obj);
+      // console.log("objobj", obj);
       if (obj.partialMatch(fields)) {
         return i;
       }

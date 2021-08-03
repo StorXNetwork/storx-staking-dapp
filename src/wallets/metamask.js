@@ -43,7 +43,7 @@ export async function initWeb3() {
       })
     );
   } catch (e) {
-    console.log(e);
+    // console.log(e);
   }
 }
 
@@ -76,12 +76,12 @@ export function _initListerner() {
   });
 
   window.ethereum.on("disconnect", (data) => {
-    console.log("disconnect", data);
+    // console.log("disconnect", data);
     return store.dispatch(actions.WalletDisconnected());
   });
 
   window.ethereum.on("message", (data) => {
-    console.log("message", data);
+    // console.log("message", data);
   });
 }
 
@@ -165,8 +165,8 @@ export async function SubmitContractTxGeneral(
       return resp;
     }
   } catch (e) {
-    console.log("resp", IsJsonRpcError(e));
-    console.log("resp", e);
+    // console.log("resp", IsJsonRpcError(e));
+    // console.log("resp", e);
     throw e;
   }
 }
@@ -181,7 +181,7 @@ export const GetPastEvents = async (abi, address) => {
       toBlock: "latest",
     },
     function (error, events) {
-      console.log("eventsevents", events);
+      // console.log("eventsevents", events);
     }
   );
 };

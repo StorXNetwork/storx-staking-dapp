@@ -85,7 +85,7 @@ export async function initXdc3() {
       })
     );
   } catch (e) {
-    console.log(e);
+    // console.log(e);
   }
 }
 
@@ -97,14 +97,14 @@ export function _initListerner() {
   addressChangeIntervalRef = setInterval(async () => {
     const accounts = await xdc3.eth.getAccounts();
     if (_.isEqual(accounts, addresses)) return;
-    console.log("accounts", accounts);
+    // console.log("accounts", accounts);
     addresses = accounts;
     store.dispatch(actions.AccountChanged(accounts[0]));
   }, 1000);
 
   window.ethereum.on("accountsChanged", async (data) => {
     const accounts = await xdc3.eth.getAccounts();
-    console.log("accounts", accounts);
+    // console.log("accounts", accounts);
     addresses = accounts;
     store.dispatch(actions.AccountChanged(accounts[0]));
   });
@@ -129,12 +129,12 @@ export function _initListerner() {
   });
 
   window.ethereum.on("disconnect", (data) => {
-    console.log("disconnect", data);
+    // console.log("disconnect", data);
     return store.dispatch(actions.WalletDisconnected());
   });
 
   window.ethereum.on("message", (data) => {
-    console.log("message", data);
+    // console.log("message", data);
   });
 }
 
@@ -196,7 +196,7 @@ export async function SubmitContractTxGeneral(
 
         address = contractAddress;
 
-        console.log("typetype", type, address, arguments);
+        // console.log("typetype", type, address, arguments);
 
         const contract = new xdc3.eth.Contract(abi, address);
 
@@ -232,7 +232,7 @@ export async function SubmitContractTxGeneral(
             let interval = setInterval(async () => {
               try {
                 const receipt = await xdc3.eth.getTransactionReceipt(hash);
-                console.log("receipt", receipt);
+                // console.log("receipt", receipt);
                 if (receipt !== null) {
                   if (receipt.status) {
                     clearInterval(interval);
@@ -251,7 +251,7 @@ export async function SubmitContractTxGeneral(
           // })
           // .catch(reject);
         } else {
-          console.log("addresses[0]", addresses[0], method, params);
+          // console.log("addresses[0]", addresses[0], method, params);
 
           const data = contract.methods[method](...params).encodeABI();
 
@@ -292,9 +292,9 @@ export async function SubmitContractTxGeneral(
         }
       })
       .catch((e) => {
-        console.log(arguments, e);
-        console.log("resp", IsJsonRpcError(e));
-        console.log("resp", e);
+        // console.log(arguments, e);
+        // console.log("resp", IsJsonRpcError(e));
+        // console.log("resp", e);
         reject(e);
       });
   });

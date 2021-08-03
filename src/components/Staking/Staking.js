@@ -136,7 +136,7 @@ class Staking extends React.Component {
                   "view",
                   this.props.wallet.address
                 ).then((x) => {
-                  console.log("canWithdrawStakeIn", x);
+                  // console.log("canWithdrawStakeIn", x);
                   this.setState({
                     stake: {
                       ...this.state.stake,

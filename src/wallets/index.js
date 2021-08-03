@@ -48,8 +48,8 @@ export function IsLocked(...params) {
         resolve(resp);
       })
       .catch((e) => {
-        console.log("resp", IsJsonRpcError(e));
-        console.log("resp", e);
+        // console.log("resp", IsJsonRpcError(e));
+        // console.log("resp", e);
         reject(e);
       });
   });
@@ -106,8 +106,8 @@ export function SubmitContractTxGeneral(...params) {
         resolve(resp);
       })
       .catch((e) => {
-        console.log("resp", IsJsonRpcError(e));
-        console.log("resp", e, e.message);
+        // console.log("resp", IsJsonRpcError(e));
+        // console.log("resp", e, e.message);
         const message = e.message || <>Failing Transaction</>;
         toast(
           <div>

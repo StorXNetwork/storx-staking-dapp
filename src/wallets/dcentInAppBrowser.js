@@ -38,7 +38,7 @@ export const initDcent = async () => {
     _initListerner();
     const chain_id = await xdc3.eth.getChainId();
     const accounts = await xdc3.eth.getAccounts();
-    console.log("chain_id", chain_id, accounts);
+    // console.log("chain_id", chain_id, accounts);
     return store.dispatch(
       actions.WalletConnected({
         address: accounts[0],
@@ -47,7 +47,7 @@ export const initDcent = async () => {
       })
     );
   } catch (e) {
-    console.log(e);
+    // console.log(e);
   }
 };
 
@@ -80,12 +80,12 @@ export function _initListerner() {
   });
 
   window.ethereum.on("disconnect", (data) => {
-    console.log("disconnect", data);
+    // console.log("disconnect", data);
     return store.dispatch(actions.WalletDisconnected());
   });
 
   window.ethereum.on("message", (data) => {
-    console.log("message", data);
+    // console.log("message", data);
   });
 }
 
@@ -123,7 +123,7 @@ export async function SubmitContractTxGeneral(
       const gasLimit = await contract.methods[method](...params).estimateGas({
         from: accounts[0],
       });
-      console.log("accounts", accounts, toXdcAddress(accounts[0]));
+      // console.log("accounts", accounts, toXdcAddress(accounts[0]));
       const resp = await contract.methods[method](...params).send({
         from: toXdcAddress(accounts[0]),
         gas: gasLimit,
@@ -132,8 +132,8 @@ export async function SubmitContractTxGeneral(
       return resp;
     }
   } catch (e) {
-    console.log("resp", IsJsonRpcError(e));
-    console.log("resp", e);
+    // console.log("resp", IsJsonRpcError(e));
+    // console.log("resp", e);
     throw e;
   }
 }

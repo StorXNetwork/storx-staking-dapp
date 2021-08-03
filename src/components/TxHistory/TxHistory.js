@@ -36,12 +36,12 @@ class TxHistory extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log(
-      "account change",
-      !_.isEqual(prevProps.wallet, this.props.wallet),
-      prevProps.wallet,
-      this.props.wallet
-    );
+    // console.log(
+    //   "account change",
+    //   !_.isEqual(prevProps.wallet, this.props.wallet),
+    //   prevProps.wallet,
+    //   this.props.wallet
+    // );
     if (!_.isEqual(prevProps.wallet, this.props.wallet)) {
       // fetch events
       this.getEvents();
@@ -66,7 +66,7 @@ class TxHistory extends React.Component {
         });
       })
       .catch((e) => {
-        console.log(e);
+        // console.log(e);
         this.setState({ loading: false });
       });
   }
