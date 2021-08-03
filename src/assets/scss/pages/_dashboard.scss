@@ -105,9 +105,30 @@ figure {
   border-right: 1px solid var(--border-color);
   content: "";
 }
-// .ver-divider:nth-child(2n):after {
-//   display: none;
-// }
+.stats-counter .ver-divider:nth-child(2n):after {
+  display: none;
+}
+
+@media screen and (max-width:991px) {
+.staking-counter .ver-divider:nth-child(3n):after {
+  display: none;
+}
+}
+@media screen and (max-width:767px) {
+.staking-counter .ver-divider:nth-child(3n):after {
+  display: block;
+}
+}
+@media screen and (max-width:575px) {
+.staking-counter .ver-divider:nth-child(3n):after {
+  display: none;
+}
+}
+@media screen and (max-width:499px) {
+.staking-counter .ver-divider:nth-child(3n):after {
+  display: block;
+}
+}
 .stats-counter .ver-divider:nth-child(4n):after {
   border-right: none;
 }
