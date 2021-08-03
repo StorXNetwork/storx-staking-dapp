@@ -13,6 +13,7 @@ import Header from "./components/Header";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Footer from "./components/Footer";
 import Staking from "./components/Staking/Staking";
+import Disclaimer from "./components/Disclaimer";
 import TxHistory from "./components/TxHistory/TxHistory";
 
 /**
@@ -71,6 +72,7 @@ function App() {
 
       <Route exact path={"/tx-history"} component={ComposedHistory} />
       <Route exact path={"/staking"} component={ComposedStaking} />
+      <Route exact path={"/disclaimer"} component={Disclaimer} />
       <Route exact path={"/"} component={Dashboard} />
 
       <Footer />

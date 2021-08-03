@@ -14,7 +14,12 @@ import { IsDark, Toggle } from "../helpers/theme";
 import * as actions from "../actions";
 import { toast } from "react-toastify";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEllipsisH,
+  faExclamationTriangle,
+  faHome,
+  faSignOutAlt,
+} from "@fortawesome/free-solid-svg-icons";
 import { SubmitContractTxGeneral } from "../wallets/account";
 import { AxiosInstance } from "../helpers/constant";
 import { LOADER_BOX } from "./common/common";
@@ -71,6 +76,23 @@ class Header extends React.Component {
 
   componentDidMount() {
     this.getTVL();
+
+    window.$(document).ready(function () {
+      window.$(function () {
+        window.$(".custom-dropdown-toggle").click(function () {
+          window.$(this).next(".dropdown").toggle();
+        });
+        window.$(document).click(function (e) {
+          var target = e.target;
+          if (
+            !window.$(target).is(".custom-dropdown-toggle") &&
+            !window.$(target).parents().is(".custom-dropdown-toggle")
+          ) {
+            window.$(".dropdown").hide();
+          }
+        });
+      });
+    });
   }
 
   componentDidUpdate(prevProps) {
@@ -170,7 +192,7 @@ class Header extends React.Component {
             >
               <ul className="navbar-nav ml-auto" id="mySidenav">
                 <li className="nav-item button">
-                  <Link className="btn nav-link d-xs-none" to="/">
+                  <Link className="btn nav-link d-none-till-md" to="/">
                     Home
                   </Link>
                 </li>
@@ -214,6 +236,30 @@ class Header extends React.Component {
                       {themeToggle}
                     </button>
                   </div>
+                </li>
+              </ul>
+            </div>
+
+            <div className="tMenu ml-1">
+              <div className="custom-dropdown-toggle" title="Menu">
+                <FontAwesomeIcon icon={faEllipsisH} />
+              </div>
+              <ul className="dropdown">
+                <li className="d-md-none">
+                  <Link
+                    to="/"
+                    className="d-flex align-items-center justify-content-between"
+                  >
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/disclaimer"
+                    className="d-flex align-items-center justify-content-between"
+                  >
+                    Disclaimer{" "}
+                  </Link>
                 </li>
               </ul>
             </div>
