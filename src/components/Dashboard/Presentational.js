@@ -263,7 +263,7 @@ function DashboardPresentation({
               <h3 className="header-stats">Statistics</h3>
               <div className="stats-box h-0 p-3 pt-4 pb-4">
                 <div className="row stats-counter">
-                  <div className="col-sm-6 col-md-6 col-lg-6 ver-divider ver-divider_none-md safari-float-left">
+                  <div className="col-sm-6 col-md-6 col-lg-6 ver-divider safari-float-left">
                     <div className="media align-items-center">
                       <figure className="sm-avatar mr-2">
                         <div className="xs-avatar mx-auto">
@@ -300,7 +300,7 @@ function DashboardPresentation({
                       </div>
                     </div>
                   </div>
-                  <div className="col-sm-6 col-md-6 col-lg-6 ver-divider ver-divider_none-md safari-float-left">
+                  <div className="col-sm-6 col-md-6 col-lg-6 ver-divider safari-float-left">
                     <div className="media align-items-center">
                       <figure className="sm-avatar mr-2">
                         <div className="xs-avatar mx-auto">
@@ -330,7 +330,7 @@ function DashboardPresentation({
               <h3 className="header-stats">Rewards</h3>
               <div className="stats-box h-0 p-3 pt-4 pb-4">
                 <div className="row stats-counter">
-                  <div className="col-sm-6 col-md-6 col-lg-6 ver-divider plus ver-divider_none-md safari-float-left">
+                  <div className="col-sm-6 col-md-6 col-lg-6 ver-divider plus safari-float-left">
                     <div className="media align-items-center">
                       <figure className="sm-avatar mr-2">
                         <div className="xs-avatar mx-auto">
@@ -352,7 +352,7 @@ function DashboardPresentation({
                       </div>
                     </div>
                   </div>
-                  <div className="col-sm-6 col-md-6 col-lg-6 ver-divider plus ver-divider_none-md safari-float-left">
+                  <div className="col-sm-6 col-md-6 col-lg-6 ver-divider plus safari-float-left">
                     <div className="media align-items-center">
                       <figure className="sm-avatar mr-2">
                         <div className="xs-avatar mx-auto">

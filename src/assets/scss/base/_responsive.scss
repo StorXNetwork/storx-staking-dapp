@@ -127,6 +127,9 @@
   .staking-counter .ver-divider:nth-child(3n):after {
     border-right: none;
   }
+  .ver-divider:after {
+    right: 0px !important;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -362,9 +365,11 @@
   .themeSwitcher {
     left: 10px;
   }
+
 }
 
 @media screen and (max-width: 575px) {
+
   .topbar .top-navbar .navbar-nav {
     flex-direction: column;
   }
@@ -384,6 +389,9 @@
   }
   .hidden-xs {
     display: none;
+  }
+  .stats-counter .ver-divider:after {
+    border-right: none;
   }
   .stats-counter .ver-divider:nth-child(2n):before,
   .stats-counter .ver-divider:nth-child(3n):before,
