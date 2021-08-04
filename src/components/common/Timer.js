@@ -1,21 +1,36 @@
 import React, { useState, useEffect } from "react";
 import { FormatSecondsTwo } from "../../helpers/constant";
 
-export default function Timer(props) {
-  const { startDate = new Date().getTime(), endDate } = props;
-  const startTime = new Date(startDate).getTime() / 1000,
-    endTime = new Date(endDate).getTime() / 1000;
-  const [state, setstate] = useState(endTime - startTime);
-  useEffect(() => {
-    const ref = setInterval(() => {
-      if (state > 1) setstate(state - 1);
-    }, 1000);
+export default class Timer extends React.Component {
+  constructor(props) {
+    super(props);
 
-    return () => {
-      if (props.cb) props.cb()
-      clearInterval(ref);
-    };
-  });
-  const x = FormatSecondsTwo(state);
-  return <div>{x}</div>;
+    const { startDate = new Date().getTime(), endDate } = props;
+    const startTime = new Date(startDate).getTime() / 1000,
+      endTime = new Date(endDate).getTime() / 1000;
+
+    this.state = { count: endTime - startTime };
+
+    this.ref = null;
+  }
+
+  componentDidMount() {
+    this.ref = setInterval(() => {
+      if (this.state.count >= 1) this.setState({ count: this.state.count - 1 });
+      else {
+        if (this.props.cb) this.props.cb();
+        clearInterval(this.ref);
+      }
+    }, 1000);
+  }
+
+  componentWillUnmount() {
+    if (this.ref) clearInterval(this.ref);
+  }
+
+  render() {
+    const x = FormatSecondsTwo(this.state.count);
+
+    return <div>{x}</div>;
+  }
 }
