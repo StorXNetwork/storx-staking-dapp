@@ -18,7 +18,9 @@ export default class Timer extends React.Component {
     this.ref = setInterval(() => {
       if (this.state.count >= 1) this.setState({ count: this.state.count - 1 });
       else {
-        if (this.props.cb) this.props.cb();
+        if (this.props.cb) {
+          setTimeout(() => this.props.cb(), 10000);
+        }
         clearInterval(this.ref);
       }
     }, 1000);
