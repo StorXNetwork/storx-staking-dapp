@@ -11,7 +11,10 @@ export default function Timer(props) {
       if (state > 1) setstate(state - 1);
     }, 1000);
 
-    return () => clearInterval(ref);
+    return () => {
+      if (props.cb) props.cb()
+      clearInterval(ref);
+    };
   });
   const x = FormatSecondsTwo(state);
   return <div>{x}</div>;

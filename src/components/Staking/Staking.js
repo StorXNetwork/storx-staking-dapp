@@ -184,7 +184,10 @@ class Staking extends React.Component {
             />
             <div className="row mb-3">
               <div className="col-sm-12 col-md-6 col-lg-6 mb-3">
-                <InfoCard data={this.state} />
+                <InfoCard
+                  data={this.state}
+                  getStakeDetail={this.getStakeDetail}
+                />
               </div>
               <div className="col-sm-12 col-md-6 col-lg-6 mb-3">
                 <StakingForm

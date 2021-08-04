@@ -22,18 +22,20 @@ function GetStatusPill(status) {
   );
 }
 
-export function InfoCard({ data }) {
+export function InfoCard({ data, getStakeDetail }) {
   const staked = data.stake ? GetStatusPill(data.stake.staked) : LOADER_BOX;
   const stakedAmount = data.stake
     ? FormatToken(data.stake.stakedAmount)
     : LOADER_BOX;
   const earned = data.stake ? FormatToken(data.stake.earned) : LOADER_BOX;
-  const totalRedeemed = data.stake ? FormatToken(data.stake.totalRedeemed) : LOADER_BOX;
+  const totalRedeemed = data.stake
+    ? FormatToken(data.stake.totalRedeemed)
+    : LOADER_BOX;
   const lastRedeemedAt = data.stake
     ? DateStringFormat(data.stake.lastRedeemedAt * 1000)
     : LOADER_BOX;
   const nextDripAt = data.stake ? (
-    <Timer endDate={data.stake.nextDripAt * 1000} />
+    <Timer endDate={data.stake.nextDripAt * 1000} cb={getStakeDetail} />
   ) : (
     LOADER_BOX
   );
@@ -74,7 +76,13 @@ export function InfoCard({ data }) {
   );
 }
 
-export function InfoHeader({ stakingData, wallet, reputation, stakeValid, stakeValidClass }) {
+export function InfoHeader({
+  stakingData,
+  wallet,
+  reputation,
+  stakeValid,
+  stakeValidClass,
+}) {
   return (
     <>
       <div className="row mb-3">
