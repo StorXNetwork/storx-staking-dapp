@@ -10,13 +10,14 @@ import {
   faReddit,
 } from "@fortawesome/free-brands-svg-icons";
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 function Foooter() {
   return (
     <>
       <footer className="footer">
         <div className="container">
-          <div className="row footer-wrap">
+          <div className="row footer-wrap align-items-center">
             <div className="col-md-7">
               <p>
                 &copy;2021{" "}
@@ -25,10 +26,13 @@ function Foooter() {
                 </a>
                 . All Rights Reserved.
               </p>
+              <p>
+                <Link to="/disclaimer">Disclaimer</Link>
+              </p>
             </div>
             <div className="col-md-5">
               <div className="privacy-terms">
-                <ul className="list-inline">
+                <ul className="list-inline mb-0">
                   <li className="list-inline-item">
                     <a href="https://twitter.com/StorXNetwork" target="_blank">
                       <FontAwesomeIcon size="lg" icon={faTwitter} />
