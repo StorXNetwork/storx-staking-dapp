@@ -3,7 +3,7 @@
 StorX Staking Dashboard is a DAPP to view and interact with storx staking contracts.  
 
 Current UI at: https://farmer.storx.io  
-Public API available at: https://farmerapi.storx.io
+Public API available at: https://farmerapi.storx.io  
 Public API documentation: https://farmerapi.storx.io/docs.html
 
 
