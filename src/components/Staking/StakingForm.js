@@ -197,8 +197,9 @@ class StakingForm extends React.Component {
             </Button>
             <Button
               onClick={() => {
-                this.setState({ showModal: false });
-                this.unstake();
+                this.setState({ showModal: false }, () => {
+                  this.unstake();
+                });
               }}
               variant="primary"
             >
