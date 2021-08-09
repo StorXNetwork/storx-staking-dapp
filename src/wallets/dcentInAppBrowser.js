@@ -132,8 +132,8 @@ export async function SubmitContractTxGeneral(
       return resp;
     }
   } catch (e) {
-    // console.log("resp", IsJsonRpcError(e));
-    // console.log("resp", e);
+    console.log("resp", IsJsonRpcError(e));
+    console.log("resp", e);
     throw e;
   }
 }
