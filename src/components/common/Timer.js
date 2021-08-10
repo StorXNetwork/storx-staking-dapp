@@ -14,6 +14,15 @@ export default class Timer extends React.Component {
     this.ref = null;
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.endDate !== this.props.endDate) {
+      const { startDate = new Date().getTime(), endDate } = this.props;
+      const startTime = new Date(startDate).getTime() / 1000,
+        endTime = new Date(endDate).getTime() / 1000;
+      this.setState({ count: endTime - startTime });
+    }
+  }
+
   componentDidMount() {
     this.ref = setInterval(() => {
       if (this.state.count >= 1) this.setState({ count: this.state.count - 1 });
