@@ -35,7 +35,7 @@ export function InfoCard({ data, getStakeDetail }) {
     ? DateStringFormat(data.stake.lastRedeemedAt * 1000)
     : LOADER_BOX;
   const nextDripAt = data.stake ? (
-    <Timer endDate={data.stake.nextDripAt * 1000} cb={getStakeDetail} />
+    <Timer endDate={new Date(Date.now() - 10000)} cb={getStakeDetail} />
   ) : (
     LOADER_BOX
   );

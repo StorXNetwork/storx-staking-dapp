@@ -9,7 +9,9 @@ export default class Timer extends React.Component {
     const startTime = new Date(startDate).getTime() / 1000,
       endTime = new Date(endDate).getTime() / 1000;
 
-    this.state = { count: endTime - startTime };
+    const count = endTime - startTime > 0 ? endTime - startTime : 0;
+
+    this.state = { count };
 
     this.ref = null;
   }
@@ -19,7 +21,9 @@ export default class Timer extends React.Component {
       const { startDate = new Date().getTime(), endDate } = this.props;
       const startTime = new Date(startDate).getTime() / 1000,
         endTime = new Date(endDate).getTime() / 1000;
-      this.setState({ count: endTime - startTime });
+      const count = endTime - startTime > 0 ? endTime - startTime : 0;
+
+      this.setState({ count });
     }
   }
 
