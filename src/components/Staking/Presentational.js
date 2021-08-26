@@ -1,5 +1,8 @@
-import React from "react";
+import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useState } from "react";
 import { fromWei, toXdcAddress } from "xdc3-utils";
+import { Button, Modal } from "react-bootstrap";
 
 import { DateStringFormat, DECIMALS, RemoveExpo } from "../../helpers/constant";
 import { FormatNumber, FormatToken } from "../../helpers/decimal";
@@ -22,7 +25,14 @@ function GetStatusPill(status) {
   );
 }
 
-export function InfoCard({ data, getStakeDetail }) {
+export function InfoCard({ data, getStakeDetail, claimRewards }) {
+  const initialTimer0 = data.stake
+    ? Date.now() > data.stake.nextDripAt * 1000
+    : false;
+
+  const [showManual, setShowManual] = useState(initialTimer0);
+  const [showModal, setshowModal] = useState(false);
+
   const staked = data.stake ? GetStatusPill(data.stake.staked) : LOADER_BOX;
   const stakedAmount = data.stake
     ? FormatToken(data.stake.stakedAmount)
@@ -35,9 +45,34 @@ export function InfoCard({ data, getStakeDetail }) {
     ? DateStringFormat(data.stake.lastRedeemedAt * 1000)
     : LOADER_BOX;
   const nextDripAt = data.stake ? (
-    <Timer endDate={data.stake.nextDripAt * 1000} cb={getStakeDetail} />
+    <Timer
+      endDate={data.stake.nextDripAt * 1000}
+      cb={() => {
+        getStakeDetail();
+        setShowManual(true);
+      }}
+    />
   ) : (
     LOADER_BOX
+  );
+  const stakeButton = showManual ? (
+    <li className="list-group-item d-flex justify-content-between align-items-center">
+      <span className="">
+        Claim Manually {" "}
+        <FontAwesomeIcon
+          onClick={() => setshowModal(true)}
+          className="u-pointer"
+          icon={faQuestionCircle}
+        />
+      </span>{" "}
+      <span className="">
+        <button onClick={claimRewards} className="btn btn-rounded btn-info">
+          Claim Rewards
+        </button>
+      </span>
+    </li>
+  ) : (
+    ""
   );
 
   return (
@@ -66,11 +101,32 @@ export function InfoCard({ data, getStakeDetail }) {
               <li className="list-group-item d-flex justify-content-between align-items-center">
                 Next Rewards <span className="">{nextDripAt}</span>
               </li>
+              {stakeButton}
             </>
           ) : (
             ""
           )}
         </ul>
+
+        <Modal
+          centered={true}
+          show={showModal}
+          onHide={() => setshowModal(false)}
+        >
+          <Modal.Header>
+            <h4>Claim Rewards Manually</h4>
+          </Modal.Header>
+          <Modal.Body>
+            Incase there's a delay in rewards being auto credited, users can
+            choose to initiate claim themselves and their rewards instantly.{" "}
+            <b />
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={() => setshowModal(false)} variant="secondary">
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     </>
   );

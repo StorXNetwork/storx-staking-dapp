@@ -27,6 +27,7 @@ class Staking extends React.Component {
     this.state = InitialState;
 
     this.getStakeDetail = this.getStakeDetail.bind(this);
+    this.claimEarned = this.claimEarned.bind(this);
   }
 
   componentDidMount() {
@@ -36,6 +37,18 @@ class Staking extends React.Component {
   componentDidUpdate(prevProps) {
     if (prevProps.wallet.address !== this.props.wallet.address)
       this.getStakeDetail();
+  }
+
+  claimEarned() {
+    if (!this.props.wallet.connected) return;
+    SubmitContractTxGeneral(
+      "claimEarned",
+      { type: "staking" },
+      "nonpayable",
+      this.props.wallet.address
+    )
+      .then(console.log)
+      .catch(console.log);
   }
 
   getStakeDetail() {
@@ -187,6 +200,7 @@ class Staking extends React.Component {
                 <InfoCard
                   data={this.state}
                   getStakeDetail={this.getStakeDetail}
+                  claimRewards={this.claimEarned}
                 />
               </div>
               <div className="col-sm-12 col-md-6 col-lg-6 mb-3">
