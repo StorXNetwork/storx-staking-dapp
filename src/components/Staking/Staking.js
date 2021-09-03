@@ -172,13 +172,13 @@ class Staking extends React.Component {
 
     let stakeValidClass =
       this.state.isStaker &&
-      this.state.reputation > this.state.stakingData.reputationThreshold
+      this.state.reputation >= this.state.stakingData.reputationThreshold
         ? "text-success"
         : "text-danger";
 
     const stakeValid = this.state.stakingData
       ? this.state.isStaker
-        ? (this.state.reputation > this.state.stakingData.reputationThreshold)
+        ? (this.state.reputation >= this.state.stakingData.reputationThreshold)
             .toString()
             .toUpperCase()
         : "NOT A STAKER"
