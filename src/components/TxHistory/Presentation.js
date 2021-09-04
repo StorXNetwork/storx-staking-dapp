@@ -61,7 +61,7 @@ function RenderRows(events, from) {
   if (events.length === 0) {
     return (
       <tr className="hover-grow ">
-        <td className="u-text-center">No Treansactions done yet</td>
+        <td colSpan={3} className="u-text-center">No Transactions done yet</td>
       </tr>
     );
   }
