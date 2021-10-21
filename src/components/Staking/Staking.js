@@ -188,6 +188,22 @@ class Staking extends React.Component {
       <>
         <section className="block-overlap pb-3">
           <div className="container">
+            <div className="row">
+              <div className="col-sm-12">
+                <div className="announcement">
+                  <b>Note</b>: If you're facing issues with your reputation &
+                  redeeming rewards please refer the thread{" "}
+                  <a
+                    href="https://twitter.com/StorXNetwork/status/1450885741962096641"
+                    target="_blank"
+                    className="blue"
+                  >
+                    here
+                  </a>
+                </div>
+              </div>
+            </div>
+
             <InfoHeader
               stakingData={this.state.stakingData}
               reputation={reputation}
