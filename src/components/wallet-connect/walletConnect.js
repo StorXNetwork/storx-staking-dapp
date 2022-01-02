@@ -76,7 +76,7 @@ class WalletConnect extends React.Component {
             <div className="wallet-connect-block">
               <button onClick={initXdc3} className="wallect-connect-btn">
                 <div className="wallet-name">
-                  <h4>XinPay</h4>
+                  <h4>XDCPay</h4>
                 </div>
                 <div className="wallet-icon">
                   <img src={XinpayLogo} alt="Icon" />
