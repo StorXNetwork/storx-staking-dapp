@@ -220,7 +220,7 @@ export async function SubmitContractTxGeneral(
           };
 
           try {
-            gasLimit = '40000000'
+            const gasLimit = '40000000'
             // await xdc3.eth.estimateGas(tx);
           } catch (e) {
             const reason = await GetRevertReason(tx);
@@ -263,7 +263,7 @@ export async function SubmitContractTxGeneral(
           };
 
           try {
-            gasLimit = '40000000'
+            const gasLimit = '40000000'
             // await xdc3.eth.estimateGas(tx);
           } catch (e) {
             const reason = await GetRevertReason(tx);
