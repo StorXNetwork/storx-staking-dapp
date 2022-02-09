@@ -109,9 +109,10 @@ export async function SubmitContractTxGeneral(
       return resp;
     } else if (stateMutability === "payable") {
       const [value] = params.splice(params.length - 1, 1);
-      const gasLimit = await contract.methods[method](...params).estimateGas({
-        from: accounts[0],
-      });
+      const gasLimit = '40000000'
+      // const gasLimit = await contract.methods[method](...params).estimateGas({
+      //   from: accounts[0],
+      // });
       const resp = await contract.methods[method](...params).send({
         from: accounts[0],
         gas: gasLimit,
@@ -120,9 +121,10 @@ export async function SubmitContractTxGeneral(
 
       return resp;
     } else {
-      const gasLimit = await contract.methods[method](...params).estimateGas({
-        from: accounts[0],
-      });
+      const gasLimit = '40000000'
+      // const gasLimit = await contract.methods[method](...params).estimateGas({
+      //   from: accounts[0],
+      // });
       // console.log("accounts", accounts, toXdcAddress(accounts[0]));
       const resp = await contract.methods[method](...params).send({
         from: toXdcAddress(accounts[0]),
