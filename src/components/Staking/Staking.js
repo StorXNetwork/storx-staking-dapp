@@ -217,6 +217,7 @@ class Staking extends React.Component {
                   data={this.state}
                   getStakeDetail={this.getStakeDetail}
                   claimRewards={this.claimEarned}
+                  stakeValid={stakeValid}
                 />
               </div>
               <div className="col-sm-12 col-md-6 col-lg-6 mb-3">

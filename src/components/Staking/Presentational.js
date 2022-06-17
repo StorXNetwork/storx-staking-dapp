@@ -8,6 +8,7 @@ import { DateStringFormat, DECIMALS, RemoveExpo } from "../../helpers/constant";
 import { FormatNumber, FormatToken } from "../../helpers/decimal";
 import { LOADER_BOX } from "../common/common";
 import Timer from "../common/Timer";
+import Tooltip from "@material-ui/core/Tooltip";
 
 function GetStatusPill(status) {
   if (status) {
@@ -25,7 +26,7 @@ function GetStatusPill(status) {
   );
 }
 
-export function InfoCard({ data, getStakeDetail, claimRewards }) {
+export function InfoCard({ data, getStakeDetail, claimRewards, stakeValid }) {
   const initialTimer0 = data.stake
     ? Date.now() > data.stake.nextDripAt * 1000
     : false;
@@ -55,6 +56,7 @@ export function InfoCard({ data, getStakeDetail, claimRewards }) {
   ) : (
     LOADER_BOX
   );
+  const tooltipMessage = 'Note: Currently, Your Status is "Not a Staker." Once you gain the reputation, your Claim Button will activate, and you can claim Rewards.'
   const stakeButton = showManual ? (
     <li className="list-group-item d-flex justify-content-between align-items-center">
       <span className="">
@@ -66,9 +68,17 @@ export function InfoCard({ data, getStakeDetail, claimRewards }) {
         />
       </span>{" "}
       <span className="">
-        <button onClick={claimRewards} className="btn btn-rounded btn-info">
-          Claim Rewards
-        </button>
+        {stakeValid === 'NOT A STAKER' ? (
+          <Tooltip title={tooltipMessage}>
+            <button onClick={claimRewards} className="btn btn-rounded btn-info" disabled>
+              Claim Rewards
+            </button>
+          </Tooltip>
+        ) : (
+          <button onClick={claimRewards} className="btn btn-rounded btn-info">
+            Claim Rewards
+          </button>
+        )}
       </span>
     </li>
   ) : (
