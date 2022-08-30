@@ -42,7 +42,7 @@ export async function initXdc3() {
   try {
     const isLocked = await IsLocked();
     if (isLocked === true) {
-      toast("Please unlock XinPay wallet to continue", { autoClose: 2000 });
+      toast("Please unlock XDCPay wallet to continue", { autoClose: 2000 });
       return store.dispatch(actions.WalletDisconnected());
     }
     const isXdc3Supported = IsXdc3Supported();
