@@ -9,13 +9,12 @@ import {
 import ReactTooltip from "react-tooltip";
 
 const geoUrl =
-  "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
+  "https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json";
 
 const MapChart = ({ setTooltipContent, node_data }) => {
   const markers = [];
   const country_count = {};
   let max = 0;
-
   if (node_data)
     for (let i = 0; i < node_data.length; i++) {
       let node = node_data[i];
@@ -25,6 +24,7 @@ const MapChart = ({ setTooltipContent, node_data }) => {
       country_count[node.geo_data.country] += 1;
       if (country_count[node.geo_data.country] > max)
         max = country_count[node.geo_data.country];
+
       markers.push(
         <Marker
           key={"marker" + i}
@@ -33,7 +33,7 @@ const MapChart = ({ setTooltipContent, node_data }) => {
               <>
                 {`Address: ${node.xdc_address}`}
                 <br />
-                {`Reputation: ${node.reputation}`}
+                {`Reputation: ${node.reputation || 'N/A'}`}
               </>
             );
           }}
@@ -52,21 +52,20 @@ const MapChart = ({ setTooltipContent, node_data }) => {
       <ComposableMap data-tip="" projectionConfig={{ scale: 200 }}>
         <ZoomableGroup>
           <Geographies geography={geoUrl}>
-            {({ geographies }) =>
-              geographies.map((geo) => {
-                const count = country_count[geo.properties.ISO_A2] || 0;
+            {({ geographies }) =>{
+              return geographies.map((geo) => {
+                const count = country_count[geo.properties["Alpha-2"]] || 0;
                 const count_percent =
                   Math.round(0.75 * 100 * (count / max)) + 25;
-
                 return (
                   <Geography
                     key={geo.rsmKey}
                     geography={geo}
                     onMouseEnter={() => {
-                      const { NAME } = geo.properties;
+                      const { name } = geo.properties;
                       setTooltipContent(
                         <>
-                          {`Country: ${NAME}`}
+                          {`Country: ${name}`}
                           <br />
                           {`Count: ${count}`}
                         </>
@@ -80,6 +79,7 @@ const MapChart = ({ setTooltipContent, node_data }) => {
                 );
               })
             }
+          }
           </Geographies>
           {markers}
         </ZoomableGroup>
