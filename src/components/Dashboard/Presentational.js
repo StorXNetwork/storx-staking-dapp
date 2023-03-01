@@ -251,6 +251,16 @@ function DashboardPresentation({
                   Refer
                 </a>
               </div>
+              <div className="announcement">
+                <b>Note</b>: {" "}
+                <a
+                  href="https://docs.google.com/spreadsheets/d/1KO4nYGHu8QqRdKnu9AuMXc9ltrABjDOWlZ1DOZ8Q_Ag/edit?usp=sharing"
+                  target="_blank"
+                  className="blue"
+                >
+                  List of Default Storage Nodes (Published on 01-03-2023 14:00 UTC)
+                </a>
+              </div>
             </div>
           </div>
         </div>
