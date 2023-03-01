@@ -258,7 +258,7 @@ function DashboardPresentation({
                   target="_blank"
                   className="blue"
                 >
-                  List of default nodes (Published on 01-03-2023 14:00 UTC)
+                  List of Default Storage Nodes (Published on 01-03-2023 14:00 UTC)
                 </a>
               </div>
             </div>
