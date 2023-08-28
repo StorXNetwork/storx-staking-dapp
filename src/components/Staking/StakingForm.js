@@ -157,6 +157,11 @@ class StakingForm extends React.Component {
               <span className="">{FormatNumber(fromWei(stake.balance))}</span>
             </li>
           </ul>
+          <div className="text-center mt-3 font-weight-bold font-italic">
+            Note: Node Operators are advised not to click claim options until a 7-day cooling period after 
+            un-staking is completed, as clicking before this could result in transaction rejections 
+            or refund delays.
+          </div>
           <div className="text-center mt-3">
             <div
               onClick={this.withdrawStake}
