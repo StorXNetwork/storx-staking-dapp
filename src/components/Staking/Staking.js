@@ -48,7 +48,7 @@ class Staking extends React.Component {
     const earned = await SubmitContractTxGeneral("earned", { type: "staking" }, "view", this.props.wallet.address);
     const stakingData = await AxiosInstance.get("/get-contract-data");
     const nextDripAt =
-      isStaker && !stackingDetails.unstaked
+    stackingDetails.staked && !stackingDetails.unstaked
         ? await SubmitContractTxGeneral("nextDripAt", { type: "staking" }, "view", this.props.wallet.address)
         : Math.floor(new Date().getTime() / 1000).toString();
     const approvedAmount = await SubmitContractTxGeneral("allowance", { type: "storx" }, "view", this.props.wallet.address, CONTRACT_ADDRESS.staking);
@@ -56,8 +56,6 @@ class Staking extends React.Component {
 
     const { exists, balance, lastRedeemedAt, unstakedTime, staked, totalRedeemed, stakerHolder, stakedAmount, stakedTime, unstaked, ...rst } =
       stackingDetails;
-
-    console.log("nextDripAt", nextDripAt);
 
     this.setState(
       {
