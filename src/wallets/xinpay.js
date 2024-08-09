@@ -13,6 +13,7 @@ import {
 import * as actions from "../actions";
 import store from "../redux/store";
 import { toast } from "react-toastify";
+import Web3 from "web3";
 
 let addresses, xdc3, addressChangeIntervalRef;
 
@@ -220,7 +221,7 @@ export async function SubmitContractTxGeneral(
           };
 
           try {
-            const gasLimit = '40000000'
+            const gasLimit = "40000000";
             // await xdc3.eth.estimateGas(tx);
           } catch (e) {
             const reason = await GetRevertReason(tx);
@@ -263,7 +264,7 @@ export async function SubmitContractTxGeneral(
           };
 
           try {
-            const gasLimit = '40000000'
+            const gasLimit = "40000000";
             // await xdc3.eth.estimateGas(tx);
           } catch (e) {
             const reason = await GetRevertReason(tx);
@@ -378,7 +379,9 @@ export function toXdcAddress(address) {
 }
 
 export async function IsLocked() {
-  let xdc3 = new Xdc3(await GetProvider());
+  const web3 = new Web3(await GetProvider());
+  const allAccounts = await web3.eth.getAccounts();
+  /* let xdc3 = new Xdc3(await GetProvider());
   const accounts = await xdc3.eth.getAccounts();
-  return _.isEmpty(accounts);
+  return _.isEmpty(accounts); */
 }
