@@ -1,5 +1,5 @@
 /*--------------------------
-    Theme Switcher Styles  
+    Theme Switcher Styles
 ---------------------------*/
 .themeSwitcher {
   left: 30px;
@@ -8,13 +8,15 @@
   padding-left: 4px;
 }
 .lightTheme {
-  --background-color: #f2f3f6;
+  //--background-color: #f2f3f6;
+  --background-color: #fff;
   --text-color: #6c7083;
   --headerbg: #212130;
   --frontbg: #fefefe;
   --modalbg: #ffffff;
   --link-color: #543fd7;
   --border-color: #ececec;
+  --border-color01: #e8e8e8;
 }
 .lightTheme .d-block-light {
   display: none !important;
@@ -72,6 +74,7 @@
   --modalbg: #212130;
   --link-color: #828fff;
   --border-color: #2e2e42;
+  --border-color01: #2e2e42;
 }
 .darkTheme h1,
 .darkTheme h2,
@@ -115,5 +118,5 @@
   color: #e6aa1e;
 }
 /*--------------------------
-    Theme Switcher Styles  
+    Theme Switcher Styles
 ---------------------------*/

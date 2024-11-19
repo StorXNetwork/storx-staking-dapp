@@ -18,19 +18,20 @@ function Foooter() {
       <footer className="footer">
         <div className="container">
           <div className="row footer-wrap align-items-center">
-            <div className="col-md-7">
-              <p>
+            {/*<div className="col-md-7">*/}
+            <div className="col-md-12">
+              <p className="cpoyright-text">
                 &copy;2021{" "}
                 <a href="https://storx.tech" target="_blank">
                   StorX
                 </a>
-                . All Rights Reserved.
+                . All Rights Reserved. <Link to="/disclaimer">Disclaimer</Link>
               </p>
-              <p>
+              {/*<p>
                 <Link to="/disclaimer">Disclaimer</Link>
-              </p>
+              </p>*/}
             </div>
-            <div className="col-md-5">
+            <div className="col-md-5 d-none">
               <div className="privacy-terms">
                 <ul className="list-inline mb-0">
                   <li className="list-inline-item">

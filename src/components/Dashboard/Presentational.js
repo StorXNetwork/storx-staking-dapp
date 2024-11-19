@@ -6,6 +6,9 @@ import FarmNode from "../../assets/img/icons/farmnodes.png";
 import Staking from "../../assets/img/icons/staking.png";
 import Rewards from "../../assets/img/icons/staking-rewards.png";
 import HostingRewards from "../../assets/img/icons/hosting-rewards.png";
+import rocketIcon from "../../assets/img/icons/banner-rocket-icon.svg";
+import tickIcon from "../../assets/img/icons/green-tick-icon.svg";
+import crossIcon from "../../assets/img/icons/red-cross-icon.svg";
 import { fromXdcAddress, toXdcAddress } from "../../wallets/xinpay";
 import { FormatNumber, FormatToken } from "../../helpers/decimal";
 import {
@@ -58,9 +61,11 @@ function RenderRows(
     const data = holders[i];
     const status =
       reputationThreshold <= data.reputation ? (
-        <span className="btn btn-farmnode">Active</span>
+        // <span className="btn btn-farmnode">Active</span>
+          <img src={tickIcon} style={{ maxWidth: "20px", margin: "0 0 0 18px" }} alt="icon" />
       ) : (
-        <span className="btn btn-slashed">Inactive</span>
+          /*<span className="btn btn-slashed">Inactive</span>*/
+          <img src={crossIcon} style={{ maxWidth: "20px", margin: "0 0 0 18px" }} alt="icon" />
       );
     const pinClass = favorite.includes(
       fromXdcAddress(data.stake.stakerHolder).toLowerCase()
@@ -236,7 +241,7 @@ function DashboardPresentation({
 
   return (
     <>
-      <section className="mb-5">
+      {/*<section className="mb-5">
         <div className="container">
           <div className="row">
             <div className="col-lg-12">
@@ -264,9 +269,108 @@ function DashboardPresentation({
             </div>
           </div>
         </div>
+      </section>*/}
+
+      {/*<section className="sec-banner">
+        <div className="container">
+          <div className="content-wrapper">
+            <div className="consulting-wrapper"><img src={rocketIcon} alt="rocket icon" />Business Consulting</div>
+            <h1>Ready to Take Your Business <br />
+              Growth to The Next Level?</h1>
+            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem<br /> accusantium doloremque laudantium aperiae</p>
+          </div>
+        </div>
+        <div className="scroll-line-wrapper">
+          <div className="scroll-line"></div>
+          <div className="scroll-line"></div>
+          <div className="scroll-line"></div>
+          <div className="scroll-line"></div>
+        </div>
+      </section>*/}
+
+      <section className="sec-statistics-objects">
+        <div className="container">
+          <div className="row row-eq-height">
+            <div className="col-xl-3 col-md-6">
+              <div className="object-card">
+                <div className="content-wrapper">
+                  <p className="title">Farm/Storage Nodes</p>
+                  <h4>{allNodeCount}</h4>
+                  <p className="small date">
+                    <GeneralModal
+                        centered={true}
+                        modalClass="map-modal modal-lg"
+                        btnElement={"div"}
+                        btnName="View All"
+                        btnProps={{ className: "map-button" }}
+                        footer={
+                          <div>
+                            Total Storage Providers: {allNodeCount}
+                          </div>
+                        }
+                    >
+                      <WorldMap data={node_data} />
+                    </GeneralModal>
+                  </p>
+                </div>
+                <div className="icon-wrapper">
+                  <img src={FarmNode} className="img-fluid" alt="Current Block" />
+                </div>
+              </div>
+            </div>
+            <div className="col-xl-3 col-md-6">
+              <div className="object-card">
+                <div className="content-wrapper">
+                  <p className="title">SRX Staked</p>
+                  <h4>{totalStaked}</h4>
+                  <p className="small date">SRX</p>
+                </div>
+                <div className="icon-wrapper">
+                  <img
+                      src={Staking}
+                      className="img-fluid"
+                      alt="Epoch"
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="col-xl-3 col-md-6">
+              <div className="object-card">
+                <div className="content-wrapper">
+                  <p className="title">Hosting Rewards</p>
+                  <h4>{hostingRewards}</h4>
+                  <p className="small date">SRX/PA</p>
+                </div>
+                <div className="icon-wrapper">
+                  <img
+                      src={HostingRewards}
+                      className="img-fluid"
+                      alt="Next Checkpoint"
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="col-xl-3 col-md-6">
+              <div className="object-card">
+                <div className="content-wrapper">
+                  <p className="title">Staking Rewards</p>
+                  <h4>{stakingRewwards}%</h4>
+                  <p className="small date">P.A (approx)</p>
+                </div>
+                <div className="icon-wrapper">
+                  <img
+                      src={Rewards}
+                      className="img-fluid"
+                      alt="Next Checkpoint"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <section className="block-overlap">
+      <section className="block-overlap d-none">
         <div className="container">
           <div className="row">
             <div className="col-xl-6 col-lg-12 mb-3">
@@ -274,7 +378,7 @@ function DashboardPresentation({
               <div className="stats-box h-0 p-3 pt-4 pb-4">
                 <div className="row stats-counter">
                   <div className="col-sm-6 col-md-6 col-lg-6 ver-divider safari-float-left">
-                    <div className="media align-items-center">
+                    <div className="media align-items-center statistics-card">
                       <figure className="sm-avatar mr-2">
                         <div className="xs-avatar mx-auto">
                           <img
@@ -391,95 +495,96 @@ function DashboardPresentation({
         </div>
       </section>
 
-      <section className="section-sm" id="farmnode">
+      <section className="section-sm sec-farmnode" id="farmnode">
         <div className="container">
-          <div className="row">
-            <div className="farmnodes-tabbed-section">
-              <div className="col-lg-12">
-                <div className="ticker-head align-items-center justify-content-between mb-2">
-                  <ul
-                    className="nav nav-tabs ticker-nav form-tabs hidden-xs"
-                    role="tablist"
-                  >
-                    <li className="nav-item ">
-                      <div
-                        className={tab === 0 ? "nav-link active" : "nav-link"}
-                        onClick={() => {
-                          setActive(0);
-                          setTab(0);
-                        }}
-                      >
-                        Farm/Storage Nodes ( {nodeCountTab} )
-                      </div>
-                    </li>
-                    <li className="nav-item ">
-                      <div
-                        className={tab === 1 ? "nav-link active" : "nav-link"}
-                        onClick={() => {
-                          setActive(0);
-                          setTab(1);
-                        }}
-                      >
-                        Favorite ( {favoriteNodeCount} )
-                      </div>
-                    </li>
-                    <li className="nav-item ">
-                      <div
-                        className={tab === 2 ? "nav-link active" : "nav-link"}
-                        onClick={() => {
-                          setActive(0);
-                          setTab(2);
-                        }}
-                      >
-                        Inactive ( {inactiveNodeCount} ){" "}
-                      </div>
-                    </li>
-                  </ul>
-                  <div className="d-sm-none">
-                    <select
-                      className="mb10 form-control"
-                      id="tab_selector"
-                      value={`${tab}`}
-                      onChange={(v) => {
-                        setActive(0);
-                        setTab(v.target.value);
-                      }}
+          <div className="farmnode-wrapper">
+            <div className="row">
+              <div className="farmnodes-tabbed-section">
+                <div className="col-lg-12">
+                  <div className="ticker-head align-items-center justify-content-between mb-2">
+                    <ul
+                        className="nav nav-tabs ticker-nav form-tabs hidden-xs"
+                        role="tablist"
                     >
-                      <option value="0">
-                        Farm/Storage Nodes ( {nodeCountTab} )
-                      </option>
-                      <option value="1">
-                        Favorite ( {favoriteNodeCount} )
-                      </option>
-                      <option value="2">
-                        Inactive ( {inactiveNodeCount} ){" "}
-                      </option>
-                    </select>
-                  </div>
-                  <div class="input-group with-icon">
-                    <input
-                      class="form-control"
-                      type="search"
-                      placeholder="Filter node address..."
-                      value={addrFilter}
-                      onChange={(e) => setaddrFilter(e.target.value)}
-                    />
-                    <FontAwesomeIcon icon={faSearch} />
+                      <li className="nav-item ">
+                        <div
+                            className={tab === 0 ? "nav-link active" : "nav-link"}
+                            onClick={() => {
+                              setActive(0);
+                              setTab(0);
+                            }}
+                        >
+                          Farm/Storage Nodes ( {nodeCountTab} )
+                        </div>
+                      </li>
+                      <li className="nav-item ">
+                        <div
+                            className={tab === 1 ? "nav-link active" : "nav-link"}
+                            onClick={() => {
+                              setActive(0);
+                              setTab(1);
+                            }}
+                        >
+                          Favorite ( {favoriteNodeCount} )
+                        </div>
+                      </li>
+                      <li className="nav-item ">
+                        <div
+                            className={tab === 2 ? "nav-link active" : "nav-link"}
+                            onClick={() => {
+                              setActive(0);
+                              setTab(2);
+                            }}
+                        >
+                          Inactive ( {inactiveNodeCount} ){" "}
+                        </div>
+                      </li>
+                    </ul>
+                    <div className="d-sm-none">
+                      <select
+                          className="mb10 form-control"
+                          id="tab_selector"
+                          value={`${tab}`}
+                          onChange={(v) => {
+                            setActive(0);
+                            setTab(v.target.value);
+                          }}
+                      >
+                        <option value="0">
+                          Farm/Storage Nodes ( {nodeCountTab} )
+                        </option>
+                        <option value="1">
+                          Favorite ( {favoriteNodeCount} )
+                        </option>
+                        <option value="2">
+                          Inactive ( {inactiveNodeCount} ){" "}
+                        </option>
+                      </select>
+                    </div>
+                    <div className="input-group with-icon">
+                      <input
+                          className="form-control"
+                          type="search"
+                          placeholder="Filter node address..."
+                          value={addrFilter}
+                          onChange={(e) => setaddrFilter(e.target.value)}
+                      />
+                      <FontAwesomeIcon icon={faSearch}/>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-12">
-              <div className="tab-content">
-                <div
-                  role="tabpanel"
-                  className="tab-pane fade in active show"
-                  id="tab1"
-                >
-                  <table className="table table-responsive-stack">
-                    <thead>
+            <div className="row">
+              <div className="col-lg-12">
+                <div className="tab-content">
+                  <div
+                      role="tabpanel"
+                      className="tab-pane fade in active show"
+                      id="tab1"
+                  >
+                    <table className="table table-responsive-stack">
+                      <thead>
                       <tr>
                         <th className="visibility-xs fav"></th>
                         <th>FARM NODE ADDRESS</th>
@@ -488,45 +593,46 @@ function DashboardPresentation({
                         <th>REPUTATION</th>
                         <th>STATUS</th>
                       </tr>
-                    </thead>
-                    <tbody>
+                      </thead>
+                      <tbody>
                       {RenderRows(
-                        displayNode,
-                        reputationThreshold,
-                        active,
-                        toggleFavorite,
-                        favorite,
-                        pageLength
+                          displayNode,
+                          reputationThreshold,
+                          active,
+                          toggleFavorite,
+                          favorite,
+                          pageLength
                       )}
-                    </tbody>
-                  </table>
+                      </tbody>
+                    </table>
 
-                  <div className="pagination-container d-flex align-items-center justify-content-between">
-                    <div class="entries-amount">
-                      <span>Show</span>
-                      <select
-                        id="change-record-count"
-                        class="select"
-                        value={pageLength}
-                        onChange={(e) => setPageLength(e.target.value)}
-                      >
-                        <option value="10">10</option>
-                        <option value="20">20</option>
-                        <option value="30">30</option>
-                      </select>
-                      <span class="hide-mobile">Entries</span>
+                    <div className="pagination-container d-flex align-items-center justify-content-between">
+                      <div className="entries-amount">
+                        <span>Show</span>
+                        <select
+                            id="change-record-count"
+                            className="select"
+                            value={pageLength}
+                            onChange={(e) => setPageLength(e.target.value)}
+                        >
+                          <option value="10">10</option>
+                          <option value="20">20</option>
+                          <option value="30">30</option>
+                        </select>
+                        <span className="hide-mobile">Entries</span>
+                      </div>
+
+                      <nav aria-label="Page navigation example">
+                        <ul className="pagination">
+                          <RenderPagination
+                              active={active}
+                              total={displayNode?.length}
+                              setPage={setActive}
+                              pageLength={pageLength}
+                          />
+                        </ul>
+                      </nav>
                     </div>
-
-                    <nav aria-label="Page navigation example">
-                      <ul className="pagination">
-                        <RenderPagination
-                          active={active}
-                          total={displayNode?.length}
-                          setPage={setActive}
-                          pageLength={pageLength}
-                        />
-                      </ul>
-                    </nav>
                   </div>
                 </div>
               </div>

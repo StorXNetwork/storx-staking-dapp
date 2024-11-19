@@ -1,14 +1,21 @@
-import React from "react";
+import React, {useState} from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import _ from "lodash";
 
 import BalanceModal from "./common/BalanceModal";
 import WalletConnectModal from "./wallet-connect/walletConnect";
 
-import LogoLight from "../assets/img/storx-logo-light.png";
+import LogoLight from "../assets/img/storx-logo-light.svg";
+import LogoDark from "../assets/img/storx-logo-dark.svg";
 
-import LogoDark from "../assets/img/storx-logo.png";
+import facebookIcon from "../assets/img/icons/facebook-icon.svg";
+import linkdinIcon from "../assets/img/icons/linkdin-icon.svg";
+import loginIcon from "../assets/img/icons/login-icon.svg";
+import signIcon from "../assets/img/icons/sign-up-icon.svg";
+import twitterIcon from "../assets/img/icons/twitter-icon.svg";
+import youtubeIcon from "../assets/img/icons/youtube-icon.svg";
+
 import { IsDark, Toggle } from "../helpers/theme";
 
 import * as actions from "../actions";
@@ -72,9 +79,13 @@ const ToggleDark = (
 );
 
 class Header extends React.Component {
-  state = { tvl: LOADER_BOX };
-
+  // state = { tvl: LOADER_BOX };
+  state = {
+    tvl: LOADER_BOX,
+    stickyClass: false,
+  };
   componentDidMount() {
+    window.addEventListener("scroll", this.isSticky);
     this.getTVL();
 
     window.$(document).ready(function () {
@@ -135,8 +146,21 @@ class Header extends React.Component {
     return { btn_msg, btn_class };
   }
 
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.isSticky);
+  }
+  isSticky = () => {
+    const scrollTop = window.scrollY;
+    if (scrollTop > 30) {
+      this.setState({ stickyClass: true });
+    } else {
+      this.setState({ stickyClass: false });
+    }
+  };
   render() {
     const brandLogo = IsDark(this.props.theme) === true ? LogoLight : LogoDark;
+
+
     const themeToggle =
       IsDark(this.props.theme) === true ? ToggleLight : ToggleDark;
 
@@ -174,98 +198,148 @@ class Header extends React.Component {
     const btn = this.getConnectButton();
 
     return (
-      <header className="custom-header">
-        <nav className="navbar navbar-expand-lg fixed-top navbar-custom sticky">
-          <div className="container">
-            <Link className="logo" to="/">
-              <img src={brandLogo} alt="SRX" />
-            </Link>
-
-            <div className="hBadge badge ml-2">
-              <span>TVL</span>
-              <span className="ml-1">{this.state.tvl}</span>
-            </div>
-
-            <div
-              className="collapse navbar-collapse"
-              id="navbarSupportedContent"
-            >
-              <ul className="navbar-nav ml-auto" id="mySidenav">
-                <li className="nav-item button">
-                  <Link className="btn nav-link d-none-till-md" to="/">
-                    Home
-                  </Link>
-                </li>
-                <li className="nav-item button">
-                  <Link className="btn nav-link" to="/staking">
-                    Staking
-                  </Link>
-                </li>
-                <li className="nav-item button">
-                  <Link className="btn nav-link" to="/tx-history">
-                    TX History
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            <div className="mobile-footer-block">
-              <ul className="navbar-nav mobile-footer-nav">
-                <li className="nav-item button">
-                  {
-                    <WalletConnectModal
-                      btnName={btn.btn_msg}
-                      btnClass={btn.btn_class}
-                    />
-                  }
-                </li>
-                <li className="nav-item button">{balance}</li>
-                <li className="nav-item button">{logout}</li>
-              </ul>
-              <ul className="navbar-nav mobile-footer-nav">
-                <li className="nav-item button">
-                  <div className="themeSwitcher">
-                    <button
-                      id="theme-toggle"
-                      className="btn btn-link btn-sm small theme-toggle"
-                      type="button"
-                      onClick={() =>
-                        this.props.SetTheme(Toggle(this.props.theme))
-                      }
-                    >
-                      {themeToggle}
-                    </button>
-                  </div>
-                </li>
-              </ul>
-            </div>
-
-            <div className="tMenu ml-1">
-              <div className="custom-dropdown-toggle u-pointer" title="Menu">
-                <FontAwesomeIcon icon={faEllipsisH} />
+        <header className={`custom-header ${this.state.stickyClass ? 'sticky-header' : ''}`}>
+          <div className="top-header">
+            <div className="container">
+              <div className="row align-items-center">
+                <div className="col-5">
+                  <ul className="social-media-wrapper">
+                    <li>
+                      <a href="https://www.facebook.com/StorXNetwork" target="_blank">
+                        <img
+                            src={facebookIcon}
+                            alt="facebook"
+                        />
+                      </a>
+                    </li>
+                    <li>
+                      <a href="https://twitter.com/StorXNetwork" target="_blank">
+                        <img src={twitterIcon} alt="twitter"/>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="https://www.linkedin.com/company/storxnetwork/" target="_blank">
+                        <img src={linkdinIcon} alt="linkdin"/>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="https://www.youtube.com/channel/UC5vUiX1eINl0gs6T3mS1CxA" target="_blank">
+                        <img src={youtubeIcon} alt="youtube"/>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div className="col-7 text-end">
+                  <ul className="user-sign-in-wrapper">
+                    <li>
+                      <a href="https://storx.io/new"
+                      ><img src={signIcon} alt="signup"/>
+                        <span>Sign Up</span></a
+                      >
+                    </li>
+                    <li>
+                      <a href="https://storx.io/login"
+                      ><img src={loginIcon} alt="login"/>
+                        <span>Login</span></a
+                      >
+                    </li>
+                  </ul>
+                </div>
               </div>
-              <ul className="dropdown">
-                <li className="d-md-none">
-                  <Link
-                    to="/"
-                    className="d-flex align-items-center justify-content-between"
-                  >
-                    Home
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/disclaimer"
-                    className="d-flex align-items-center justify-content-between"
-                  >
-                    Disclaimer{" "}
-                  </Link>
-                </li>
-              </ul>
             </div>
           </div>
-        </nav>
-      </header>
+          {/*<nav className="navbar navbar-expand-lg fixed-top navbar-custom sticky">*/}
+          <nav className="navbar navbar-expand-lg fixed-top navbar-custom sticky">
+            <div className="container">
+              <Link className="logo" to="/">
+                <img src={brandLogo} alt="SRX" />
+              </Link>
+
+              <div className="hBadge badge ml-2">
+                <span>TVL</span>
+                <span className="ml-1">{this.state.tvl}</span>
+              </div>
+
+              <div
+                  className="collapse navbar-collapse"
+                  id="navbarSupportedContent"
+              >
+                <ul className="navbar-nav ml-auto" id="mySidenav">
+                  <li className="nav-item button">
+                    <NavLink exact className="btn nav-link d-none-till-md" to="/">
+                      Home
+                    </NavLink>
+                  </li>
+                  <li className="nav-item button">
+                    <NavLink className="btn nav-link" to="/staking">
+                      Staking
+                    </NavLink>
+                  </li>
+                  <li className="nav-item button">
+                    <NavLink className="btn nav-link" to="/tx-history">
+                      TX History
+                    </NavLink>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="mobile-footer-block">
+                <ul className="navbar-nav mobile-footer-nav">
+                  <li className="nav-item button">
+                    {
+                      <WalletConnectModal
+                          btnName={btn.btn_msg}
+                          btnClass={btn.btn_class}
+                      />
+                    }
+                  </li>
+                  <li className="nav-item button">{balance}</li>
+                  <li className="nav-item button">{logout}</li>
+                </ul>
+                <ul className="navbar-nav mobile-footer-nav">
+                  <li className="nav-item button">
+                    <div className="themeSwitcher">
+                      <button
+                          id="theme-toggle"
+                          className="btn btn-link btn-sm small theme-toggle"
+                          type="button"
+                          onClick={() =>
+                              this.props.SetTheme(Toggle(this.props.theme))
+                          }
+                      >
+                        {themeToggle}
+                      </button>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="tMenu ml-1">
+                <div className="custom-dropdown-toggle u-pointer" title="Menu">
+                  <FontAwesomeIcon icon={faEllipsisH} />
+                </div>
+                <ul className="dropdown">
+                  <li className="d-md-none">
+                    <Link
+                        to="/"
+                        className="d-flex align-items-center justify-content-between"
+                    >
+                      Home
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                        to="/disclaimer"
+                        className="d-flex align-items-center justify-content-between"
+                    >
+                      Disclaimer{" "}
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </header>
     );
   }
 }
