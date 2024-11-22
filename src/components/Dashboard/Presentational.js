@@ -296,7 +296,7 @@ function DashboardPresentation({
               <a href="#">
                 <div className="content">
                   <h3>Node Basic</h3>
-                  <p>adssad</p>
+                  {/*<p>StorX Farmer</p>*/}
                 </div>
                 <div className="icon">
                   <img src={rightArrowIcon} alt="icon"/>
@@ -307,7 +307,7 @@ function DashboardPresentation({
               <a href="#">
                 <div className="content">
                   <h3>FAQS</h3>
-                  <p>adssad</p>
+                  {/*<p>adssad</p>*/}
                 </div>
                 <div className="icon">
                   <img src={rightArrowIcon} alt="icon"/>
@@ -318,7 +318,7 @@ function DashboardPresentation({
               <a href="#">
                 <div className="content">
                   <h3>Blogs</h3>
-                  <p>adssad</p>
+                  {/*<p>adssad</p>*/}
                 </div>
                 <div className="icon">
                   <img src={rightArrowIcon} alt="icon"/>
@@ -329,7 +329,7 @@ function DashboardPresentation({
               <a href="#">
                 <div className="content">
                   <h3>Support</h3>
-                  <p>adssad</p>
+                  {/*<p>adssad</p>*/}
                 </div>
                 <div className="icon">
                   <img src={rightArrowIcon} alt="icon"/>
