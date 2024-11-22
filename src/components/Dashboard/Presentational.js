@@ -9,6 +9,7 @@ import HostingRewards from "../../assets/img/icons/hosting-rewards.png";
 import rocketIcon from "../../assets/img/icons/banner-rocket-icon.svg";
 import tickIcon from "../../assets/img/icons/green-tick-icon.svg";
 import crossIcon from "../../assets/img/icons/red-cross-icon.svg";
+import rightArrowIcon from "../../assets/img/icons/right-arrow-white-icon.svg";
 import { fromXdcAddress, toXdcAddress } from "../../wallets/xinpay";
 import { FormatNumber, FormatToken } from "../../helpers/decimal";
 import {
@@ -288,6 +289,57 @@ function DashboardPresentation({
         </div>
       </section>*/}
 
+      <section className="sec-resources">
+        <div className="container">
+          <ul className="custom-support">
+            <li>
+              <a href="#">
+                <div className="content">
+                  <h3>Node Basic</h3>
+                  <p>adssad</p>
+                </div>
+                <div className="icon">
+                  <img src={rightArrowIcon} alt="icon"/>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <div className="content">
+                  <h3>FAQS</h3>
+                  <p>adssad</p>
+                </div>
+                <div className="icon">
+                  <img src={rightArrowIcon} alt="icon"/>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <div className="content">
+                  <h3>Blogs</h3>
+                  <p>adssad</p>
+                </div>
+                <div className="icon">
+                  <img src={rightArrowIcon} alt="icon"/>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <div className="content">
+                  <h3>Support</h3>
+                  <p>adssad</p>
+                </div>
+                <div className="icon">
+                  <img src={rightArrowIcon} alt="icon"/>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
       <section className="sec-statistics-objects">
         <div className="container">
           <div className="row row-eq-height">
@@ -514,10 +566,10 @@ function DashboardPresentation({
                               setTab(0);
                             }}
                         >
-                          Farm/Storage Nodes ( {nodeCountTab} )
+                          Storage Nodes Listing ( {nodeCountTab} )
                         </div>
                       </li>
-                      <li className="nav-item ">
+                      <li className="nav-item" style={{ border: 'none' }}>
                         <div
                             className={tab === 1 ? "nav-link active" : "nav-link"}
                             onClick={() => {
@@ -525,10 +577,10 @@ function DashboardPresentation({
                               setTab(1);
                             }}
                         >
-                          Favorite ( {favoriteNodeCount} )
+                          Selected Nodes ( {favoriteNodeCount} )
                         </div>
                       </li>
-                      <li className="nav-item ">
+                      <li className="nav-item d-none">
                         <div
                             className={tab === 2 ? "nav-link active" : "nav-link"}
                             onClick={() => {
@@ -565,7 +617,7 @@ function DashboardPresentation({
                       <input
                           className="form-control"
                           type="search"
-                          placeholder="Filter node address..."
+                          placeholder="Filter Node Address..."
                           value={addrFilter}
                           onChange={(e) => setaddrFilter(e.target.value)}
                       />

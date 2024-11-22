@@ -232,14 +232,14 @@ class Header extends React.Component {
                 <div className="col-7 text-end">
                   <ul className="user-sign-in-wrapper">
                     <li>
-                      <a href="https://storx.io/new"
-                      ><img src={signIcon} alt="signup"/>
+                      <a href="https://storx.io/signup" target="_blank">
+                        <img src={signIcon} alt="signup"/>
                         <span>Sign Up</span></a
                       >
                     </li>
                     <li>
-                      <a href="https://storx.io/login"
-                      ><img src={loginIcon} alt="login"/>
+                      <a href="https://storx.io/login" target="_blank">
+                        <img src={loginIcon} alt="login"/>
                         <span>Login</span></a
                       >
                     </li>

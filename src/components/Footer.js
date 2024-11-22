@@ -21,7 +21,7 @@ function Foooter() {
             {/*<div className="col-md-7">*/}
             <div className="col-md-12">
               <p className="cpoyright-text">
-                &copy;2021{" "}
+                &copy;{new Date().getFullYear()}{" "}
                 <a href="https://storx.tech" target="_blank">
                   StorX
                 </a>
