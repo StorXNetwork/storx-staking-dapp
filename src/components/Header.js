@@ -230,7 +230,7 @@ class Header extends React.Component {
                   </ul>
                 </div>
                 <div className="col-7 text-end">
-                  <ul className="user-sign-in-wrapper">
+                  {/*<ul className="user-sign-in-wrapper">
                     <li>
                       <a href="https://storx.io/signup" target="_blank">
                         <img src={signIcon} alt="signup"/>
@@ -243,6 +243,11 @@ class Header extends React.Component {
                         <span>Login</span></a
                       >
                     </li>
+                  </ul>*/}
+                  <ul className="top-menu">
+                    <li><a href="#">Node Guidelines</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Blogs</a></li>
                   </ul>
                 </div>
               </div>
@@ -264,13 +269,28 @@ class Header extends React.Component {
                   className="collapse navbar-collapse"
                   id="navbarSupportedContent"
               >
-                <ul className="navbar-nav ml-auto" id="mySidenav">
+                <ul className="navbar-nav ml-auto d-none" id="mySidenav">
                   <li className="nav-item button">
                     <NavLink exact className="btn nav-link d-none-till-md" to="/">
                       Home
                     </NavLink>
                   </li>
                   <li className="nav-item button">
+                    <NavLink exact className="btn nav-link d-none-till-md" to="/node">
+                      Node Guidelines
+                    </NavLink>
+                  </li>
+                  <li className="nav-item button">
+                    <NavLink exact className="btn nav-link d-none-till-md" to="/faq">
+                      FAQs
+                    </NavLink>
+                  </li>
+                  <li className="nav-item button">
+                    <NavLink exact className="btn nav-link d-none-till-md" to="/blog">
+                      Blogs
+                    </NavLink>
+                  </li>
+                  {/*<li className="nav-item button">
                     <NavLink className="btn nav-link" to="/staking">
                       Staking
                     </NavLink>
@@ -279,20 +299,20 @@ class Header extends React.Component {
                     <NavLink className="btn nav-link" to="/tx-history">
                       TX History
                     </NavLink>
-                  </li>
+                  </li>*/}
                 </ul>
               </div>
 
               <div className="mobile-footer-block">
                 <ul className="navbar-nav mobile-footer-nav">
-                  <li className="nav-item button">
+                  {/*<li className="nav-item button">
                     {
                       <WalletConnectModal
                           btnName={btn.btn_msg}
                           btnClass={btn.btn_class}
                       />
                     }
-                  </li>
+                  </li>*/}
                   <li className="nav-item button">{balance}</li>
                   <li className="nav-item button">{logout}</li>
                 </ul>
@@ -314,7 +334,7 @@ class Header extends React.Component {
                 </ul>
               </div>
 
-              <div className="tMenu ml-1">
+              {/*<div className="tMenu ml-1">
                 <div className="custom-dropdown-toggle u-pointer" title="Menu">
                   <FontAwesomeIcon icon={faEllipsisH} />
                 </div>
@@ -336,7 +356,7 @@ class Header extends React.Component {
                     </Link>
                   </li>
                 </ul>
-              </div>
+              </div>*/}
             </div>
           </nav>
         </header>

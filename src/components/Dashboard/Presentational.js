@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import { Link, NavLink } from "react-router-dom";
 import { fromWei } from "xdc3-utils";
 
 import FarmNode from "../../assets/img/icons/farmnodes.png";
@@ -293,10 +293,30 @@ function DashboardPresentation({
         <div className="container">
           <ul className="custom-support">
             <li>
+              <NavLink to="/staking">
+                <div className="content">
+                  <h3>Setup Node</h3>
+                </div>
+                <div className="icon">
+                  <img src={rightArrowIcon} alt="icon"/>
+                </div>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/tx-history">
+                <div className="content">
+                  <h3>Transaction History
+                  </h3>
+                </div>
+                <div className="icon">
+                  <img src={rightArrowIcon} alt="icon"/>
+                </div>
+              </NavLink>
+            </li>
+            <li>
               <a href="#">
                 <div className="content">
-                  <h3>Node Basic</h3>
-                  {/*<p>StorX Farmer</p>*/}
+                  <h3>Connect Wallet</h3>
                 </div>
                 <div className="icon">
                   <img src={rightArrowIcon} alt="icon"/>
@@ -306,30 +326,7 @@ function DashboardPresentation({
             <li>
               <a href="#">
                 <div className="content">
-                  <h3>FAQS</h3>
-                  {/*<p>adssad</p>*/}
-                </div>
-                <div className="icon">
-                  <img src={rightArrowIcon} alt="icon"/>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <div className="content">
-                  <h3>Blogs</h3>
-                  {/*<p>adssad</p>*/}
-                </div>
-                <div className="icon">
-                  <img src={rightArrowIcon} alt="icon"/>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <div className="content">
-                  <h3>Support</h3>
-                  {/*<p>adssad</p>*/}
+                  <h3>Contact Support</h3>
                 </div>
                 <div className="icon">
                   <img src={rightArrowIcon} alt="icon"/>
@@ -343,10 +340,10 @@ function DashboardPresentation({
       <section className="sec-statistics-objects">
         <div className="container">
           <div className="row row-eq-height">
-            <div className="col-xl-3 col-md-6">
+            {/*<div className="col-xl-3 col-md-6">
               <div className="object-card">
                 <div className="content-wrapper">
-                  <p className="title">Farm/Storage Nodes</p>
+                  <p className="title">Storage Nodes</p>
                   <h4>{allNodeCount}</h4>
                   <p className="small date">
                     <GeneralModal
@@ -369,8 +366,8 @@ function DashboardPresentation({
                   <img src={FarmNode} className="img-fluid" alt="Current Block" />
                 </div>
               </div>
-            </div>
-            <div className="col-xl-3 col-md-6">
+            </div>*/}
+            <div className="col-xl-4 col-md-6">
               <div className="object-card">
                 <div className="content-wrapper">
                   <p className="title">SRX Staked</p>
@@ -386,7 +383,7 @@ function DashboardPresentation({
                 </div>
               </div>
             </div>
-            <div className="col-xl-3 col-md-6">
+            <div className="col-xl-4 col-md-6">
               <div className="object-card">
                 <div className="content-wrapper">
                   <p className="title">Hosting Rewards</p>
@@ -402,7 +399,7 @@ function DashboardPresentation({
                 </div>
               </div>
             </div>
-            <div className="col-xl-3 col-md-6">
+            <div className="col-xl-4 col-md-6">
               <div className="object-card">
                 <div className="content-wrapper">
                   <p className="title">Staking Rewards</p>
