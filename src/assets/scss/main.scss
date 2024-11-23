@@ -428,3 +428,25 @@
     }
   }
 }
+
+
+.footer{
+  .cpoyright-text{
+    text-align: left;
+  }
+  ul.bottom-menu{
+    margin: 0;
+    padding: 0;
+    text-align: right;
+    li{
+      list-style: none;
+      display: inline-block;
+      &:not(:last-of-type){
+        margin: 0 20px 0 0;
+      }
+      a{
+        color: var(--text-color);
+      }
+    }
+  }
+}
