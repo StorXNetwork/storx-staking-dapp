@@ -245,9 +245,15 @@ class Header extends React.Component {
                     </li>
                   </ul>*/}
                   <ul className="top-menu">
-                    <li><a href="#">Node Guidelines</a></li>
-                    <li><a href="#">FAQs</a></li>
-                    <li><a href="#">Blogs</a></li>
+                    <li>
+                      <NavLink exact to="/node-guidelines">
+                        Node Guidelines
+                      </NavLink>
+                    </li>
+                    <li><NavLink exact to="/faqs">
+                      FAQs
+                    </NavLink></li>
+                    <li><a href="https://storx.io/#storx-blog" target="_blank">Blogs</a></li>
                   </ul>
                 </div>
               </div>

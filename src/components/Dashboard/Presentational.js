@@ -292,7 +292,7 @@ function DashboardPresentation({
       <section className="sec-resources">
         <div className="container">
           <ul className="custom-support">
-            <li>
+            {/*<li>
               <NavLink to="/staking">
                 <div className="content">
                   <h3>Setup Node</h3>
@@ -301,6 +301,16 @@ function DashboardPresentation({
                   <img src={rightArrowIcon} alt="icon"/>
                 </div>
               </NavLink>
+            </li>*/}
+            <li>
+              <a href="https://doc.storx.io/storage-node.html" target="_blank">
+                <div className="content">
+                  <h3>Setup Node</h3>
+                </div>
+                <div className="icon">
+                  <img src={rightArrowIcon} alt="icon"/>
+                </div>
+              </a>
             </li>
             <li>
               <NavLink to="/tx-history">
@@ -324,7 +334,7 @@ function DashboardPresentation({
               </a>
             </li>
             <li>
-              <a href="#">
+              <a href="https://discord.com/invite/ha4Jufj2Nm" target="_blank">
                 <div className="content">
                   <h3>Contact Support</h3>
                 </div>
