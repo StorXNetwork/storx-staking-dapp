@@ -1,171 +1,184 @@
 import React from "react";
-import { connect } from "react-redux";
-import { Container, Row, Col, Modal, Button } from "react-bootstrap";
+import {connect} from "react-redux";
+import {Container, Row, Col, Modal, Button} from "react-bootstrap";
 
 import Keystore from "./Keystore";
 import PrivateKey from "./PrivateKey";
 
-import { PROJECT_NAME, DEFAULT_CHAIN_ID } from "../../helpers/constant";
-import { initXdc3 } from "../../wallets/xinpay";
+import {PROJECT_NAME, DEFAULT_CHAIN_ID} from "../../helpers/constant";
+import {initXdc3} from "../../wallets/xinpay";
 import * as actions from "../../actions";
 
 import XinpayLogo from "../../assets/img/wallets/xinpay-logo.png";
 import PrivateKeyLogo from "../../assets/img/wallets/privatekey-logo.png";
 import KeystoreLogo from "../../assets/img/wallets/keystore-logo.png";
 import DcentLogo from "../../assets/img/wallets/dcent-logo.png";
+import arrowRight from "../../assets/img/icons/right-arrow-white-icon.svg";
 
-import { toast } from "react-toastify";
-import { initDcent } from "../../wallets/dcentInAppBrowser";
+import {toast} from "react-toastify";
+import {initDcent} from "../../wallets/dcentInAppBrowser";
 
 const Provider = {
-  menu: "menu",
-  keystore: "keystore",
-  privateKey: "privatekey",
+    menu: "menu",
+    keystore: "keystore",
+    privateKey: "privatekey",
 };
 
 class WalletConnect extends React.Component {
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
-    this.state = {
-      showModal: false,
-      providerSelected: Provider.menu,
+        this.state = {
+            showModal: false,
+            providerSelected: Provider.menu,
+        };
+    }
+
+    componentDidUpdate(prevProps) {
+        if (
+            prevProps.wallet.connected !== this.props.wallet.connected &&
+            this.props.wallet.connected
+        ) {
+            this.setState({showModal: false});
+        }
+    }
+
+    accountCallback = (loader) => (account) => {
+        if (account === null)
+            toast("error while loading wallet", {autoClose: 2000, type: "error"});
+        else {
+            this.props.WalletConnected({
+                account,
+                chain_id: DEFAULT_CHAIN_ID,
+                address: account.address,
+                loader,
+            });
+            this.setState({showModal: false, providerSelected: Provider.menu});
+        }
     };
-  }
 
-  componentDidUpdate(prevProps) {
-    if (
-      prevProps.wallet.connected !== this.props.wallet.connected &&
-      this.props.wallet.connected
-    ) {
-      this.setState({ showModal: false });
+    RenderWalletProvider() {
+        if (this.state.providerSelected === Provider.menu)
+            return (
+                <div className="modal-content wallet-modal-content">
+                    <div className="modal-header border-bottom-0">
+                        <h5 className="modal-title" id="exampleModalLabel">
+                            Connect to a wallet
+                        </h5>
+                        <button
+                            type="button"
+                            className="close"
+                            onClick={() => this.setState({showModal: false})}
+                        >
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div className="modal-body">
+                        <div className="wallet-connect-block">
+                            <button onClick={initXdc3} className="wallect-connect-btn">
+                                <div className="name-wrapper">
+                                  <div className="wallet-icon">
+                                        <img src={XinpayLogo} alt="Icon"/>
+                                    </div>
+                                    <div className="wallet-name">
+                                        <h4>XDCPay</h4>
+                                    </div>
+                                </div>
+                                <a href="#" className="link-icon"><img src={arrowRight} alt="icon"/></a>
+                            </button>
+                            <button
+                                className="wallect-connect-btn"
+                                onClick={() =>
+                                    this.setState({providerSelected: Provider.privateKey})
+                                }
+                            >
+                                <div className="name-wrapper">
+                                  <div className="wallet-icon">
+                                        <img src={PrivateKeyLogo} alt="Icon"/>
+                                    </div>
+                                    <div className="wallet-name">
+                                        <h4>Private Key</h4>
+                                    </div>
+                                </div>
+                                <a href="#" className="link-icon"><img src={arrowRight} alt="icon"/></a>
+                            </button>
+                            <button
+                                className="wallect-connect-btn"
+                                onClick={() =>
+                                    this.setState({providerSelected: Provider.keystore})
+                                }
+                            >
+                                <div className="name-wrapper">
+                                  <div className="wallet-icon">
+                                        <img src={KeystoreLogo} alt="Icon"/>
+                                    </div>
+                                    <div className="wallet-name">
+                                        <h4>Key Store</h4>
+                                    </div>
+                                </div>
+                                <a href="#" className="link-icon"><img src={arrowRight} alt="icon"/></a>
+                            </button>
+                            <button className="wallect-connect-btn" onClick={initDcent}>
+                                <div className="name-wrapper">
+                                  <div className="wallet-icon">
+                                        <img src={DcentLogo} alt="Icon"/>
+                                    </div>
+                                    <div className="wallet-name">
+                                        <h4>D'CENT</h4>
+                                    </div>
+                                </div>
+                                <a href="#" className="link-icon"><img src={arrowRight} alt="icon"/></a>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+
+        if (this.state.providerSelected === Provider.keystore)
+            return (
+                <Keystore
+                    back={() => this.setState({providerSelected: Provider.menu})}
+                    cb={this.accountCallback(Provider.keystore)}
+                />
+            );
+
+        if (this.state.providerSelected === Provider.privateKey)
+            return (
+                <PrivateKey
+                    back={() => this.setState({providerSelected: Provider.menu})}
+                    cb={this.accountCallback(Provider.privateKey)}
+                />
+            );
     }
-  }
 
-  accountCallback = (loader) => (account) => {
-    if (account === null)
-      toast("error while loading wallet", { autoClose: 2000, type: "error" });
-    else {
-      this.props.WalletConnected({
-        account,
-        chain_id: DEFAULT_CHAIN_ID,
-        address: account.address,
-        loader,
-      });
-      this.setState({ showModal: false, providerSelected: Provider.menu });
+    render() {
+        const BTN_MSG = this.props.btnName || "CONNECT";
+        const BTN_CLASS = this.props.btnClass || "btn nav-link";
+        const disabled = this.props.disabled || false;
+
+        return (
+            <>
+                <div
+                    className={BTN_CLASS}
+                    onClick={() => this.setState({showModal: true})}
+                    disabled={disabled}
+                >
+                    {BTN_MSG}
+                </div>
+                <Modal
+                    centered={true}
+                    show={this.state.showModal}
+                    onHide={() => this.setState({showModal: false})}
+                >
+                    {this.RenderWalletProvider()}
+                </Modal>
+            </>
+        );
     }
-  };
-
-  RenderWalletProvider() {
-    if (this.state.providerSelected === Provider.menu)
-      return (
-        <div className="modal-content">
-          <div className="modal-header border-bottom-0">
-            <h5 className="modal-title" id="exampleModalLabel">
-              Connect to a wallet
-            </h5>
-            <button
-              type="button"
-              className="close"
-              onClick={() => this.setState({ showModal: false })}
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div className="modal-body">
-            <div className="wallet-connect-block">
-              <button onClick={initXdc3} className="wallect-connect-btn">
-                <div className="wallet-name">
-                  <h4>XDCPay</h4>
-                </div>
-                <div className="wallet-icon">
-                  <img src={XinpayLogo} alt="Icon" />
-                </div>
-              </button>
-              <button
-                className="wallect-connect-btn"
-                onClick={() =>
-                  this.setState({ providerSelected: Provider.privateKey })
-                }
-              >
-                <div className="wallet-name">
-                  <h4>Private Key</h4>
-                </div>
-                <div className="wallet-icon">
-                  <img src={PrivateKeyLogo} alt="Icon" />
-                </div>
-              </button>
-              <button
-                className="wallect-connect-btn"
-                onClick={() =>
-                  this.setState({ providerSelected: Provider.keystore })
-                }
-              >
-                <div className="wallet-name">
-                  <h4>Key Store</h4>
-                </div>
-                <div className="wallet-icon">
-                  <img src={KeystoreLogo} alt="Icon" />
-                </div>
-              </button>
-              <button className="wallect-connect-btn" onClick={initDcent}>
-                <div className="wallet-name">
-                  <h4>D'CENT</h4>
-                </div>
-                <div className="wallet-icon">
-                  <img src={DcentLogo} alt="Icon" />
-                </div>
-              </button>
-            </div>
-          </div>
-        </div>
-      );
-
-    if (this.state.providerSelected === Provider.keystore)
-      return (
-        <Keystore
-          back={() => this.setState({ providerSelected: Provider.menu })}
-          cb={this.accountCallback(Provider.keystore)}
-        />
-      );
-
-    if (this.state.providerSelected === Provider.privateKey)
-      return (
-        <PrivateKey
-          back={() => this.setState({ providerSelected: Provider.menu })}
-          cb={this.accountCallback(Provider.privateKey)}
-        />
-      );
-  }
-
-  render() {
-    const BTN_MSG = this.props.btnName || "CONNECT";
-    const BTN_CLASS = this.props.btnClass || "btn nav-link";
-    const disabled = this.props.disabled || false;
-
-    return (
-      <>
-        <div
-          className={BTN_CLASS}
-          onClick={() => this.setState({ showModal: true })}
-          disabled={disabled}
-        >
-          {BTN_MSG}
-        </div>
-        <Modal
-          centered={true}
-          show={this.state.showModal}
-          onHide={() => this.setState({ showModal: false })}
-        >
-          {this.RenderWalletProvider()}
-        </Modal>
-      </>
-    );
-  }
 }
 
-function mapStateToProps({ wallet }) {
-  return { wallet };
+function mapStateToProps({wallet}) {
+    return {wallet};
 }
 
 export default connect(mapStateToProps, actions)(WalletConnect);
