@@ -77,37 +77,39 @@ class StakingForm extends React.Component {
 
     if (!stake.staked && !stake.unstaked)
       return (
-        <div className="stats-box p-4">
-          <h5 className="mb-2">Stake</h5>
-          <ul className="list-group mb-2">
-            <li className="list-group-item d-flex justify-content-between align-items-center">
-              Approved Amount <span className="">{approvedAmount}</span>
-            </li>
-          </ul>
-          <label className="form-label">Staking Amount</label>
-          <input
-            type="number"
-            className="form-control"
-            placeholder="Enter Staking Amount"
-            value={this.state.form.amount}
-            onChange={(e) =>
-              this.setState({ form: { amount: e.target.value } })
-            }
-          />
-          <div className="mt-2">
-            {parseFloat(this.props.approvedAmount) >=
-            parseFloat(this.state.form.amount) ? (
-              <button onClick={this.stake} className="btn btn-rounded btn-info">
-                Stake
-              </button>
-            ) : (
-              <button
-                onClick={this.approveAmount}
-                className="btn btn-rounded btn-warning"
-              >
-                Approve
-              </button>
-            )}
+        <div className="stats-box stake-card">
+          <h5 className="title">Stake</h5>
+          <div className="stake-body">
+            <ul className="list-group mb-2">
+              <li className="list-group-item d-flex justify-content-between align-items-center">
+                Approved Amount <span className="">{approvedAmount}</span>
+              </li>
+            </ul>
+            <label className="form-label">Staking Amount</label>
+            <input
+                type="number"
+                className="form-control"
+                placeholder="Enter Staking Amount"
+                value={this.state.form.amount}
+                onChange={(e) =>
+                    this.setState({ form: { amount: e.target.value } })
+                }
+            />
+            <div className="mt-2">
+              {parseFloat(this.props.approvedAmount) >=
+              parseFloat(this.state.form.amount) ? (
+                  <button onClick={this.stake} className="btn btn-rounded btn-info">
+                    Stake
+                  </button>
+              ) : (
+                  <button
+                      onClick={this.approveAmount}
+                      className="btn btn-rounded btn-warning"
+                  >
+                    Approve
+                  </button>
+              )}
+            </div>
           </div>
         </div>
       );

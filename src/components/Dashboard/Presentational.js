@@ -292,7 +292,7 @@ function DashboardPresentation({
       <section className="sec-resources">
         <div className="container">
           <ul className="custom-support">
-            {/*<li>
+            <li>
               <NavLink to="/staking">
                 <div className="content">
                   <h3>Setup Node</h3>
@@ -301,8 +301,8 @@ function DashboardPresentation({
                   <img src={rightArrowIcon} alt="icon"/>
                 </div>
               </NavLink>
-            </li>*/}
-            <li>
+            </li>
+            {/*<li>
               <a href="https://doc.storx.io/storage-node.html" target="_blank">
                 <div className="content">
                   <h3>Setup Node</h3>
@@ -311,8 +311,8 @@ function DashboardPresentation({
                   <img src={rightArrowIcon} alt="icon"/>
                 </div>
               </a>
-            </li>
-            <li>
+            </li>*/}
+           {/* <li>
               <NavLink to="/tx-history">
                 <div className="content">
                   <h3>Transaction History
@@ -322,8 +322,8 @@ function DashboardPresentation({
                   <img src={rightArrowIcon} alt="icon"/>
                 </div>
               </NavLink>
-            </li>
-            <li>
+            </li>*/}
+            {/*<li>
               <a href="#">
                 <div className="content">
                   <h3>Connect Wallet</h3>
@@ -332,7 +332,7 @@ function DashboardPresentation({
                   <img src={rightArrowIcon} alt="icon"/>
                 </div>
               </a>
-            </li>
+            </li>*/}
             <li>
               <a href="https://discord.com/invite/ha4Jufj2Nm" target="_blank">
                 <div className="content">
@@ -609,15 +609,21 @@ function DashboardPresentation({
                             setTab(v.target.value);
                           }}
                       >
-                        <option value="0">
+                        {/*<option value="0">
                           Farm/Storage Nodes ( {nodeCountTab} )
+                        </option>*/}
+                        <option value="0">
+                          Storage Nodes Listing ( {nodeCountTab} )
                         </option>
                         <option value="1">
+                          Selected Nodes ( {favoriteNodeCount} )
+                        </option>
+                        {/*<option value="1">
                           Favorite ( {favoriteNodeCount} )
-                        </option>
-                        <option value="2">
+                        </option>*/}
+                        {/*<option value="2">
                           Inactive ( {inactiveNodeCount} ){" "}
-                        </option>
+                        </option>*/}
                       </select>
                     </div>
                     <div className="input-group with-icon">

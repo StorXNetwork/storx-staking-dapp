@@ -19,7 +19,7 @@ function Foooter() {
         <div className="container">
           <div className="row footer-wrap align-items-center">
             {/*<div className="col-md-7">*/}
-            <div className="col-md-6 align-self-center">
+            <div className="col-lg-6 col-md-12 order-md-1 order-2 align-self-center">
               <p className="cpoyright-text">Copyright StorX Foundation {new Date().getFullYear()}, All Rights Reserved</p>
               {/*<p className="cpoyright-text">
                 &copy;{new Date().getFullYear()}{" "}
@@ -32,7 +32,7 @@ function Foooter() {
                 <Link to="/disclaimer">Disclaimer</Link>
               </p>*/}
             </div>
-            <div className="col-md-6 align-self-center">
+            <div className="col-lg-6 col-md-12 order-md-2 order-1 align-self-center">
               <ul className="bottom-menu">
                 <li><a href="#">Documentation</a></li>
                 <li><a href="#">Terms & Conditions</a></li>

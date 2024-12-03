@@ -9,7 +9,10 @@ import { FormatNumber, FormatToken } from "../../helpers/decimal";
 import { LOADER_BOX } from "../common/common";
 import Timer from "../common/Timer";
 import Tooltip from "@material-ui/core/Tooltip";
-
+import stackIcon from "../../assets/img/icons/stack-icon.svg";
+import reputationIcon from "../../assets/img/icons/reputation-icon.svg";
+import nodeIcon from "../../assets/img/icons/node-icon.svg";
+import walletIcon from "../../assets/img/icons/wallet-icon.svg";
 function GetStatusPill(status) {
   if (status) {
     return (
@@ -87,37 +90,48 @@ export function InfoCard({ data, getStakeDetail, claimRewards, stakeValid }) {
 
   return (
     <>
-      <div className="stats-box p-4">
-        <h5 className="mb-2">Stake Details</h5>
+     {/* <div className="stats-box p-4"><h5 className="mb-2">Stake Details</h5>
         <ul className="list-group">
-          <li className="list-group-item d-flex justify-content-between align-items-center">
-            Staked {staked}
-          </li>
-
-          {data.stake && data.stake.staked ? (
-            <>
-              <li className="list-group-item d-flex justify-content-between align-items-center">
-                Staked Amount <span className="">{stakedAmount}</span>
-              </li>
-              <li className="list-group-item d-flex justify-content-between align-items-center">
-                Current Earnings <span className="">{earned}</span>
-              </li>
-              <li className="list-group-item d-flex justify-content-between align-items-center">
-                Rewards Redeemed<span className="">{totalRedeemed}</span>
-              </li>
-              <li className="list-group-item d-flex justify-content-between align-items-center">
-                Last Rewards <span className="">{lastRedeemedAt}</span>
-              </li>
-              <li className="list-group-item d-flex justify-content-between align-items-center">
-                Next Rewards <span className="">{nextDripAt}</span>
-              </li>
-              {stakeButton}
-            </>
-          ) : (
-            ""
-          )}
+          <li className="list-group-item d-flex justify-content-between align-items-center">Staked <span className="badge badge-success badge-pill u-uppercase">true</span></li>
+          <li className="list-group-item d-flex justify-content-between align-items-center">Staked Amount <span className="">4008.00</span></li>
+          <li className="list-group-item d-flex justify-content-between align-items-center">Current Earnings <span className="">273.74</span></li>
+          <li className="list-group-item d-flex justify-content-between align-items-center">Rewards Redeemed<span className="">27874.28</span></li>
+          <li className="list-group-item d-flex justify-content-between align-items-center">Last Rewards <span className="">5-11-2024 19:25</span></li>
+          <li className="list-group-item d-flex justify-content-between align-items-center">Next Rewards <span className=""><div><span className="timer"><span className="days">D:&nbsp;2</span>&nbsp;&nbsp;<span className="hours">07</span>:<span className="minutes">54</span>:<span className="seconds">38</span></span></div></span></li>
         </ul>
+      </div>*/}
+      <div className="stats-box stake-card">
+        <h5 className="title">Stake Details</h5>
+        <div className="stake-body p-0">
+          <ul className="list-group">
+            <li className="list-group-item d-flex justify-content-between align-items-center">
+              Staked {staked}
+            </li>
 
+            {data.stake && data.stake.staked ? (
+                <>
+                  <li className="list-group-item d-flex justify-content-between align-items-center">
+                    Staked Amount <span className="">{stakedAmount}</span>
+                  </li>
+                  <li className="list-group-item d-flex justify-content-between align-items-center">
+                    Current Earnings <span className="">{earned}</span>
+                  </li>
+                  <li className="list-group-item d-flex justify-content-between align-items-center">
+                    Rewards Redeemed<span className="">{totalRedeemed}</span>
+                  </li>
+                  <li className="list-group-item d-flex justify-content-between align-items-center">
+                    Last Rewards <span className="">{lastRedeemedAt}</span>
+                  </li>
+                  <li className="list-group-item d-flex justify-content-between align-items-center">
+                    Next Rewards <span className="">{nextDripAt}</span>
+                  </li>
+                  {stakeButton}
+                </>
+            ) : (
+                ""
+            )}
+          </ul>
+        </div>
         <Modal
           centered={true}
           show={showModal}
@@ -151,7 +165,7 @@ export function InfoHeader({
 }) {
   return (
     <>
-      <div className="row mb-3">
+      {/*<div className="row mb-3">
         <div className="col-sm-12 col-md-12 col-lg-12">
           <div className="stats-box p-4">
             <h5>
@@ -166,9 +180,114 @@ export function InfoHeader({
             </h5>
           </div>
         </div>
-      </div>
+      </div>*/}
 
       <div className="row">
+        {/*<div className="col-md-4">
+          <div className="stacking-card">
+            <p className="title">Minimum <br/> Reputation</p>
+            <strong>
+              {stakingData
+                  ? FormatNumber(stakingData.reputationThreshold)
+                  : LOADER_BOX}
+            </strong>
+          </div>
+        </div>*/}
+        <div className="col-md-12 mb-4">
+          <div className="stacking-card wallet-card">
+            <div className="name-wrapper">
+              <div className="icon">
+                <img src={walletIcon} alt="icon"/>
+              </div>
+              {wallet ? (
+                  <>
+                    <p className="title">{toXdcAddress(wallet)}</p>
+                  </>
+              ) : (
+                  LOADER_BOX
+              )}
+            </div>
+          </div>
+        </div>
+        <div className="col-md-4">
+          <div className="stacking-card">
+            <div className="name-wrapper">
+              <div className="icon">
+                <img src={stackIcon} alt="icon"/>
+              </div>
+              <p className="title">Minimum <br/> Stake Amount</p>
+            </div>
+            <strong>
+              {stakingData
+                  ? FormatNumber(
+                      fromWei(
+                          RemoveExpo(stakingData.minStakeAmount + "")
+                      )
+                  )
+                  : LOADER_BOX}
+            </strong>
+          </div>
+        </div>
+        {/*<div className="col-md-4">
+          <div className="stacking-card">
+            <p className="title">Maximum
+              <br />
+              Stake Amount</p>
+            <strong>
+              {stakingData
+                  ? FormatNumber(
+                      fromWei(RemoveExpo(stakingData.maxStakeAmount))
+                  )
+                  : LOADER_BOX}
+            </strong>
+          </div>
+        </div>*/}
+
+        <div className="col-md-4">
+          <div className="stacking-card">
+            <div className="name-wrapper">
+              <div className="icon">
+                <img src={reputationIcon} alt="icon"/>
+              </div>
+              <p className="title">Current<br />Reputation</p>
+            </div>
+            <strong>
+              {reputation ? reputation : LOADER_BOX}
+            </strong>
+          </div>
+        </div>
+       {/* <div className="col-md-4">
+          <div className="stacking-card">
+            <p className="title"> Hosting
+              <br />
+              Rewards</p>
+            <strong>
+              {stakingData
+                  ? FormatNumber(
+                      fromWei(
+                          RemoveExpo(stakingData.hostingCompensation)
+                      )
+                  )
+                  : LOADER_BOX}
+            </strong>
+          </div>
+        </div>*/}
+        <div className="col-md-4">
+          <div className="stacking-card">
+            <div className="name-wrapper">
+              <div className="icon">
+                <img src={nodeIcon} alt="icon"/>
+              </div>
+              <p className="title">Farmer Node<br />Status</p>
+            </div>
+            <strong>
+              {stakeValid ? stakeValid : LOADER_BOX}
+            </strong>
+          </div>
+        </div>
+      </div>
+
+      {/*<div className="row">
         <div className="col-lg-12 mb-3">
           <div className="stats-box p-4">
             <div className="row staking-counter">
@@ -288,7 +407,7 @@ export function InfoHeader({
             </div>
           </div>
         </div>
-      </div>
+      </div>*/}
     </>
   );
 }

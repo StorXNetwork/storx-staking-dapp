@@ -202,7 +202,7 @@ class Header extends React.Component {
           <div className="top-header">
             <div className="container">
               <div className="row align-items-center">
-                <div className="col-5">
+                <div className="col-4">
                   <ul className="social-media-wrapper">
                     <li>
                       <a href="https://www.facebook.com/StorXNetwork" target="_blank">
@@ -229,7 +229,7 @@ class Header extends React.Component {
                     </li>
                   </ul>
                 </div>
-                <div className="col-7 text-end">
+                <div className="col-8 text-end">
                   {/*<ul className="user-sign-in-wrapper">
                     <li>
                       <a href="https://storx.io/signup" target="_blank">
@@ -311,14 +311,14 @@ class Header extends React.Component {
 
               <div className="mobile-footer-block">
                 <ul className="navbar-nav mobile-footer-nav">
-                  {/*<li className="nav-item button">
+                  <li className="nav-item button">
                     {
                       <WalletConnectModal
                           btnName={btn.btn_msg}
                           btnClass={btn.btn_class}
                       />
                     }
-                  </li>*/}
+                  </li>
                   <li className="nav-item button">{balance}</li>
                   <li className="nav-item button">{logout}</li>
                 </ul>

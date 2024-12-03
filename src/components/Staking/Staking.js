@@ -109,9 +109,9 @@ class Staking extends React.Component {
 
     return (
       <>
-        <section className="block-overlap pb-3">
+        <section className="block-overlap sec-staking">
           <div className="container">
-            <div className="row">
+            {/*<div className="row">
               <div className="col-sm-12">
                 <div className="announcement">
                   <b>Note</b>: If you're facing issues with your reputation & redeeming rewards please refer the thread{" "}
@@ -120,7 +120,7 @@ class Staking extends React.Component {
                   </a>
                 </div>
               </div>
-            </div>
+            </div>*/}
 
             <InfoHeader
               stakingData={this.state.stakingData}
@@ -129,7 +129,7 @@ class Staking extends React.Component {
               stakeValidClass={stakeValidClass}
               wallet={this.props.wallet.address}
             />
-            <div className="row mb-3">
+            <div className="row">
               <div className="col-sm-12 col-md-6 col-lg-6 mb-3">
                 <InfoCard data={this.state} getStakeDetail={this.getStakeDetail} claimRewards={this.claimEarned} stakeValid={stakeValid} />
               </div>
