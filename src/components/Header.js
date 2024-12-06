@@ -13,7 +13,7 @@ import facebookIcon from "../assets/img/icons/facebook-icon.svg";
 import linkdinIcon from "../assets/img/icons/linkdin-icon.svg";
 import loginIcon from "../assets/img/icons/login-icon.svg";
 import signIcon from "../assets/img/icons/sign-up-icon.svg";
-import twitterIcon from "../assets/img/icons/twitter-icon.svg";
+import twitterIcon from "../assets/img/icons/twitter-icon-new.svg";
 import youtubeIcon from "../assets/img/icons/youtube-icon.svg";
 
 import { IsDark, Toggle } from "../helpers/theme";

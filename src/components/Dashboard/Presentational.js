@@ -295,7 +295,7 @@ function DashboardPresentation({
             <li>
               <NavLink to="/staking">
                 <div className="content">
-                  <h3>Setup Node</h3>
+                  <h3>Stake SRX</h3>
                 </div>
                 <div className="icon">
                   <img src={rightArrowIcon} alt="icon"/>

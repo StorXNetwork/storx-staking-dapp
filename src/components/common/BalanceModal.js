@@ -3,7 +3,7 @@ import { Modal } from "react-bootstrap";
 import { fromWei } from "xdc3-utils";
 
 import XdcLogo from "../../assets/img/wallets/xdc-logo.png";
-import SrxLogo from "../../assets/img/wallets/storx-logo.png";
+import SrxLogo from "../../assets/img/icons/storx-logo-icon.svg";
 import { DECIMALS, RemoveExpo } from "../../helpers/constant";
 import { FormatNumber, FormatToken } from "../../helpers/decimal";
 
