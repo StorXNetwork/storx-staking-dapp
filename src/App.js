@@ -17,6 +17,8 @@ import Disclaimer from "./components/Disclaimer";
 import TxHistory from "./components/TxHistory/TxHistory";
 import NodeGuidelines from "./components/Dashboard/NodeGuidelines";
 import OurFaqs from "./components/Dashboard/OurFaqs";
+import TermsConditions from "./components/Dashboard/TermsConditions";
+import PrivacyPolicy from "./components/Dashboard/PrivacyPolicy";
 
 /**
  *
@@ -77,6 +79,8 @@ function App() {
       <Route exact path={"/disclaimer"} component={Disclaimer} />
       <Route exact path={"/node-guidelines"} component={NodeGuidelines} />
       <Route exact path={"/faqs"} component={OurFaqs} />
+      <Route exact path={"/terms-conditions"} component={TermsConditions} />
+      <Route exact path={"/privacy-policy"} component={PrivacyPolicy} />
       <Route exact path={"/"} component={Dashboard} />
 
       <Footer />

@@ -34,10 +34,10 @@ function Foooter() {
             </div>
             <div className="col-lg-6 col-md-12 order-md-2 order-1 align-self-center">
               <ul className="bottom-menu">
-                <li><a href="#">Documentation</a></li>
-                <li><a href="#">Terms & Conditions</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Disclaimer</a></li>
+                {/*<li><a href="#">Documentation</a></li>*/}
+                <li><Link to="terms-conditions">Terms & Conditions</Link></li>
+                <li><Link to="privacy-policy">Privacy Policy</Link></li>
+                {/*<li><a href="#">Disclaimer</a></li>*/}
               </ul>
             </div>
             <div className="col-md-5 d-none">
