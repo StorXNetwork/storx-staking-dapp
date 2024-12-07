@@ -70,7 +70,7 @@ export const NETWORK_NAME = {
 };
 
 export const CHAIN_DATA = {
-  50: "https://explorer.xinfin.network",
+  50: "https://xdcscan.com",
   51: "https://explorer.apothem.network",
 };
 
@@ -91,7 +91,7 @@ export const ADDR_LINK = (explorer, addr) => {
   let retLink = `${explorer}`;
 
   if (!retLink.endsWith("/")) retLink += "/";
-  retLink += `addr/${addr}`;
+  retLink += `address/${addr}`;
   return retLink;
 };
 
