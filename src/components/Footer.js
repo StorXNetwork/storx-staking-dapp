@@ -10,7 +10,7 @@ import {
   faReddit,
 } from "@fortawesome/free-brands-svg-icons";
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 
 function Foooter() {
   return (
@@ -35,6 +35,7 @@ function Foooter() {
             <div className="col-lg-6 col-md-12 order-md-2 order-1 align-self-center">
               <ul className="bottom-menu">
                 {/*<li><a href="#">Documentation</a></li>*/}
+                <li><NavLink exact to="/faqs">FAQs</NavLink></li>
                 <li><Link to="terms-conditions">Terms & Conditions</Link></li>
                 <li><Link to="privacy-policy">Privacy Policy</Link></li>
                 {/*<li><a href="#">Disclaimer</a></li>*/}

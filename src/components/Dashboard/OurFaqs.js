@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { fromWei } from "xdc3-utils";
 
-import FarmNode from "../../assets/img/icons/farmnodes.png";
+import questionImg from "../../assets/img/question-img-1.png";
 import Staking from "../../assets/img/icons/staking.png";
 import Rewards from "../../assets/img/icons/staking-rewards.png";
 import HostingRewards from "../../assets/img/icons/hosting-rewards.png";
@@ -51,6 +51,139 @@ function OurFaqs() {
         <div className="container">
           <h2>Frequently Asked Questions</h2>
           <div className="faq-wrapper">
+            <div className="faq-item">
+              <h3>How will the revised rewards be credited into the Node Operator's account?</h3>
+              <p>There is no change in the methods of claiming rewards.</p>
+            </div>
+
+            <div className="faq-item">
+              <h3>I am getting the following error while trying to check for the logs as provided in the image below :</h3>
+              <div className="img-wrapper">
+                <img src={questionImg} alt="img"/>
+              </div>
+              <p>This is the issue related to the Docker version as the docker installed already is not updated so in order to update the docker. Kindly follow the steps below carefully in the Terminal.</p>
+              <ol>
+                <li>Command to Uninstall the docker Completely :--
+                  <ul>
+                    <li>sudo apt-get purge docker-engine</li>
+                    <li>sudo apt-get purge docker</li>
+                    <li>sudo apt-get autoremove</li>
+                    <li>sudo apt-get purge -y docker-engine docker docker.io docker-ce docker-ce-cli</li>
+                  </ul>
+                </li>
+                <li>Removing the docker directories
+                  <ul>
+                    <li>sudo rm -rf /var/lib/docker /etc/docker</li>
+                    <li>sudo rm /etc/apparmor.d/docker</li>
+                    <li>sudo groupdel docker</li>
+                    <li>sudo rm -rf /var/run/docker.sock</li>
+                    <li>sudo rm -rf /var/lib/containerd</li>
+                    <li>sudo rm -r ~/.docker</li>
+                  </ul>
+                </li>
+                <li>Checking the docker is uninstalled properly :--
+                  <ul>
+                    <li>docker</li>
+                    <li>Once the docker is uninstalled you will get the “No such directories / No such file exist.”</li>
+                  </ul>
+                </li>
+                <li>Reinstalling the docker using the command :--
+                  <ul>
+                    <li>sudo bash bootstrap.sh</li>
+                  </ul>
+                </li>
+                <li>Checking the Docker Version
+                  <ul>
+                    <li>docker --version</li>
+                    <li>You can check the version of the docker using the above command.
+                      If this gives you the output with version means the docker is installed successfully.</li>
+                  </ul>
+                </li>
+                <li>Check for the Docker status
+                  <ul>
+                    <li>sudo systemctl status docker</li>
+                    <li>Make sure the status is active here.</li>
+                  </ul>
+                </li>
+                <li>Starting the Docker
+                  <ul>
+                    <li>sudo systemctl start docker</li>
+                    <li>If the status is inactive you need to start the docker using the above command.</li>
+                  </ul>
+                </li>
+                <li>Validating the any container is running in the docker
+                  <ul>
+                    <li>docker ps</li>
+                    <li>The above command will give you the container running status</li>
+                  </ul>
+                </li>
+                <li>Now you can run the command
+                  <ul>
+                    <li>sudo bash start-node.sh</li>
+                    <li>This will start the node.</li>
+                  </ul>
+                </li>
+                <li>Checking for the logs
+                  <ul>
+                    <li>sudo bash check-logs.sh</li>
+                    <li>This will give you the output of the docker running container status.</li>
+                  </ul>
+                </li>
+              </ol>
+              <p>Once you are getting the right status as per the documentation in the storX you can continue with the check for the node setup in your browser URL.</p>
+            </div>
+
+            <div className="faq-item">
+              <h3>What happens if a VPS gets wiped/lost, the node turns inactive but the operator can still claim (with a 1 month cool off period) ? How exactly do we risk losing the staked amount? </h3>
+              <p>If the VPS is wiped/lost, This is considered as breach of service terms. So the user would have to inform us at support@storx.io , Since the Storage Node was not available the users would be unable to reclaim his staking deposit
+              </p>
+              <p>If the vps data is intact, Then he can proceed with resigning the node and that  would be considered as graceful exist and he would have to wait for one month and proceed with cancellation of node, and reclaim staking deposit.
+              </p>
+            </div>
+
+            <div className="faq-item">
+              <h3>So if an incident occurs on the hardware or VPS provider side, if the operator informs support he can still claim his staked amount, even if the data has been lost ?</h3>
+              <p>The nodes are paid to keep the data intact, The node operator is responsible to ensure that the data is intact and available to users. In the mainnet there is an option for users to do a graceful exit by giving a notice of 1 month so that the user data can be backed up.</p>
+              <p>Contabo had a service downtime and not data being lost. To be very specific to your case, you can still send the email to support, We can evaluate the details of the node and revert back . The incident needs to be reported and reviewed for exact resolutions.</p>
+            </div>
+
+            <div className="faq-item">
+              <h3>Is it possible to change VPS providers without losing my stake position?</h3>
+              <p>I am assuming that your nodes are currently in active state, Since you have not mentioned it specifically, All active nodes can migrate their existing storage nodes or can change ISP or Storage Nodes without changing their staking limit. Users would have to follow the step by step guidelines as suggested to upgrade their node. They would be promoted to provide node id details and email address during the upgrade process.  Once completed your node would be live with the same id and specific staking limit.
+              </p>
+            </div>
+
+            <div className="faq-item">
+              <h3>Is it possible to create a new node (with 40k min stake) using the migration script used for migrating the existing nodes ?
+              </h3>
+              <p>Yes it is possible to create a new node with the script provided make sure you are following the criteria as mentioned in the document.</p>
+            </div>
+
+            <div className="faq-item">
+              <h3>What is the cooling off / Notice period for storage nodes to resign in the mainnet?
+              </h3>
+              <p>The cooling-off period for storage nodes to resign and claim staking tokens is one month from the resignation date.
+              </p>
+            </div>
+
+            <div className="faq-item">
+              <h3>What if the storage node exits without notice on the mainnet?
+              </h3>
+              <p>If the storage node exits without providing the one-month notice specified above, the user will not be able to claim the deposit of the staking amount.
+              </p>
+            </div>
+
+            <div className="faq-item">
+              <h3>How can I check if the node is set up successfully?
+              </h3>
+              <p>Once the node is set up, you can check the status of the node setup on this link: <a href="https://farmer.storx.io/" target="_blank">https://farmer.storx.io/</a>. You must provide the wallet ID in the search bar to check its status. If it is active, then it is appropriately configured.</p>
+            </div>
+
+          </div>
+
+         {/* <div className="faq-wrapper">
+
+            Old Faqs
             <div className="faq-item">
               <h3>I have met the required hardware requirement as per the Document. How can I begin with the Node Installation?</h3>
               <p>
@@ -327,7 +460,7 @@ This will give you the output of the docker running container status.</p>
             </div>
 
 
-          </div>
+          </div>*/}
          {/* <div className="faq-wrapper">
             <Accordion>
               <div className={`accordion-item ${openAccordion.first === "0" ? "open" : ""}`}>

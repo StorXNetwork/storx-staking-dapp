@@ -503,8 +503,17 @@
       &:not(:last-of-type){
       }
     }
+    .img-wrapper{
+      margin: 20px 0;
+      img{
+        @media screen and (max-width: 1200px) {
+          width: 100%;
+        }
+      }
+    }
     ul{
       margin: 10px 0 20px;
+      padding-left: 0;
       li{
         position: relative;
         display: block;
@@ -522,6 +531,9 @@
           left: 0;
           top: 8px;
         }
+        ul{
+          padding-left: 12px;
+        }
       }
     }
     ol{
@@ -533,6 +545,9 @@
         color: var(--text-color);
         &:not(:last-of-type){
           margin: 0 0 6px;
+        }
+        ul{
+          padding-left: 12px;
         }
       }
     }
