@@ -48,16 +48,6 @@ function NodeGuidelines({
               <li>
                 <a href="https://doc.storx.io/storage-node.html" target="_blank">
                   <div className="content">
-                    <h3>Staking Requirements</h3>
-                  </div>
-                  <div className="icon">
-                    <img src={rightArrowIcon} alt="icon"/>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="https://doc.storx.io/storage-node.html" target="_blank">
-                  <div className="content">
                     <h3>Hardware Requirements</h3>
                   </div>
                   <div className="icon">
@@ -69,6 +59,16 @@ function NodeGuidelines({
                 <a href="https://doc.storx.io/storage-node.html" target="_blank">
                   <div className="content">
                     <h3>Software Requirements</h3>
+                  </div>
+                  <div className="icon">
+                    <img src={rightArrowIcon} alt="icon"/>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="https://doc.storx.io/storage-node.html" target="_blank">
+                  <div className="content">
+                    <h3>Staking Requirements</h3>
                   </div>
                   <div className="icon">
                     <img src={rightArrowIcon} alt="icon"/>
