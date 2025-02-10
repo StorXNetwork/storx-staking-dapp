@@ -40,6 +40,45 @@ function NodeGuidelines({
 
   return (
     <>
+      <section className="sec-setup-storage">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-4 col-md-6">
+              <div className="setup-card">
+                <div className="icon-wrapper">
+                  <span className="count">1</span>
+                  <h3 className="f-20">Set Up Storage Node</h3>
+                </div>
+                <div className="content">
+                  <p>Deploy a Server/ VPS with the required specs and install the necessary dependencies.</p>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-4 col-md-6">
+              <div className="setup-card">
+                <div className="icon-wrapper">
+                  <span className="count">2</span>
+                  <h3 className="f-20">Stake StorX Token ($SRX)</h3>
+                </div>
+                <div className="content">
+                  <p>Stack Lock your $SRX tokens to activate your node and secure the network.</p>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-4 col-md-6">
+              <div className="setup-card">
+                <div className="icon-wrapper">
+                  <span className="count">3</span>
+                  <h3 className="f-20">Gain Reputation</h3>
+                </div>
+                <div className="content">
+                  <p>Maintain uptime, build reputation, and earn $SRX rewards for contributing to the network.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       <section className="sec-resources">
         <div className="container">
           <div className="resources-card">
