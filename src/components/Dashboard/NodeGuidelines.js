@@ -42,6 +42,7 @@ function NodeGuidelines({
     <>
       <section className="sec-setup-storage">
         <div className="container">
+          <h2>Node Setup Step</h2>
           <div className="row">
             <div className="col-lg-4 col-md-6">
               <div className="setup-card">
