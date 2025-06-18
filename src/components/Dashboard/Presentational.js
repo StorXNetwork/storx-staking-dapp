@@ -214,9 +214,7 @@ function DashboardPresentation({
   const totalStaked = data
     ? FormatNumber(FormatToken(data.totalStaked + ""))
     : LOADER_BOX;
-  const hostingRewards = data
-    ? FormatNumber(fromWei(RemoveExpo(data.hostingCompensation) + ""))
-    : LOADER_BOX;
+ const hostingRewards = data ? FormatNumber(parseFloat(fromWei(RemoveExpo(data.hostingCompensation))) / 12) : LOADER_BOX;
 
   const stakingRewwards = data
     ? data.interest / data.interestPrecision
