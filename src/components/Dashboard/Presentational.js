@@ -397,8 +397,8 @@ function DashboardPresentation({
               <div className="object-card">
                 <div className="content-wrapper">
                   <p className="title">Hosting Rewards</p>
-                  {/*<h4>{hostingRewards}</h4>*/}
-                  <h4>270.5</h4>
+                  <h4>{hostingRewards}</h4>
+                  {/*<h4>270.75</h4>*/}
                   <p className="small date">SRX/per Month</p>
                 </div>
                 <div className="icon-wrapper">
